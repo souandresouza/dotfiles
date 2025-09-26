@@ -1,0 +1,131 @@
+// Waybar v0.12.0
+{
+  "spacing": 0,
+  "reload_style_on_change": true,
+  "modules-left": [
+    "group/group-left"
+  ],
+  "modules-center": [
+    "group/group-center"
+  ],
+  "modules-right": [
+    "group/group-right"
+  ],
+  "group/group-left": {
+    "orientation": "horizontal",
+    "modules": [
+      "hyprland/workspaces",
+      "custom/spotify",
+      "tray"
+    ]
+  },
+  "group/group-center": {
+    "orientation": "horizontal",
+    "modules": [
+      "clock",
+      ]
+  },
+  "group/group-right": {
+    "orientation": "horizontal",
+    "modules": [
+      "custom/wireplumber",
+      "group/group-end",
+      "group/group-power"
+    ]
+  },
+  "custom/spotify": {
+    "format": "{}",
+    "exec": "/usr/bin/python3 ~/.config/waybar/assets/mediaplayer.py --player spotify",
+    "return-type": "json",
+    "on-click": "playerctl -p spotify play-pause",
+    "on-scroll-up": "playerctl -p spotify next",
+    "on-scroll-down": "playerctl -p spotify previous"
+  },
+  "tray": {
+    "icon-size": 18,
+    "spacing": 6
+  },
+  "clock": {
+    "interval":1,
+    "format": "{:L%A %d de %B de %Y - %T}",
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 1,
+      "format": {
+        "months": "<span color='#d79921'><b>{}</b></span>",
+        "days": "<span color='#ebdbb2'><b>{}</b></span>",
+        "weekdays": "<span color='#98971a'><b>{}</b></span>",
+        "today": "<span color='#cc241d'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click": "shift_reset",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+  "custom/wireplumber": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "~/.config/waybar/assets/volume_bar.sh",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click-right": "pavucontrol",
+    "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ --limit 1.0",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+    "tooltip": true
+  },
+  "group/group-end": {
+    "orientation": "horizontal",
+    "modules": [
+      "bluetooth",
+      "network"
+    ]
+  },
+  "bluetooth": {
+    "format-no-controller": "",
+    "format-disabled": "",
+    "format-off": "<s>Bluetooth</s>",
+    "format-on": "Bluetooth",
+    "format-connected": "{device_alias}",
+    "on-click-right": "kitty -e bluetoothctl",
+    "on-click": "bluetoothctl show | grep -q \"Powered: yes\" && bluetoothctl power off || bluetoothctl power on",
+    "tooltip-format-connected": "{device_alias}\t{device_address}"
+  },
+  "network": {
+    "interval": 60,
+    "format-wifi": " {essid}",
+    "format-ethernet": " {ifname}",
+    "format-disconnected": " disconnected",
+    "tooltip-format-ethernet": "{ifname}",
+    "tooltip-format-wifi": "{essid}"
+  },
+  "group/group-power": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 500,
+      "children-class": "not-power",
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "custom/power", // First element is the "group leader" and won't ever be hidden
+      "custom/lock",
+      "custom/reboot"
+    ]
+  },
+  "custom/lock": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "hyprlock"
+  },
+  "custom/reboot": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "systemctl reboot"
+  },
+  "custom/power": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "systemctl poweroff"
+  }
+}
