@@ -1,7 +1,10 @@
 #!/bin/bash
 
+set -e # Encerra o script imediatamente em caso de erro
+
 DOTFILES_DIR=~/dotfiles
 CONFIG_DIR=~/.config
+BACKUP_DIR="$DOTFILES_DIR/backup_$(date +%Y%m%d_%H%M%S)"
 
 declare -A DOTFILES
 DOTFILES=(
@@ -18,43 +21,52 @@ HOME_FILES=(
     [".bashrc"]="$HOME/.bashrc"
 )
 
-echo "Setting up dotfiles..."
+echo "Iniciando configuração dos dotfiles..."
+echo "Fazendo backup dos arquivos atuais em: $BACKUP_DIR"
 
-# Criar diretório .config se não existir
+# Cria diretórios necessários
 mkdir -p "$CONFIG_DIR"
+mkdir -p "$BACKUP_DIR"
 
-# Linkar pastas do .config
+# Função para fazer backup e criar link
+link_file() {
+    local source="$1"
+    local target="$2"
+
+    # Verifica se o arquivo/diretório de origem existe
+    if [ ! -e "$source" ]; then
+        echo "AVISO: O caminho de origem '$source' não existe. Pulando."
+        return
+    fi
+
+    # Se o target já existe, move para o backup
+    if [ -e "$target" ] || [ -L "$target" ]; then
+        echo "Fazendo backup de '$target' para '$BACKUP_DIR'"
+        mv "$target" "$BACKUP_DIR/"
+    fi
+
+    # Cria o link simbólico
+    ln -sfn "$source" "$target"
+    echo "Link criado: $source -> $target"
+}
+
+# Cria links para as pastas de configuração
 for folder in "${!DOTFILES[@]}"; do
-    TARGET="${DOTFILES[$folder]}"
-    SOURCE="$DOTFILES_DIR/$folder"
-
-    if [ -e "$TARGET" ]; then
-        rm -rf "$TARGET"
-    fi
-
-    ln -sfn "$SOURCE" "$TARGET"
-    echo "Linked $SOURCE -> $TARGET"
+    link_file "$DOTFILES_DIR/$folder" "${DOTFILES[$folder]}"
 done
 
-# Linkar arquivos do HOME
+# Cria links para os arquivos no home
 for file in "${!HOME_FILES[@]}"; do
-    TARGET="${HOME_FILES[$file]}"
-    SOURCE="$DOTFILES_DIR/$file"
-
-    if [ -e "$TARGET" ]; then
-        rm "$TARGET"
-    fi
-
-    ln -sf "$SOURCE" "$TARGET"
-    echo "Linked $SOURCE -> $TARGET"
+    link_file "$DOTFILES_DIR/$file" "${HOME_FILES[$file]}"
 done
 
-# Recarregar Hyprland apenas se estiver rodando
+# Recarrega o Hyprland apenas se estiver em execução
+echo "Verificando se o Hyprland está ativo..."
 if command -v hyprctl >/dev/null 2>&1 && hyprctl monitors >/dev/null 2>&1; then
     hyprctl reload
-    echo "Hyprland reloaded"
+    echo "Hyprland recarregado com sucesso."
 else
-    echo "Hyprland not running, skip reload"
+    echo "Hyprland não está em execução. O recarregamento foi pulado."
 fi
 
-echo "Dotfiles setup complete!"
+echo "✅ Configuração dos dotfiles concluída!"
