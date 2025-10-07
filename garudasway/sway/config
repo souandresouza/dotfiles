@@ -1,0 +1,12 @@
+# Config for sway
+#
+# Read `man 5 sway` for a complete reference.
+
+# user config directory
+include $HOME/.config/sway/config.d/*
+
+# Auto set monitor properties
+    exec_always pkill kanshi; exec kanshi
+
+# Autotiling based on window dimensions
+    exec autotiling &
