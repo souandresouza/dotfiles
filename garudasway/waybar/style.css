@@ -1,0 +1,114 @@
+/* ~/.config/waybar/style.css */
+/* ---------- Paleta de Cores Noir ---------- */
+@define-color bg          #0a0a0a;
+@define-color bg-alt      #1a1a1a;
+@define-color fg          #e0e0e0;
+@define-color muted       #a0a0a0;
+@define-color accent      #ffffff;
+@define-color warning     #ffaa00;
+@define-color error       #ff4444;
+@define-color ok          #44ff44;
+@define-color border      #333333;
+@define-color shadow      rgba(0, 0, 0, 0.8);
+
+/* ---------- Estilos Globais ---------- */
+* {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 12pt;
+  color: @fg;
+}
+
+/* ---------- Barra Principal ---------- */
+window#waybar {
+  background-color: @bg;
+  border-bottom: 2px solid @border;
+  color: @fg;
+}
+
+/* ---------- Módulos Individuais ---------- */
+/* Contêineres para todos os módulos */
+#sway-workspaces,
+#sway-window,
+#clock,
+#network,
+#bluetooth,
+#privacy,
+#tray,
+#pulseaudio,
+#backlight,
+#battery {
+  background-color: @bg-alt;
+  padding: 0px 8px;
+  margin: 4px 2px;
+  border-radius: 6px;
+}
+
+/* ---------- Workspaces (Espaços de Trabalho) ---------- */
+#sway-workspaces button {
+  color: @muted;
+  padding: 0px 4px;
+  margin: 0px 2px;
+  border-radius: 4px;
+  background: transparent;
+}
+
+#sway-workspaces button.active {
+  background-color: @accent;
+  color: @bg;
+  font-weight: bold;
+}
+
+#sway-workspaces button.urgent {
+  background-color: @error;
+  color: @bg;
+}
+
+#sway-workspaces button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: @fg;
+}
+
+/* ---------- Estados dos Módulos ---------- */
+/* Bateria */
+#battery.charging, #battery.plugged {
+  color: @ok;
+}
+
+#battery.warning:not(.charging) {
+  color: @warning;
+}
+
+#battery.critical:not(.charging) {
+  color: @error;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* Rede */
+#network.disconnected {
+  color: @warning;
+}
+
+/* Áudio */
+#pulseaudio.muted {
+  color: @muted;
+}
+
+/* ---------- Tooltip ---------- */
+tooltip {
+  background: @bg-alt;
+  color: @fg;
+  border: 1px solid @border;
+  border-radius: 6px;
+}
+
+/* ---------- Animação para Bateria Crítica ---------- */
+@keyframes blink {
+  to {
+    background-color: @bg-alt;
+    color: @error;
+  }
+}
