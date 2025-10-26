@@ -1,0 +1,113 @@
+//   _ _ _ _____ __ __ _____ _____ _____
+//  | | | |  _  |  |  | __  |  _  | __  |
+//  | | | |     |_   _| __ -|     |    -|
+//  |_____|__|__| |_| |_____|__|__|__|__|  MODULES
+//
+
+{
+	// workspaces
+	"hyprland/workspaces": {
+	// Formatting omitted for brevity
+	"ignore-workspaces": [
+		"(special:)?chrome-sharing-indicator"
+	]
+},
+   	
+	// clock
+	"clock": {  
+		"interval": 1,
+		"format": "{:%T}",
+		"timezone": "America/Sao_Paulo",
+        "locale": "pt_BR.UTF-8",
+		"format-alt": "{:L%A, %d-%m-%Y}",
+		"tooltip-format": "<big>{calendar}</big>",
+		"calendar": {
+			"mode": "year",
+			"mode-mon-col": 3,
+			"weeks-pos": "right",
+			"on-scroll": 1,
+			"format": {
+				"months": "<span color='#ffffff'><b>{}</b></span>",
+				"days": "<span color='#ffffff'><b>{}</b></span>",
+				"weeks": "<span color='#ffffff'><b>W{}</b></span>",
+				"weekdays": "<span color='#ffffff'><b>{}</b></span>",
+				"today": "<span color='#ffffff'><b><u>{}</u></b></span>"
+			}
+		}
+	},
+	
+	// audio
+	"pulseaudio": {
+  "format": "{volume}% {icon}",
+  "format-bluetooth":"󰂰",
+  "format-muted": "<span font='12'></span>",
+  "format-icons": {
+    "headphones": "",
+    "bluetooth": "󰥰",
+    "handsfree": "",
+    "headset": "󱡬",
+    "phone": "",
+    "portable": "",
+    "car": "",
+    "default": ["🕨","🕩","🕪"]
+  },
+  "justify": "center",
+  "on-click": "amixer sset Master toggle",
+  "on-click-right": "pavucontrol",
+  "tooltip-format": "{icon}  {volume}%"
+},
+	
+	// bluetooth
+	"bluetooth": {
+	"format": " {device_alias}",
+	"format-connected": " {device_alias}",
+	"format-connected-battery": " {device_alias} {device_battery_percentage}%",
+	// "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+	"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+	"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+	"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+	"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+  },
+	
+	// network
+	"network": {
+		"format": "{ifname}",
+		"format-wifi": " {signalStrength}%",
+		"format-ethernet": "󰌘 {ifname}",
+		"format-disconnected": "disconnected",
+		"tooltip-format": "󰌘 {ifname} via {gwaddri}",
+		"tooltip-format-wifi": " {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\n {bandwidthUpBits}  {bandwidthDownBits}",
+		"tooltip-format-ethernet": "󰌘 {ifname}\nIP: {ipaddr}\n  {bandwidthUpBits}  {bandwidthDownBits}",
+		"tooltip-format-disconnected": "disconnected",
+		"max-length": 50,
+		"on-click": "nm-connection-editor"
+	},
+	
+	"custom/weather": {
+		"format": "{}",
+		"return-type": "json",
+		"exec": "~/.config/waybar/scripts/weather.sh",
+		"interval": 10,
+		"on-click": "firefox https://wttr.in"
+  },
+	// battery
+	"battery": {
+		"states": {
+			"good": 95,
+			"warning": 30,
+			"critical": 10
+		},
+		"format": "{icon} {capacity}%",
+		"format-charging": " {capacity}%",
+		"format-plugged": " {capacity}%",
+		"format-icons": ["", "", "", "", ""]
+	},
+	
+	// power menu
+	"custom/exit": {
+		"format": "",
+		"on-click": "wlogout -b 2",
+		"tooltip": false		
+	},
+}
+
