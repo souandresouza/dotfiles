@@ -1,0 +1,71 @@
+# Global settings for all notifications
+# Lines starting with # are comments and ignored.
+# Empty lines are also ignored.
+
+# Position of the notification window
+anchor=top-right
+
+# Background color in hexadecimal format (e.g., #RRGGBB or #RRGGBBAA)
+background-color=#282828FF
+
+# Text color
+text-color=#EBDBB2FF
+
+# Width of the notification window
+width=300
+
+# Margin from the edge of the screen
+margin=10
+
+# Padding inside the notification (space between content and border)
+padding=10
+
+# Border size
+border-size=2
+
+# Border color
+border-color=#458588FF
+
+# Border radius (for rounded corners)
+border-radius=5
+
+# Font and font size
+font=monospace 10
+
+# Enable or disable icons
+icons=1
+
+# Format string for notifications
+# %a: Application name
+# %s: Notification summary
+# %b: Notification body
+# %g: Number of notifications in the current group
+# %i: Notification ID
+format=%a\n<b>%s</b>\n%b
+
+# Timeout for notifications in milliseconds (0 for no timeout)
+default-timeout=5000
+
+# Criteria-based styling for specific applications or notification types
+# This section defines styles for notifications from a specific application.
+[app-name=Firefox]
+background-color=#FE8019FF
+text-color=#282828FF
+border-color=#D65D0EFF
+
+# Another criteria example: urgent notifications
+[urgency=critical]
+background-color=#FB4934FF
+text-color=#FBF1C7FF
+border-color=#CC241DFF
+default-timeout=0 # Critical notifications don't expire by default
+
+# Grouped notifications
+# This sets the default format for grouped notifications and makes them invisible by default.
+[grouped]
+format=%g new notifications
+invisible=1
+
+# Make the first member of each group visible again
+[group-index=0]
+invisible=0
