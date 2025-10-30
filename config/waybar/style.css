@@ -1,0 +1,214 @@
+@import url("/home/andre/.cache/wal/colors-waybar.css");
+
+* {
+    all: unset;
+    font-family: 'EnvyCodeR Nerd Font';
+    transition: background-color .3s ease;
+}
+
+#waybar .horizontal {
+    /* background: rgba(0,0,0,0.6); */
+}
+
+tooltip,
+#tray menu {
+    background: @background;
+    border: 2px solid @foreground;
+    color: @foreground;
+    padding: 5px;
+}
+
+#tray menu * {
+    border-radius: 2.5px;
+    transition: all .3s ease;
+}
+
+#tray menu *:hover, 
+#tray menu *:focus {
+    background: @foreground;
+    color: @background;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+window {
+    background: transparent;
+}
+
+window#waybar.empty #window {
+    background-color: transparent;
+}
+
+#custom-sep {
+    color: @color1;
+    font-size: 20px;
+}
+
+#custom-sep2 {
+    color: transparent;
+    font-size: 4px;
+}
+
+.modules-right {
+    padding-top: 4px;
+    margin: 4px;
+}
+
+.modules-center {
+    padding: 4px;
+    margin: 4px;
+}
+
+#workspaces {
+    background: @background;
+    border: 2px solid @foreground;
+    color: @foreground;
+    padding: 5px;
+}
+
+#workspaces > button {
+    font-size: 12.5px;
+    transition: all 0.3s ease;
+    padding: 0 8px 0 8px;
+    margin: 0;
+}
+
+#workspaces > button.empty.flat {
+    color: @foreground;
+}
+
+#workspaces > button.urgent {
+    color: @background;
+    background: @color1;
+}
+
+#workspaces > button.active.flat {
+    color: @background;
+    background: @foreground;
+    padding: 0 8px 0 8px;
+}
+
+#workspaces > button.inactive {
+    color: @foreground;
+}
+
+#workspaces > button:nth-child(1) {
+}
+
+#workspaces > button:last-child {
+}
+
+#group-player {
+    background-color: @color1;
+    padding: 0 16px;
+    color: @background;
+}
+
+#group-power {
+    padding: 7px;
+}
+
+#custom-notif {
+    padding: 2.5px 15px;
+    margin: 7.5px;
+    background: @color3;
+    color: @background;
+}
+
+#custom-infolabel {
+    font-size: 20px;
+    margin-right: 5px;
+    padding: 0 5px;
+    padding-right: 5px;
+    color: @foreground;
+}
+
+#tray {
+    padding: 2px;
+    background: @foreground;
+}
+
+#clock {
+    background: @background;
+    border: 2px solid @foreground;
+    color: @foreground;
+    padding: 5px;
+}
+
+#win {
+    padding: 2px 7px;
+    background-color: @color1;
+    min-width: 20px;
+    color: @background;
+}
+
+#window {
+    background: @background;
+    border: 2px solid @foreground;
+    color: @foreground;
+    padding: 5px;
+}
+
+#window.win2 {
+    color: @foreground;
+    opacity: 0.7;
+}
+
+#group-info {
+    background: @color1;
+    margin: 0;
+    color: @background;
+}
+
+#pulseaudio {
+    background: @background;
+    border: 2px solid @foreground;
+    color: @foreground;
+    padding-left: 5px;
+    padding-right: 20px;
+}
+
+#taskbar button {
+    margin: 5px 0;
+    transition: all .3s ease;
+}
+
+#taskbar button.active {
+    margin: 0 0 10px 0;
+}
+
+#battery {
+    background: @background;
+    border: 2px solid @foreground;
+    color: @foreground;
+    padding-left: 5px;
+    padding-right: 20px;
+}
+
+#backlight {
+    background: @background;
+    border: 2px solid @foreground;
+    color: @foreground;
+    padding: 5px;
+}
+
+#custom-exit {
+    background: @background;
+    border: 2px solid @foreground;
+    color: @foreground;
+    padding-left: 5px;
+    padding-right: 10px;
+}
+
+#network {
+    background: @background;
+    border: 2px solid @foreground;
+    color: @foreground;
+    padding: 5px;
+}
