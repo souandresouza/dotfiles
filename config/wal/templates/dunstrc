@@ -1,0 +1,67 @@
+# Arquivo de configuração do Dunst para integração com pywal16
+
+[global]
+# Formato da notificação
+format = "%s\n%b"
+
+# Duração da notificação em milissegundos
+# tempo_vida = 5000
+
+# Posição da notificação (por exemplo, "top-right", "bottom-left", "center")
+# geometria = "300x50-30+30"
+
+# Fonte
+# font = Monospace 8
+
+# Transparência
+# background_opacity = 0.8
+
+# Mostrar o contador de notificações
+# show_age_threshold = 60
+
+# Mostrar o progresso do volume/brilho
+# progress_bar = true
+
+# Cor de fundo padrão (usando a cor de fundo do pywal)
+# NOTA: O pywal irá substituir estas cores usando o template.
+# O pywal usa a variável {color0} para a cor de fundo.
+# O pywal usa a variável {color15} para a cor do texto.
+# O pywal usa as variáveis {color1} a {color6} para cores de destaque.
+
+# Cor de fundo da notificação
+# O pywal irá substituir {color0} pela cor de fundo do esquema.
+background = "{color0}"
+# Cor do texto da notificação
+# O pywal irá substituir {color15} pela cor de primeiro plano (texto) do esquema.
+foreground = "{color15}"
+
+# Cor da borda
+# O pywal irá substituir {color8} pela cor de destaque (geralmente uma cor mais escura).
+frame_color = "{color8}"
+# Largura da borda
+frame_width = 1
+
+# Ícone
+# icon_position = left
+# max_icon_size = 32
+
+# Urgência Baixa
+[low]
+timeout = 5
+background = "{color0}"
+foreground = "{color15}"
+frame_color = "{color8}"
+
+# Urgência Média
+[normal]
+timeout = 10
+background = "{color0}"
+foreground = "{color15}"
+frame_color = "{color4}"
+
+# Urgência Alta
+[critical]
+timeout = 0
+background = "{color1}"
+foreground = "{color15}"
+frame_color = "{color1}"
