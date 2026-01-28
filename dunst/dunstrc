@@ -1,0 +1,6 @@
+[global]
+font = Monospace 10
+geometry = "300x5-30+50"
+
+# ISSO AQUI É O ÚNICO COMANDO QUE IMPORTA:
+include = ~/.cache/wal/dunstrc

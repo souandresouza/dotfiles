@@ -1,0 +1,180 @@
+{
+    "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    "max-height": 34, // Waybar height (to be removed for auto height)
+    "max-width": 1900, // Waybar width
+    "spacing": 10, // Gaps between modules (6px)
+    // Choose the order of the modules
+    "modules-left": [
+        "hyprland/workspaces",
+        "custom/year-progress2",
+        "hyprland/window",
+    ],
+    "modules-center": [
+        "mpris",
+        "clock",
+        "custom/weather",
+        "custom/swaync",
+    ],
+    "modules-right": [
+        "network",
+        "pulseaudio",
+        "backlight",
+        "bluetooth",
+        "battery",
+    ],
+    // Modules configuration
+    "hyprland/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": false,  // Isso é importante!
+    "warp-on-scroll": false,
+    "format": "{}",
+    "format-icons": {
+        "urgent": "",
+        "focused": "", 
+        "default": ""
+    },
+    "persistent-workspaces": {
+        "*": 5  // Todos os workspaces 1-10 disponíveis
+    }
+},
+    "clock": {
+        "timezone": "America/Sao_Paulo",
+        "interval": 1,
+        "locale": "pt_BR.UTF-8",
+        "format": " {:L%A, %d/%m/%Y, %T}",
+        "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "bluetooth": {
+    "format": " Bluetooth",
+    "format-disabled": "󰂲 Bluetooth off",
+    "format-off": "󰂲",
+    "format-no-controller": "󰂲",
+    "format-device-preference": ["BT-5.2", "Ba-FON192", "KA-8778"],
+    "format-connected": "{device_alias} {device_battery_percentage}%",
+    "format-connected-battery": "{device_alias} {device_battery_percentage}%",
+    
+    "tooltip": true,
+    "tooltip-format": "Bluetooth",
+    "tooltip-format-connected": "{controller_alias}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias} - {device_battery_percentage}%",
+    "tooltip-format-enumerate-connected-battery": "{device_alias} - {device_battery_percentage}%",
+    
+    "on-click": "blueman-manager"
+},
+    
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "Brilho {percent}%",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+    
+    "mpris": {
+        "format": "{player_icon} {dynamic}",
+        "format-paused": "{status_icon} <i>{dynamic}</i>",
+        "tooltip-format": "{player}: {artist} - {title} ({status})",
+        "status-icons": {
+            "playing": "󰐊",
+            "paused": "󰏤"
+        },
+        // AÇÕES PERSONALIZADAS:
+        "on-click": "playerctl play-pause",       // Clique = Play/Pause
+        "on-scroll-up": "playerctl previous",     // Scroll para cima = Anterior
+        "on-scroll-down": "playerctl next"        // Scroll para baixo = Próxima
+    },
+   
+    "custom/year-progress2": {
+        "format": "{}",
+        "exec": "~/.config/scripts/year-progress.sh",
+        "interval": 86400,  // Atualiza a cada hora
+        "return-type": "json"
+    },
+    
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
+    "network": {
+        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    
+    "custom/day_of_year": {
+        "format": "{}",
+        "exec": "~/.config/scripts/day_of_year.sh",
+        "interval": 30
+    },
+    
+    "custom/weather": {
+    "format": {},
+    "exec": "~/.config/scripts/weather.py",
+    "restart-interval": 300,
+    "return-type": "json",
+    "on-click": "xdg-open https://weather.com/pt-BR/clima/hoje/l/e1327fde1147429ff28484d1dc279fac8b72226ce87c571d2cdb8bd3e4156069"
+  },
+  
+  "custom/swaync": {
+    "tooltip": true,
+    "format": " {} {icon} ",
+    "format-icons": {
+      "notification": "[N]<span foreground='red'><sup>+</sup></span>",
+      "none": "[N]",
+      "dnd-notification": "[DND]<span foreground='red'><sup>+</sup></span>",
+      "dnd-none": "[DND]",
+      "inhibited-notification": "[I]<span foreground='red'><sup>+</sup></span>",
+      "inhibited-none": "[I]",
+      "dnd-inhibited-notification":
+        "[DND-I]<span foreground='red'><sup>+</sup></span>",
+      "dnd-inhibited-none": "[DND-I]"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "sleep 0.1 && swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+  
+  "hyprland/window": {
+    "format": "{}",
+    "max-length": 50,
+    "separate-outputs": true
+},
+}

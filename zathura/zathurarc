@@ -1,0 +1,91 @@
+# Zathura Dark Theme - Hellwal Edition
+# Cores carregadas de: /home/andre/.cache/hellwal/
+
+# Cores base
+set default-bg			"#000b12"
+set default-fg			"#09ffff"
+
+# Interface
+set statusbar-fg		"#09ffff"
+set statusbar-bg		"#000b12"
+set statusbar-basename		true
+
+set inputbar-bg			"#000b12"
+set inputbar-fg			"#09ffff"
+
+set notification-bg		"#000b12"
+set notification-fg		"#09ffff"
+set notification-error-bg	"#233f4e"
+set notification-error-fg	"#09ffff"
+set notification-warning-bg	"#233f4e"
+set notification-warning-fg	"#09ffff"
+
+# Auto-completar
+set completion-bg		"#000b12"
+set completion-fg		"#09ffff"
+set completion-group-bg		"#000b12"
+set completion-group-fg		"#004e57"
+set completion-highlight-bg	"#09ffff"
+set completion-highlight-fg	"#000b12"
+
+# Índice/navegação
+set index-bg			"#000b12"
+set index-fg			"#09ffff"
+set index-active-bg		"#09ffff"
+set index-active-fg		"#000b12"
+
+# Recolorir documento (modo leitura noturna)
+set recolor			"true"
+set recolor-keephue		"true"
+set recolor-lightcolor		"#000b12"
+set recolor-darkcolor		"#09ffff"
+set recolor-reverse-video	"false"
+
+# Destaques/seleção
+set highlight-color		"#09ffff"
+set highlight-active-color	"#004e57"
+set highlight-transparency	0.4
+
+# Renderização
+set render-loading		"true"
+set render-loading-bg		"#000b12"
+set render-loading-fg		"#09ffff"
+
+# Tabs (se suportado)
+set tabbar-bg			"#000b12"
+set tabbar-fg			"#09ffff"
+set tabbar-bg-active		"#004e57"
+set tabbar-fg-active		"#09ffff"
+
+# Comportamento da janela
+set window-title-home-tilde	true
+set selection-clipboard		clipboard
+set adjust-open			"best-fit"
+set scroll-page-aware		"true"
+set scroll-full-overlap		"0.01"
+set zoom-min			"10"
+
+# Ajustes de fonte (opcional - descomente e ajuste)
+# set font			"Monospace 10"
+# set font			"Iosevka 11"
+# set font			"JetBrains Mono 10"
+
+# Atalhos recomendados para tema escuro
+map f toggle_fullscreen
+map <C-f> search
+map <C-h> toggle_index
+map <C-r> reload
+map <C-g> goto
+map <C-o> open
+map <C-s> save
+map <Tab> navigate next
+map <S-Tab> navigate previous
+map <C-plus> zoom in
+map <C-minus> zoom out
+map <C-0> zoom normal
+map <C-l> recolor
+map [normal] R rotate
+map [normal] r recolor_reload
+
+# Modo apresentação (útil para PDFs)
+map <F5> presentation_mode
