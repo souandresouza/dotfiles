@@ -246,6 +246,26 @@ link_configurations() {
         done
     fi
     
+    # ========== CORREÇÃO DO HELLWAL (ADICIONADO AQUI) ==========
+    # Corrigir permissões do Hellwal
+    log "Configurando permissões do Hellwal..."
+    local hellwal_cache="$HOME/.cache/hellwal/cache"
+    
+    # Criar diretório de cache se não existir
+    mkdir -p "$hellwal_cache"
+    
+    # Ajustar permissões (apenas o dono tem acesso)
+    chmod 700 "$HOME/.cache/hellwal/" 2>/dev/null || true
+    
+    # Garantir que o diretório pertence ao usuário atual
+    if [ -d "$HOME/.cache/hellwal" ]; then
+        chown -R "$USER:$USER" "$HOME/.cache/hellwal/" 2>/dev/null || true
+        success "Permissões do Hellwal configuradas"
+    else
+        warn "Diretório .cache/hellwal não encontrado"
+    fi
+    # ========== FIM DA CORREÇÃO ==========
+    
     # Linkar arquivos individuais
     [ -f "$DOTFILES/.bashrc" ] && {
         ln -sf "$DOTFILES/.bashrc" "$HOME/.bashrc"
