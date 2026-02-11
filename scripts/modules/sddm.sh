@@ -1,6 +1,6 @@
 apply_sddm() {
-  # Define o destino do wallpaper do SDDM (pode ser alterado pelo usuário)
-  SDDM_BG_DEST="${SDDM_BG_DEST:-/usr/share/sddm/themes/sddm-astronaut-theme/Backgrounds/black_hole.png}"
+  # Define o destino do wallpaper do SDDM
+  SDDM_BG_DEST="/usr/share/sddm/themes/sddm-astronaut-theme/Backgrounds/black_hole.png"
 
   # Verifica se o script está sendo executado como root
   if [[ $EUID -ne 0 ]]; then
