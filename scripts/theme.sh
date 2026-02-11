@@ -1,22 +1,40 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# ========= CONFIG =========
-WALLPAPER_DIR="${WALLPAPER_DIR:-$HOME/Imagens/wallpapers}"
-CACHE_DIR="${CACHE_DIR:-$HOME/.cache/theme}"
+# ========= XDG BASE =========
+HOME_DIR="$HOME"
+CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME_DIR/.config}"
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME_DIR/.cache}"
+DATA_DIR="${XDG_DATA_HOME:-$HOME_DIR/.local/share}"
 
-HISTORY_FILE="$CACHE_DIR/wallpaper_history.txt"
-HASH_FILE="$CACHE_DIR/wallpaper.hash"
+if command -v xdg-user-dir >/dev/null 2>&1; then
+  PICTURES_DIR="$(xdg-user-dir PICTURES)"
+else
+  PICTURES_DIR="$HOME_DIR/Pictures"
+fi
+
+# ========= USER CONFIG =========
+USER_CONFIG="$CONFIG_DIR/dotfiles/config.sh"
+[[ -f "$USER_CONFIG" ]] && source "$USER_CONFIG"
+
+THEME_MODE="${THEME_MODE:-dark}"
+WALLPAPER_BASE_DIR="${WALLPAPER_BASE_DIR:-$PICTURES_DIR/wallpapers}"
+WALLPAPER_DIR="$WALLPAPER_BASE_DIR/$THEME_MODE"
+
+# ========= CACHE =========
+DOTFILES_CACHE="$CACHE_DIR/dotfiles"
+mkdir -p "$DOTFILES_CACHE"
+
+HISTORY_FILE="$DOTFILES_CACHE/wallpaper_history.txt"
+HASH_FILE="$DOTFILES_CACHE/wallpaper.hash"
+BASE_WALL="$DOTFILES_CACHE/wallpaper_base.png"
+HYPRLOCK_WALL="$DOTFILES_CACHE/wallpaper_hyprlock.png"
+
 MAX_HISTORY=20
 
-BASE_WALL="$CACHE_DIR/wallpaper_base.png"
-HYPRLOCK_WALL="$CACHE_DIR/wallpaper_hyprlock.png"
-# ==========================
-
+# ========= PATHS =========
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MODULES_DIR="$SCRIPT_DIR/modules"
-
-mkdir -p "$CACHE_DIR"
 
 log() { echo -e "▶ $*"; }
 safe() { "$@" 2>/dev/null || true; }
@@ -37,15 +55,19 @@ for arg in "$@"; do
     --no-hellwal) DISABLE_HELLWAL=true ;;
     --no-pywal) DISABLE_PYWAL=true ;;
     --sddm) FORCE_SDDM=true ;;
+    --light) THEME_MODE="light" ;;
+    --dark) THEME_MODE="dark" ;;
     --help)
       echo "Uso: theme.sh [flags]"
       echo ""
       echo "--random        Força wallpaper novo"
       echo "--same          Reaplica o atual"
+      echo "--light         Modo claro"
+      echo "--dark          Modo escuro"
       echo "--no-swww       Não aplicar swww"
       echo "--no-hellwal    Não aplicar hellwal"
       echo "--no-pywal      Não aplicar pywal"
-      echo "--sddm          Atualiza background do SDDM (root)"
+      echo "--sddm          Atualiza background do SDDM"
       exit 0
       ;;
     *)
@@ -56,35 +78,34 @@ for arg in "$@"; do
 done
 
 # ========= DEP CHECK =========
-check_dep() {
-  command -v "$1" &>/dev/null || {
-    echo "❌ Dependência faltando: $1"
+for dep in magick jq; do
+  command -v "$dep" &>/dev/null || {
+    echo "❌ Dependência faltando: $dep"
     exit 1
   }
-}
+done
 
-check_dep magick
-check_dep jq
+# ========= VALIDATE DIR =========
+[[ ! -d "$WALLPAPER_DIR" ]] && {
+  echo "❌ Diretório não encontrado: $WALLPAPER_DIR"
+  exit 1
+}
 
 # ========= RESOLUTION =========
 get_resolution() {
-  hyprctl monitors -j 2>/dev/null | jq -r '
-    map(select(.focused == true))[0] // .[0] |
-    "\(.width)x\(.height)"
-  ' 2>/dev/null
+  if command -v hyprctl &>/dev/null; then
+    hyprctl monitors -j 2>/dev/null | jq -r '
+      map(select(.focused == true))[0] // .[0] |
+      "\(.width)x\(.height)"
+    '
+  fi
 }
 
 RESOLUTION="$(get_resolution || true)"
 [[ -z "$RESOLUTION" ]] && RESOLUTION="1920x1080"
+log "Resolução: $RESOLUTION"
 
-log "Resolução detectada: $RESOLUTION"
-
-# ========= HASH =========
-get_hash() {
-  sha256sum "$1" | awk '{print $1}'
-}
-
-# ========= LOAD WALLPAPERS =========
+# ========= WALLPAPER LIST =========
 mapfile -t WALLPAPERS < <(
   find "$WALLPAPER_DIR" -type f \( \
     -iname "*.jpg" -o \
@@ -95,7 +116,7 @@ mapfile -t WALLPAPERS < <(
 )
 
 [[ ${#WALLPAPERS[@]} -eq 0 ]] && {
-  echo "❌ Nenhum wallpaper encontrado em $WALLPAPER_DIR"
+  echo "❌ Nenhum wallpaper encontrado"
   exit 1
 }
 
@@ -110,43 +131,34 @@ done
 
 [[ ${#AVAILABLE[@]} -eq 0 ]] && AVAILABLE=("${WALLPAPERS[@]}")
 
-# ========= SELECT WALLPAPER =========
+# ========= SELECT =========
 if [[ "$USE_SAME" == true && -f "$BASE_WALL" ]]; then
-  log "Reutilizando wallpaper atual"
   SELECTED="$BASE_WALL"
 else
-  if [[ "$USE_RANDOM" == true ]]; then
-    AVAILABLE=("${WALLPAPERS[@]}")
-  fi
-
+  [[ "$USE_RANDOM" == true ]] && AVAILABLE=("${WALLPAPERS[@]}")
   SELECTED="${AVAILABLE[RANDOM % ${#AVAILABLE[@]}]}"
 fi
 
-SELECTED_BASENAME="$(basename "$SELECTED")"
-log "Wallpaper selecionado: $SELECTED_BASENAME"
+log "Selecionado: $(basename "$SELECTED")"
 
 # ========= PROCESS =========
-NEW_HASH="$(get_hash "$SELECTED")"
+NEW_HASH="$(sha256sum "$SELECTED" | awk '{print $1}')"
 OLD_HASH="$(cat "$HASH_FILE" 2>/dev/null || true)"
 
 if [[ "$NEW_HASH" != "$OLD_HASH" ]]; then
   echo "$NEW_HASH" > "$HASH_FILE"
 
-  log "Gerando wallpaper base"
   magick "$SELECTED" \
     -resize "${RESOLUTION}^" \
     -gravity center -extent "$RESOLUTION" \
     "$BASE_WALL"
 
-  log "Gerando wallpaper blur (hyprlock)"
   magick "$SELECTED" \
     -resize "${RESOLUTION}^" \
     -gravity center -extent "$RESOLUTION" \
     -blur 0x12 \
     -brightness-contrast -10x-5 \
     "$HYPRLOCK_WALL"
-else
-  log "Wallpaper igual ao anterior — pulando processamento"
 fi
 
 # ========= LOAD MODULES =========
@@ -154,19 +166,16 @@ for module in "$MODULES_DIR"/*.sh; do
   [[ -f "$module" ]] && source "$module"
 done
 
-# ========= APPLY MODULES =========
+# ========= APPLY =========
 [[ "$DISABLE_SWWW" != true ]] && type apply_swww &>/dev/null && apply_swww
 [[ "$DISABLE_HELLWAL" != true ]] && type apply_hellwal &>/dev/null && apply_hellwal
 [[ "$DISABLE_PYWAL" != true ]] && type apply_pywal &>/dev/null && apply_pywal
 [[ "$FORCE_SDDM" == true ]] && type apply_sddm &>/dev/null && apply_sddm
 
-# ========= UPDATE HISTORY =========
+# ========= HISTORY =========
 {
   echo "$SELECTED"
   printf "%s\n" "${USED[@]}"
 } | head -n "$MAX_HISTORY" > "$HISTORY_FILE"
 
-echo ""
-echo "✅ CONCLUÍDO"
-echo "Base: $BASE_WALL"
-echo "Hyprlock: $HYPRLOCK_WALL"
+echo "✅ Concluído"

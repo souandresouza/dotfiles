@@ -1,15 +1,10 @@
 apply_sddm() {
-  local dest="/usr/share/sddm/themes/sddm-astronaut-theme/Backgrounds/black_hole.png"
-
-  if [[ ! -e "$dest" ]]; then
-    log "SDDM não detectado — ignorando"
-    return
-  fi
+  SDDM_BG_DEST="/usr/share/sddm/themes/sddm-astronaut-theme/Backgrounds/black_hole.png"
 
   if [[ $EUID -ne 0 ]]; then
-    log "SDDM requer root — pulando"
-    return
+    echo "❌ SDDM requer root"
+    return 1
   fi
 
-  cp "$BASE_WALL" "$dest"
+  cp "$BASE_WALL" "$SDDM_BG_DEST"
 }

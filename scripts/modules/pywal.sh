@@ -1,16 +1,8 @@
 apply_pywal() {
-  command -v wal &>/dev/null || {
-    log "pywal não encontrado — ignorando"
-    return
-  }
+  command -v wal &>/dev/null || return 0
 
-  log "Aplicando Pywal"
+  wal -i "$BASE_WALL"
 
-  safe wal -i "$BASE_WALL"
-
-  safe pkill -USR2 waybar
-  safe pkill -USR1 dunst
-  safe pkill -USR1 zathura
-
-  command -v pywalfox &>/dev/null && safe pywalfox update
+  pkill -USR2 waybar 2>/dev/null || true
+  pkill -USR1 dunst 2>/dev/null || true
 }

@@ -1,9 +1,4 @@
 apply_hellwal() {
-  command -v hellwal &>/dev/null || {
-    log "hellwal não encontrado — ignorando"
-    return
-  }
-
-  log "Aplicando Hellwal"
-  safe hellwal -i "$BASE_WALL"
+  command -v hellwal &>/dev/null || return 0
+  hellwal -i "$BASE_WALL"
 }
