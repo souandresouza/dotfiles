@@ -7,11 +7,7 @@ CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME_DIR/.config}"
 CACHE_DIR="${XDG_CACHE_HOME:-$HOME_DIR/.cache}"
 DATA_DIR="${XDG_DATA_HOME:-$HOME_DIR/.local/share}"
 
-if command -v xdg-user-dir >/dev/null 2>&1; then
-  PICTURES_DIR="$(xdg-user-dir PICTURES)"
-else
-  PICTURES_DIR="$HOME_DIR/Pictures"
-fi
+PICTURES_DIR="$(xdg-user-dir PICTURES 2>/dev/null || echo "$HOME_DIR/Pictures")"
 
 # ========= USER CONFIG =========
 USER_CONFIG="$CONFIG_DIR/dotfiles/config.sh"
@@ -36,7 +32,8 @@ MAX_HISTORY=20
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MODULES_DIR="$SCRIPT_DIR/modules"
 
-log() { echo -e "▶ $*"; }
+log() { echo -e "▶️ $*"; }
+error() { echo -e "❌ $*" >&2; }
 safe() { "$@" 2>/dev/null || true; }
 
 # ========= FLAGS =========
@@ -71,25 +68,19 @@ for arg in "$@"; do
       exit 0
       ;;
     *)
-      echo "Flag desconhecida: $arg"
+      error "Flag desconhecida: $arg"
       exit 1
       ;;
   esac
 done
 
 # ========= DEP CHECK =========
-for dep in magick jq; do
-  command -v "$dep" &>/dev/null || {
-    echo "❌ Dependência faltando: $dep"
-    exit 1
-  }
+for dep in magick jq feh xwallpaper; do
+  command -v "$dep" &>/dev/null || { error "Dependência faltando: $dep"; exit 1; }
 done
 
 # ========= VALIDATE DIR =========
-[[ ! -d "$WALLPAPER_DIR" ]] && {
-  echo "❌ Diretório não encontrado: $WALLPAPER_DIR"
-  exit 1
-}
+[[ ! -d "$WALLPAPER_DIR" ]] && { error "Diretório não encontrado: $WALLPAPER_DIR"; exit 1; }
 
 # ========= RESOLUTION =========
 get_resolution() {
@@ -98,6 +89,8 @@ get_resolution() {
       map(select(.focused == true))[0] // .[0] |
       "\(.width)x\(.height)"
     '
+  elif command -v xrandr &>/dev/null; then
+    xrandr | grep '*' | awk '{print $1}'
   fi
 }
 
@@ -107,18 +100,10 @@ log "Resolução: $RESOLUTION"
 
 # ========= WALLPAPER LIST =========
 mapfile -t WALLPAPERS < <(
-  find "$WALLPAPER_DIR" -type f \( \
-    -iname "*.jpg" -o \
-    -iname "*.jpeg" -o \
-    -iname "*.png" -o \
-    -iname "*.webp" \
-  \)
+  find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \)
 )
 
-[[ ${#WALLPAPERS[@]} -eq 0 ]] && {
-  echo "❌ Nenhum wallpaper encontrado"
-  exit 1
-}
+[[ ${#WALLPAPERS[@]} -eq 0 ]] && { error "Nenhum wallpaper encontrado"; exit 1; }
 
 mapfile -t USED < "$HISTORY_FILE" 2>/dev/null || USED=()
 
@@ -128,7 +113,6 @@ for w in "${WALLPAPERS[@]}"; do
     AVAILABLE+=("$w")
   fi
 done
-
 [[ ${#AVAILABLE[@]} -eq 0 ]] && AVAILABLE=("${WALLPAPERS[@]}")
 
 # ========= SELECT =========
@@ -138,7 +122,6 @@ else
   [[ "$USE_RANDOM" == true ]] && AVAILABLE=("${WALLPAPERS[@]}")
   SELECTED="${AVAILABLE[RANDOM % ${#AVAILABLE[@]}]}"
 fi
-
 log "Selecionado: $(basename "$SELECTED")"
 
 # ========= PROCESS =========
@@ -148,28 +131,38 @@ OLD_HASH="$(cat "$HASH_FILE" 2>/dev/null || true)"
 if [[ "$NEW_HASH" != "$OLD_HASH" ]]; then
   echo "$NEW_HASH" > "$HASH_FILE"
 
-  magick "$SELECTED" \
-    -resize "${RESOLUTION}^" \
-    -gravity center -extent "$RESOLUTION" \
-    "$BASE_WALL"
-
-  magick "$SELECTED" \
-    -resize "${RESOLUTION}^" \
-    -gravity center -extent "$RESOLUTION" \
-    -blur 0x12 \
-    -brightness-contrast -10x-5 \
-    "$HYPRLOCK_WALL"
+  magick "$SELECTED" -resize "${RESOLUTION}^" -gravity center -extent "$RESOLUTION" "$BASE_WALL"
+  magick "$SELECTED" -resize "${RESOLUTION}^" -gravity center -extent "$RESOLUTION" -blur 0x12 -brightness-contrast -10x-5 "$HYPRLOCK_WALL"
 fi
-
 # ========= LOAD MODULES =========
+shopt -s nullglob
 for module in "$MODULES_DIR"/*.sh; do
   [[ -f "$module" ]] && source "$module"
 done
+shopt -u nullglob
 
 # ========= APPLY =========
-[[ "$DISABLE_SWWW" != true ]] && type apply_swww &>/dev/null && apply_swww
-[[ "$DISABLE_HELLWAL" != true ]] && type apply_hellwal &>/dev/null && apply_hellwal
-[[ "$DISABLE_PYWAL" != true ]] && type apply_pywal &>/dev/null && apply_pywal
+# Usando feh ou xwallpaper como fallback para X11
+apply_wallpaper() {
+  if command -v swww &>/dev/null && [[ "$DISABLE_SWWW" != true ]]; then
+    apply_swww
+  elif command -v hellwal &>/dev/null && [[ "$DISABLE_HELLWAL" != true ]]; then
+    apply_hellwal
+  elif command -v pywal &>/dev/null && [[ "$DISABLE_PYWAL" != true ]]; then
+    apply_pywal
+  elif command -v feh &>/dev/null; then
+    feh --bg-scale "$SELECTED"
+  elif command -v xwallpaper &>/dev/null; then
+    xwallpaper --zoom "$SELECTED"
+  else
+    error "Nenhum método de aplicação de wallpaper encontrado!"
+    exit 1
+  fi
+}
+
+apply_wallpaper
+
+# ========= SDDM =========
 [[ "$FORCE_SDDM" == true ]] && type apply_sddm &>/dev/null && apply_sddm
 
 # ========= HISTORY =========
