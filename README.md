@@ -1,111 +1,139 @@
-# 🎨 Hyprland Theme Engine
+🎨 Hyprland Theme Engine
 
 Modular wallpaper + color theme manager for Hyprland.
+Supports multiple wallpaper engines and lockscreen blur generation, designed to be modular, safe, and easy to extend.
 
-Supports:
-
-- swww
-- hellwal
-- pywal
-- SDDM (optional)
-- Hyprlock blur generation
 
 ---
 
-## 📦 Features
+📦 Features
 
-- Random wallpaper selection
-- Wallpaper history (no repeats)
-- Automatic resolution detection
-- Blur generation for lockscreen
-- Modular architecture
-- Safe dependency handling
-- Optional SDDM support
+Random wallpaper selection
+
+Wallpaper history (prevents repeats)
+
+Automatic screen resolution detection
+
+Blur generation for lockscreen (Hyprlock)
+
+Modular architecture with pluggable modules
+
+Safe dependency handling
+
+Optional SDDM background support
+
+
 
 ---
 
-## 🧩 Dependencies
+🧩 Supported Engines
 
 Required:
 
-- `imagemagick`
-- `jq`
+imagemagick
+
+jq
+
 
 Optional:
 
-- `swww`
-- `hellwal`
-- `pywal`
-- `pywalfox`
+swww
+
+hellwal
+
+pywal
+
+pywalfox
+
+
+Optional (requires root):
+
+SDDM (to update the SDDM background)
+
+
 
 ---
 
-## 📁 Structure
-
-```
+📁 Project Structure
 
 scripts/
-theme.sh
-modules/
-swww.sh
-hellwal.sh
-pywal.sh
-sddm.sh
+├── theme.sh
+└── modules/
+    ├── swww.sh
+    ├── hellwal.sh
+    ├── pywal.sh
+    └── sddm.sh
 
-````
-
----
-
-## 🚀 Usage
-
-```bash
-./theme.sh
-````
-
-### Flags
-
-```bash
---random        Force random wallpaper
---same          Reapply current wallpaper
---no-swww       Disable swww
---no-hellwal    Disable hellwal
---no-pywal      Disable pywal
---sddm          Update SDDM background (requires root)
---help          Show help
-```
 
 ---
 
-## ⚙️ Custom Wallpaper Directory
+🚀 Usage
 
-You can override the default directory:
+To run the theme script, execute the following command:
 
-```bash
-WALLPAPER_DIR=~/Pictures ./theme.sh
-```
+./scripts/theme.sh
 
----
-
-## 📸 Preview
-
-(Add screenshots here)
 
 ---
 
-## 🛠 Installation
+⚙️ Flags
 
-Clone your dotfiles and symlink configs:
+Flag Description
 
-```bash
+--random Force a new random wallpaper
+--same Reapply the current wallpaper
+--light Apply light theme
+--dark Apply dark theme
+--no-swww Disable swww
+--no-hellwal Disable hellwal
+--no-pywal Disable pywal
+--sddm Update SDDM background (requires root)
+--help Show this help message
+
+
+
+---
+
+⚙️ Custom Wallpaper Directory
+
+You can override the default wallpaper directory by setting the WALLPAPER_DIR variable:
+
+WALLPAPER_DIR=~/Pictures ./scripts/theme.sh
+
+
+---
+
+📸 Preview
+
+Add screenshots or GIFs of your Hyprland setup with the theme applied.
+
+
+---
+
+🛠 Installation
+
+1. Clone your dotfiles:
+
+
+
 git clone https://github.com/souandresouza/dotfiles.git
 cd dotfiles
+
+2. Make the theme script executable:
+
+
+
 chmod +x scripts/theme.sh
-```
+
+3. Run the script:
+
+
+
+./scripts/theme.sh
+
 
 ---
 
-## 📜 License
+📜 License
 
-MIT
-
-```
+MIT License
