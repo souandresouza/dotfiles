@@ -1,0 +1,6 @@
+@import "/home/andre/.cache/hellwal/rofi.rasi"
+@theme "/usr/share/rofi/themes/arthur.rasi"
+
+configuration {
+    cache-dir: "";  # Cache vazio = desabilitado
+}

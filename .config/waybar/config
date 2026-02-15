@@ -7,16 +7,22 @@
     "margin-bottom": 5,
 
     // Choose the order of the modules
-    "modules-left": ["hyprland/workspaces", "idle_inhibitor",],
+    "modules-left": ["hyprland/workspaces", "idle_inhibitor", "custom/year-progress", "custom/cava",],
     "modules-center": [ "clock",],
-    "modules-right": [ "tray", "backlight", "network", "pulseaudio", "battery", "custom/power",],
+    "modules-right": [ "mpris", "tray", "backlight/slider", "network", "pulseaudio", "battery", "custom/power",],
     // Modules configuration
 
      
-    "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
+    "hyprland/workspaces": {
+    "persistent-workspaces": {
+             "*": 5, // 5 workspaces by default on every monitor
+       }
     },
-    "idle_inhibitor": {
+    "custom/cava": {
+				"format": "{}",
+				"exec": "~/.config/scripts/cava.sh"
+	},
+	"idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
             "activated": "",
@@ -28,15 +34,17 @@
         "spacing": 10
     },
     "clock": {
+		"format": "{:%T | %d-%m-%Y}",
+        "interval": 1,
         "timezone": "America/Sao_Paulo",
         "tooltip-format": "<big>{:%Y}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%d-%m-%Y}"
     },
-    "backlight": {
-        // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
-        "format-icons": ["", ""]
-    },
+    "backlight/slider": {
+    "min": 0,
+    "max": 100,
+    "orientation": "vertical",
+    "device": "intel_backlight"
+},
     "battery": {
         "states": {
             // "good": 95,
@@ -54,10 +62,10 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "Connected  ",
+        "format-ethernet": "On  ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
+        "format-disconnected": "Off ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
         "on-click-right": "bash ~/.config/rofi/wifi_menu/rofi_wifi_menu"
     },
@@ -80,10 +88,30 @@
         },
         "on-click": "pavucontrol"
     },
+    "custom/year-progress": {
+    "exec": "~/.config/scripts/year-progress.sh",
+    "interval": 3600,  // A cada hora (mais responsivo)
+    "format": "{}",
+    "tooltip": true,
+    "return-type": "json"
+},    
     "custom/power":{
         "format": "🔒",
         "on-click": "wlogout",
         "on-click-right": "killall wlogout"
-    }, 
+    },
+    "mpris": {
+	"format": "DEFAULT: {player_icon} {dynamic}",
+	"max-length": 20,
+	"format-paused": "DEFAULT: {status_icon} <i>{dynamic}</i>",
+	"player-icons": {
+		"default": "▶",
+		"mpv": "🎵"
+	},
+	"status-icons": {
+		"paused": "⏸"
+	},
+	// "ignored-players": ["firefox"]
+}, 
 }
 
