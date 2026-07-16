@@ -1,0 +1,85 @@
+[global]
+    font = Monospace 8
+    monitor = 0
+    follow = mouse
+    width = 320
+    height = (0, 300)
+    origin = top-right
+    offset = (9, 9)
+
+    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+
+    separator_color = frame
+    frame_width = 3
+    frame_color = "#c2c2c5"
+    notification_limit = 20
+    
+    progress_bar = true
+    progress_bar_height = 10
+    progress_bar_frame_width = 1
+    progress_bar_min_width = 150
+    progress_bar_max_width = 300
+    progress_bar_corner_radius = 4
+    progress_bar_corners = all
+    
+    indicate_hidden = yes
+    transparency = 0
+    padding = 8
+    horizontal_padding = 8
+    text_icon_padding = 0
+    gap_size = 0
+    sort = yes
+    
+    line_height = 0
+    markup = full
+    alignment = center
+    vertical_alignment = center
+    show_age_threshold = 60
+    ellipsize = middle
+    ignore_newline = no
+    stack_duplicates = true
+    hide_duplicate_count = false
+    show_indicators = yes
+    enable_posix_regex = false
+    enable_recursive_icon_lookup = true
+    icon_theme = Adwaita
+    icon_position = left
+    max_icon_size = 128
+    
+    sticky_history = yes
+    history_length = 20
+    dmenu = /usr/bin/dmenu -p dunst:
+    browser = /usr/bin/xdg-open
+    always_run_script = true
+    title = Dunst
+    class = Dunst
+    corner_radius = 4
+    ignore_dbusclose = false
+    layer = overlay
+    force_xwayland = false
+    force_xinerama = false
+    mouse_left_click = close_current
+    mouse_middle_click = do_action, close_current
+    mouse_right_click = close_all
+
+[urgency_low]
+    background = "#0d0b1a"
+    foreground = "#c2c2c5"
+    timeout = 4
+    default_icon = dialog-information
+
+[urgency_normal]
+    background = "#0d0b1a"
+    foreground = "#c2c2c5"
+    timeout = 5
+    override_pause_level = 30
+    default_icon = dialog-information
+
+[urgency_critical]
+    background = "#900000"
+    foreground = "#ffffff"
+    frame_color = "#ff0000"
+    timeout = 0
+    override_pause_level = 60
+    default_icon = dialog-warning
+
