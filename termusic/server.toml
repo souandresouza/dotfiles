@@ -1,0 +1,46 @@
+version = "2"
+
+[com]
+protocol = "uds"
+socket_path = "/tmp/termusic.socket"
+port = 5101
+address = "::1"
+
+[player]
+music_dirs = ["/home/andre/Músicas"]
+loop_mode = "playlist"
+volume = 60
+speed = 10
+gapless = true
+use_mediacontrols = true
+set_discord_status = true
+random_track_quantity = 20
+random_album_min_quantity = 5
+backend = "rusty"
+startup_state = "playing"
+
+[player.remember_position]
+music = "no"
+podcast = "yes"
+
+[player.seek_step]
+short_tracks = 5
+long_tracks = 30
+
+[podcast]
+concurrent_downloads_max = 3
+max_download_retries = 3
+download_dir = "/home/andre/Músicas/podcast"
+
+[backends.rusty]
+soundtouch = true
+file_buffer_size = "4.0 MiB"
+decoded_buffer_size = "750.0 KiB"
+output_sample_rate = 48000
+
+[backends.mpv]
+audio_device = "auto"
+
+[metadata]
+directory_scan_depth = 10
+artist_separators = [",", ";", "&", "ft.", "feat.", "/", "|", "×", "、", " x "]

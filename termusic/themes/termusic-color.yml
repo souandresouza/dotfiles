@@ -1,0 +1,32 @@
+# Colors (Base16 Default Dark)
+colors:
+  # Default colors
+  primary:
+    background: "#0d0b1a"
+    foreground: "#c2c2c5"
+
+  cursor:
+    text: "#c2c2c5"
+    cursor: "#c2c2c5"
+
+  # Normal colors
+  normal:
+    black:   "#0d0b1a"
+    red:     "#4C627C"
+    green:   "#55708C"
+    yellow:  "#607F9F"
+    blue:    "#60809F"
+    magenta: "#6688AA"
+    cyan:    "#7AA5CB"
+    white:   "#c2c2c5"
+
+  # Bright colors
+  bright:
+    black:   "#5c5a6f"
+    red:     "#4C627C"
+    green:   "#55708C"
+    yellow:  "#607F9F"
+    blue:    "#60809F"
+    magenta: "#6688AA"
+    cyan:    "#7AA5CB"
+    white:   "#c2c2c5"
