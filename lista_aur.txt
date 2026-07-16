@@ -1,0 +1,6 @@
+linktui
+linuxtoys
+python-pywal16-git
+qview
+tide-island
+walogram-git
