@@ -78,18 +78,18 @@ hl.bind("F11", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle"
 hl.bind("F12", hl.dsp.window.float({ action = "toggle" }), { description = "Toggle Floating" })
 
 -- screenshot --
-hl.bind("PRINT", hl.dsp.exec_cmd("/home/andre/.config/scripts/screenshot.sh all"))
-hl.bind("SUPER + PRINT", hl.dsp.exec_cmd("/home/andre/.config/scripts/screenshot.sh monitor"))
-hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("/home/andre/.config/scripts/screenshot.sh region"))
-hl.bind("ALT + PRINT", hl.dsp.exec_cmd("/home/andre/.config/scripts/screenshot.sh window"))
+hl.bind("PRINT", hl.dsp.exec_cmd(scripts .. "/screenshot.sh all"))
+hl.bind("SUPER + PRINT", hl.dsp.exec_cmd(scripts .. "/screenshot.sh monitor"))
+hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd(scripts .. "/screenshot.sh region"))
+hl.bind("ALT + PRINT", hl.dsp.exec_cmd(scripts .. "/screenshot.sh window"))
 
 -- Laptop multimedia keys for volume and LCD brightness
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("/home/andre/.config/scripts/volume-up.sh"))
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("/home/andre/.config/scripts/volume-down.sh"))
-hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("/home/andre/.config/scripts/mute.sh"))
-hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("/home/andre/.config/scripts/mute-mic.sh"))
-hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("/home/andre/.config/scripts/brilho.sh --up"))
-hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("/home/andre/.config/scripts/brilho.sh --down"))
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(scripts .. "/volume-up.sh"))
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(scripts .. "/volume-down.sh"))
+hl.bind("XF86AudioMute",        hl.dsp.exec_cmd(scripts .. "/mute.sh"))
+hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd(scripts .. "/mute-mic.sh"))
+hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd(scripts .. "/brilho.sh --up"))
+hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd(scripts .. "/brilho.sh --down"))
 
 -- Requires playerctl
 hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"))
