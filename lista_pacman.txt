@@ -130,6 +130,7 @@ opencl-mesa
 openssh
 os-prober
 pacman-contrib
+papirus-icon-theme
 pavucontrol
 perl
 pipewire-alsa
