@@ -292,6 +292,8 @@ main() {
     # 5. Cria cópia do wallpaper como PNG
     create_current_wallpaper_copy "$SELECTED"
 
+    wal -i "$SELECTED"
+
     notify-send "Wallpaper alterado" "$(basename "$SELECTED")"
             
     echo "✨ Concluído!" >&2
