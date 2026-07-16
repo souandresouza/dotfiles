@@ -9,8 +9,8 @@ CACHE_DIR="$HOME/.cache/wallpapers"
 HISTORY_FILE="$CACHE_DIR/wallpaper_history.txt"
 CURRENT_WALLPAPER="$HOME/.cache/current_wallpaper.png"
 HISTORY_SIZE=10
-COLORS_FILE="$HOME/.cache/cadroc/colors.lua"
-CSS_FILE="$HOME/.cache/cadroc/colors.css"
+COLORS_FILE="$HOME/.cache/wal/colors.lua"
+CSS_FILE="$HOME/.cache/wal/colors.css"
 
 # ============================================
 # FUNÇÕES
