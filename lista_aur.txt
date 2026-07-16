@@ -1,5 +1,6 @@
 linktui
 linuxtoys
+papirus-folders-git
 python-pywal16-git
 qview
 tide-island
