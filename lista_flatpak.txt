@@ -1,7 +1,11 @@
 adw-gtk3 GTK Theme	org.gtk.Gtk3theme.adw-gtk3-dark	6.5	3.22	system
 Codecs Extra Extension	org.freedesktop.Platform.codecs-extra		25.08-extra	system
 Freedesktop Platform	org.freedesktop.Platform	freedesktop-sdk-25.08.14	25.08	system
+Freedesktop SDK	org.freedesktop.Sdk	freedesktop-sdk-25.08.14	25.08	system
+KDE Application Platform	org.kde.Platform		6.10	system
 Mesa (Extra)	org.freedesktop.Platform.GL.default	26.1.4	25.08-extra	system
 Mesa	org.freedesktop.Platform.GL.default	26.1.4	25.08	system
 Obsidian	md.obsidian.Obsidian	1.12.7	stable	system
-Signal Desktop	org.signal.Signal	8.18.0	stable	system
+Signal Desktop	org.signal.Signal	8.19.0	stable	system
+ZapZap	com.rtosta.zapzap	6.5.1	stable	system
+Zed	dev.zed.Zed	v1.11.3	stable	system

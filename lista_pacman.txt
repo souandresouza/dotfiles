@@ -17,10 +17,9 @@ bluez-utils
 btop
 btrfs-assistant
 btrfs-progs
-cachyos-fish-config
+cabextract
 cachyos-hello
 cachyos-hooks
-cachyos-hypr-noctalia
 cachyos-kernel-manager
 cachyos-keyring
 cachyos-micro-settings
@@ -34,7 +33,6 @@ cachyos-snapper-support
 cachyos-v3-mirrorlist
 cachyos-v4-mirrorlist
 cachyos-wallpapers
-cachyos-zsh-config
 cantarell-fonts
 cava
 chwd
@@ -48,7 +46,6 @@ dmraid
 dnsmasq
 dosfstools
 duf
-dunst
 e2fsprogs
 efibootmgr
 efitools
@@ -107,6 +104,7 @@ logrotate
 lsb-release
 lsscsi
 lvm2
+mako
 man-db
 man-pages
 mdadm
@@ -122,6 +120,7 @@ networkmanager
 networkmanager-openvpn
 nfs-utils
 nilfs-utils
+niri
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
@@ -149,6 +148,7 @@ python-pipx
 python-pyquery
 python-pystache
 qbittorrent
+qt5-wayland
 realtime-privileges
 rebuild-detector
 reflector
@@ -165,6 +165,7 @@ speech-dispatcher
 sudo
 swaybg
 swayidle
+swaylock-effects
 swayosd
 sysfsutils
 telegram-desktop
@@ -200,6 +201,7 @@ which
 wine
 wireplumber
 wpa_supplicant
+xdg-desktop-portal-gnome
 xdg-desktop-portal-wlr
 xdg-user-dirs
 xdg-user-dirs-gtk
