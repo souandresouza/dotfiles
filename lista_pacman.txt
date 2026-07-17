@@ -67,6 +67,7 @@ glaze
 gnome-keyring
 gpart
 gparted
+gpu-screen-recorder
 gst-libav
 gst-plugin-pipewire
 gst-plugins-bad
