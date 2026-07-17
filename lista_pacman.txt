@@ -166,7 +166,7 @@ speech-dispatcher
 sudo
 swaybg
 swayidle
-swaylock-effects
+swaylock
 swayosd
 sysfsutils
 telegram-desktop
