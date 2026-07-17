@@ -1,7 +1,7 @@
 #!/bin/sh
 
 COLORS_FILE="$HOME/.cache/wal/colors.css"
-MAKO_FILE="$HOME/.config/mako/config"
+FUZZEL_FILE="$HOME/.config/fuzzel/colors-fuzzel.ini"
 
 if [ ! -f "$COLORS_FILE" ]; then
     echo "ERRO: Arquivo $COLORS_FILE não encontrado!"
@@ -13,7 +13,7 @@ extract_color() {
     grep "\-\-color$1:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; '
 }
 
-# Extrair background, foreground e cursor
+# Extrair também background, foreground e cursor
 background=$(grep "\-\-background:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; ')
 foreground=$(grep "\-\-foreground:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; ')
 cursor=$(grep "\-\-cursor:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; ')
@@ -45,54 +45,27 @@ for i in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
 done
 
 # Verificar se as cores foram extraídas
-if [ -z "$color0" ] || [ -z "$background" ]; then
-    echo "ERRO: Cores não extraídas corretamente."
+if [ -z "$color0" ]; then
+    echo "ERRO: Nenhuma cor extraída."
     exit 1
 fi
 
-mkdir -p "$(dirname "$MAKO_FILE")"
-rm -f "$MAKO_FILE"
+mkdir -p "$(dirname "$FUZZEL_FILE")"
+rm -f "$FUZZEL_FILE"
 
-# Usa background como fundo, foreground como texto e color0 como borda
-cat > "$MAKO_FILE" << EOF
-sort=-time
-layer=top
-anchor=top-right
-width=300
-margin=12
-height=150
-border-size=4
-border-radius=8
-padding=20
-icons=1
-icon-location=left
-markup=1
-max-icon-size=64
-default-timeout=5000
-ignore-timeout=1
-font=Millimetre 10
-text-alignment=right
-max-visible=5
-
-background-color=${color0}
-text-color=${color7}
-border-color=${color1}
-
-# urgency=low
-# background-color=${color0}
-# text-color=${color7}
-# border-color=${color1}
-
-# urgency=normal
-# background-color=${color0}
-# text-color=${color7}
-# border-color=${color1}
-
-# urgency=high
-# background-color=#ff0033
-# text-color=${color7}
-# border-color=${color1}
+# Criar configuração com alpha ff
+cat > "$FUZZEL_FILE" << EOF
+[colors]
+background=${color0}ff
+prompt=${color15}ff
+text=${color15}ff
+placeholder=${color15}ff
+input=${color15}ff
+match=${color15}ff
+selection=${color15}ff
+selection-text=${color0}ff
+selection-match=${color15}ff
+border=${color15}ff
 EOF
-
-# Recarrega o mako
-makoctl reload
+pkill -SIGUSR1 -x fuzzel
+echo "Fuzzel atualizado!"

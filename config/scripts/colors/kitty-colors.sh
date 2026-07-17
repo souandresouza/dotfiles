@@ -1,7 +1,7 @@
 #!/bin/sh
 
 COLORS_FILE="$HOME/.cache/wal/colors.css"
-FUZZEL_FILE="$HOME/.config/fuzzel/colors-fuzzel.ini"
+KITTY_FILE="$HOME/.cache/wal/colors-kitty.conf"
 
 if [ ! -f "$COLORS_FILE" ]; then
     echo "ERRO: Arquivo $COLORS_FILE não encontrado!"
@@ -50,22 +50,31 @@ if [ -z "$color0" ]; then
     exit 1
 fi
 
-mkdir -p "$(dirname "$FUZZEL_FILE")"
-rm -f "$FUZZEL_FILE"
+mkdir -p "$(dirname "$KITTY_FILE")"
+rm -f "$KITTY_FILE"
 
-# Criar configuração com alpha ff
-cat > "$FUZZEL_FILE" << EOF
-[colors]
-background=${color0}ff
-prompt=${color15}ff
-text=${color15}ff
-placeholder=${color15}ff
-input=${color15}ff
-match=${color15}ff
-selection=${color15}ff
-selection-text=${color0}ff
-selection-match=${color15}ff
-border=${color15}ff
+# Gerar arquivo no formato Waybar (sem aspas)
+cat > "$KITTY_FILE" << EOF
+foreground $foreground
+background $background
+cursor $cursor
+
+color0 $color0
+color1 $color1
+color2 $color2
+color3 $color3
+color4 $color4
+color5 $color5
+color6 $color6
+color7 $color7
+color8 $color8
+color9 $color9
+color10 $color10
+color11 $color11
+color12 $color12
+color13 $color13
+color14 $color14
+color15 $color15
 EOF
 
-echo "Fuzzel atualizado!"
+pkill -SIGUSR1 -x kitty

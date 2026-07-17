@@ -1,7 +1,7 @@
 #!/bin/sh
 
 COLORS_FILE="$HOME/.cache/wal/colors.css"
-KITTY_FILE="$HOME/.cache/cadroc/colors-kitty.conf"
+MAKO_FILE="$HOME/.config/mako/config"
 
 if [ ! -f "$COLORS_FILE" ]; then
     echo "ERRO: Arquivo $COLORS_FILE não encontrado!"
@@ -13,7 +13,7 @@ extract_color() {
     grep "\-\-color$1:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; '
 }
 
-# Extrair também background, foreground e cursor
+# Extrair background, foreground e cursor
 background=$(grep "\-\-background:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; ')
 foreground=$(grep "\-\-foreground:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; ')
 cursor=$(grep "\-\-cursor:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; ')
@@ -45,36 +45,54 @@ for i in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
 done
 
 # Verificar se as cores foram extraídas
-if [ -z "$color0" ]; then
-    echo "ERRO: Nenhuma cor extraída."
+if [ -z "$color0" ] || [ -z "$background" ]; then
+    echo "ERRO: Cores não extraídas corretamente."
     exit 1
 fi
 
-mkdir -p "$(dirname "$KITTY_FILE")"
-rm -f "$KITTY_FILE"
+mkdir -p "$(dirname "$MAKO_FILE")"
+rm -f "$MAKO_FILE"
 
-# Gerar arquivo no formato Waybar (sem aspas)
-cat > "$KITTY_FILE" << EOF
-foreground $foreground
-background $background
-cursor $cursor
+# Usa background como fundo, foreground como texto e color0 como borda
+cat > "$MAKO_FILE" << EOF
+sort=-time
+layer=top
+anchor=top-right
+width=300
+margin=12
+height=150
+border-size=4
+border-radius=8
+padding=20
+icons=1
+icon-location=left
+markup=1
+max-icon-size=64
+default-timeout=5000
+ignore-timeout=1
+font=Millimetre 10
+text-alignment=center
+max-visible=5
 
-color0 $color0
-color1 $color1
-color2 $color2
-color3 $color3
-color4 $color4
-color5 $color5
-color6 $color6
-color7 $color7
-color8 $color8
-color9 $color9
-color10 $color10
-color11 $color11
-color12 $color12
-color13 $color13
-color14 $color14
-color15 $color15
+background-color=${color0}
+text-color=${color7}
+border-color=${color1}
+
+# urgency=low
+# background-color=${color0}
+# text-color=${color7}
+# border-color=${color1}
+
+# urgency=normal
+# background-color=${color0}
+# text-color=${color7}
+# border-color=${color1}
+
+# urgency=high
+# background-color=#ff0033
+# text-color=${color7}
+# border-color=${color1}
 EOF
 
-pkill -SIGUSR1 -x kitty
+# Recarrega o mako
+makoctl reload

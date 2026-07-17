@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WAL_COLORS="/home/andre/.cache/cadroc/colors.css"
+WAL_COLORS="/home/andre/.cache/wal/colors.css"
 
 if [ ! -f "$WAL_COLORS" ]; then
     echo "Erro: $WAL_COLORS não encontrado"
@@ -26,7 +26,7 @@ color14=$(grep 'color14' "$WAL_COLORS" | awk '{print $3}' | tr -d ';')
 color15=$(grep 'color15' "$WAL_COLORS" | awk '{print $3}' | tr -d ';')
 
 # Carrega as cores do pywal
-source ~/.cache/cadroc/colors.sh
+source ~/.cache/wal/colors.sh
 
 # Define o arquivo de saída
 CONFIG_FILE=~/.config/zathura/zathurarc
