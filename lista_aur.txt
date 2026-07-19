@@ -1,13 +1,3 @@
-cachyos-hooks
-cachyos-kernel-manager
-cachyos-keyring
-cachyos-micro-settings
-cachyos-mirrorlist
-cachyos-packageinstaller
-cachyos-plymouth-bootanimation
-cachyos-plymouth-theme
-cachyos-rate-mirrors
-cachyos-settings
 cachyos-snapper-support
 chwd
 hellwal
@@ -15,7 +5,6 @@ limine-mkinitcpio-hook
 limine-snapper-sync
 linktui
 linuxtoys
-papirus-folders-git
 qview
 tide-island
 vesktop-bin
