@@ -1,0 +1,80 @@
+// Regras para janelas
+window-rule {
+    match app-id="firefox"
+    open-on-workspace "externo"
+    open-maximized true
+}
+window-rule {
+    match app-id="telegram"
+    open-on-workspace "externo"
+    open-maximized true
+}
+window-rule {
+    match app-id="vesktop"
+    open-on-workspace "externo"
+    open-maximized true
+}
+window-rule {
+    match app-id="zathura"
+    open-on-workspace "externo"
+    open-maximized true
+}
+window-rule {
+    match app-id="mpv"
+    open-on-workspace "externo"
+    open-maximized true
+}
+window-rule {
+    match app-id="qview"
+    open-on-workspace "externo"
+    open-maximized true
+}
+window-rule {
+    match app-id="btop"
+    open-maximized true;
+}
+window-rule {
+    match app-id="kitty"
+    open-maximized true;
+}
+window-rule {
+    match app-id="com.rtosta.zapzap"
+    open-maximized true;
+}
+window-rule {
+    match app-id="dev.zed.Zed"
+    open-maximized true;
+}
+// Abrir picture-in-picture do Firefox como flutuante
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+// Work around WezTerm's initial configure bug
+window-rule {
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}
+}
+
+// Habilitar cantos arredondados para todas as janelas
+window-rule {
+    geometry-corner-radius 4
+    clip-to-geometry true
+}
+
+// Força janelas com títulos comuns de diálogos a flutuarem
+window-rule {
+    match title="^Salvar como$"
+    match title="^Salvar arquivo$"
+    match title="^Abrir arquivo$"
+    match title="^Open File$"
+    match title="^Save As$"
+    open-floating true
+}
+
+// Regra opcional específica para os seletores do Portal XDG (GTK/GNOME)
+window-rule {
+    match app-id="org.gnome.Nautilus" title="^Salvar$"
+    open-floating true
+}

@@ -1,0 +1,19 @@
+// Configuração de monitores
+output "eDP-1" {
+    mode "1366x768@60"
+    position x=0 y=0
+    scale 1
+    transform "normal"
+}
+
+output "HDMI-A-1" {
+    mode "1920x1080@100"
+    position x=1366 y=0
+    scale 1
+    transform "normal"
+}
+
+// Workspace que abre no monitor HDMI
+workspace "externo" {
+    open-on-output "HDMI-A-1"
+}

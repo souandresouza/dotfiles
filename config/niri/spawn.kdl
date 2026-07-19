@@ -1,0 +1,24 @@
+// Variáveis de ambiente
+environment {
+    QT_QPA_PLATFORM "wayland;xcb"
+    QT_QPA_PLATFORMTHEME "qt5ct:qt6ct"
+    SDL_VIDEODRIVER "wayland"
+    _JAVA_AWT_WM_NONREPARENTING "1"
+    DISPLAY "0"
+}
+
+// Programas iniciados automaticamente
+spawn-at-startup "/usr/lib/polkit-gnome/polkit-kde-authentication-agent-1"
+spawn-at-startup "sh" "-c" "$HOME/.config/scripts/screenlock.sh"
+//spawn-at-startup "waybar"
+spawn-at-startup "mako"
+spawn-at-startup "blueman-applet"
+spawn-sh-at-startup "swayidle"
+spawn-at-startup "sh" "-c" "$HOME/.config/scripts/random-wallpaper.sh"
+spawn-at-startup "sh" "-c" "$HOME/.config/scripts/wlsunset.sh"
+spawn-at-startup "sh" "-c" "$HOME/.config/scripts/sequencia.sh"
+spawn-at-startup "sh" "-c" "$HOME/.config/scripts/battery_tracker.sh"
+spawn-at-startup "dbus-update-activation-environment" "--all"
+spawn-at-startup "/usr/lib/xdg-desktop-portal" "-r"
+spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
+spawn-sh-at-startup "wl-paste --type image --watch cliphist store"

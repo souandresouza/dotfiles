@@ -1,0 +1,22 @@
+// Configuração de dispositivos de entrada
+input {
+    keyboard {
+        xkb {
+            layout "br"
+            variant "abnt2"
+        }
+        repeat-delay 250
+        repeat-rate 25
+        numlock
+    }
+
+    touchpad {
+        tap
+        natural-scroll
+    }
+
+    mouse {}
+    trackpoint {}
+    
+    focus-follows-mouse max-scroll-amount="0%"
+}

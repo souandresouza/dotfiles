@@ -1,0 +1,28 @@
+// Configuração principal do Niri
+// Importa todos os módulos
+include "input.kdl"
+include "outputs.kdl"
+include "layout.kdl"
+include "windows.kdl"
+include "animations.kdl"
+include "binds.kdl"
+include "spawn.kdl"
+
+// Configurações globais
+prefer-no-csd
+screenshot-path "~/Imagens/Screenshot from %d-%m-%Y %H-%M-%S.png"
+
+// Don't show hotkey-overlay on startup
+hotkey-overlay {
+    skip-at-startup
+}
+
+blur {
+    passes 3
+    offset 3.0
+    noise 0.02
+    saturation 1.5
+}
+
+// Tide Island shortcut bindings
+include "/home/andre/.config/tide-island/niri-shortcuts.kdl"
