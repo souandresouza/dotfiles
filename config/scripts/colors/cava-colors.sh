@@ -10,13 +10,13 @@ fi
 
 # Extrair cores do formato Pywal/CSS (--color0: #xxx;)
 extract_color() {
-    grep "\-\-color$1:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; '
+    grep -- "--color$1:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; '
 }
 
 # Extrair também background, foreground e cursor
-background=$(grep "\-\-background:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; ')
-foreground=$(grep "\-\-foreground:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; ')
-cursor=$(grep "\-\-cursor:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; ')
+background=$(grep -- "--background:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; ')
+foreground=$(grep -- "--foreground:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; ')
+cursor=$(grep -- "--cursor:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; ')
 
 # Extrair cores 0-15
 color0=$(extract_color 0)
@@ -36,12 +36,17 @@ color13=$(extract_color 13)
 color14=$(extract_color 14)
 color15=$(extract_color 15)
 
+# Limpar cores (remover colchetes, espaços e #)
+clean_color() {
+    echo "$1" | tr -d '[]# '
+}
+
 # DEBUG
-echo "foreground = [$foreground]"
-echo "background = [$background]"
-echo "cursor = [$cursor]"
+echo "foreground = [$(clean_color "$foreground")]"
+echo "background = [$(clean_color "$background")]"
+echo "cursor = [$(clean_color "$cursor")]"
 for i in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
-    eval "echo \"color$i = [\$color$i]\""
+    eval "echo \"color$i = [\$(clean_color \"\$color$i\")]\""
 done
 
 # Verificar se as cores foram extraídas
@@ -51,34 +56,44 @@ if [ -z "$color0" ]; then
 fi
 
 mkdir -p "$(dirname "$CAVA_FILE")"
-rm -f "$CAVA_FILE"
 
-# Criar configuração com alpha ff
+# Criar configuração do Cava (sem alpha, apenas RGB)
 cat > "$CAVA_FILE" << EOF
 [color]
 
 gradient = 1
-gradient_color_1 = '${color0}'
-gradient_color_2 = '${color1}'
-gradient_color_3 = '${color2}'
-gradient_color_4 = '${color3}'
-gradient_color_5 = '${color4}'
-gradient_color_6 = '${color5}'
-gradient_color_7 = '${color6}'
-gradient_color_8 = '${color7}'
+gradient_count = 8
+gradient_color_1 = '$(clean_color "$color0")'
+gradient_color_2 = '$(clean_color "$color1")'
+gradient_color_3 = '$(clean_color "$color2")'
+gradient_color_4 = '$(clean_color "$color3")'
+gradient_color_5 = '$(clean_color "$color4")'
+gradient_color_6 = '$(clean_color "$color5")'
+gradient_color_7 = '$(clean_color "$color6")'
+gradient_color_8 = '$(clean_color "$color7")'
 
 horizontal_gradient = 1
-horizontal_gradient_color_1 = '${color8}'
-horizontal_gradient_color_2 = '${color9}'
-horizontal_gradient_color_3 = '${color10}'
-horizontal_gradient_color_4 = '${color11}'
-horizontal_gradient_color_5 = '${color12}'
-horizontal_gradient_color_6 = '${color13}'
-horizontal_gradient_color_6 = '${color14}'
-horizontal_gradient_color_6 = '${color15}'
-
-blend_direction = 'right'
+horizontal_gradient_count = 8
+horizontal_gradient_color_1 = '$(clean_color "$color8")'
+horizontal_gradient_color_2 = '$(clean_color "$color9")'
+horizontal_gradient_color_3 = '$(clean_color "$color10")'
+horizontal_gradient_color_4 = '$(clean_color "$color11")'
+horizontal_gradient_color_5 = '$(clean_color "$color12")'
+horizontal_gradient_color_6 = '$(clean_color "$color13")'
+horizontal_gradient_color_7 = '$(clean_color "$color14")'
+horizontal_gradient_color_8 = '$(clean_color "$color15")'
 
 EOF
 
-pkill -USR2 cava
+echo "Configuração do Cava atualizada com sucesso!"
+echo "Arquivo: $CAVA_FILE"
+echo ""
+echo "Conteúdo do arquivo:"
+cat "$CAVA_FILE"
+
+# Recarregar Cava se estiver rodando
+if pgrep cava > /dev/null; then
+    pkill -USR2 cava
+    echo ""
+    echo "Cava recarregado!"
+fi

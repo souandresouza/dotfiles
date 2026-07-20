@@ -21,8 +21,10 @@ bluez-utils
 brightnessctl
 btop
 btrfs-progs
+cabextract
 cantarell-fonts
 catfish
+cava
 code
 cpupower
 cryptsetup
@@ -55,11 +57,13 @@ exfatprogs
 ex-vi-compat
 f2fs-tools
 fastfetch
+ffmpegthumbnailer
 file-roller
 firefox
 firewall-applet
 firewalld
 flatpak
+font-manager
 fuzzel
 git
 glances
@@ -120,6 +124,7 @@ noto-fonts-emoji
 noto-fonts-extra
 nss-mdns
 ntfs-3g
+ntfsprogs
 ntp
 nwg-displays
 nwg-look
@@ -180,6 +185,7 @@ ttf-liberation
 ttf-meslo-nerd
 ttf-opensans
 tumbler
+udftools
 udiskie
 ufw
 ufw-extras
@@ -206,6 +212,7 @@ xfsprogs
 xl2tpd
 xorg-server
 xorg-xdpyinfo
+xorg-xhost
 xorg-xinit
 xorg-xinput
 xorg-xkill
@@ -215,4 +222,5 @@ xwayland-satellite
 yay
 yazi
 yt-dlp
+zenity
 zoxide

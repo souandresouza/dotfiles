@@ -1,0 +1,7 @@
+Codecs Extra Extension	org.freedesktop.Platform.codecs-extra		25.08-extra	system
+Freedesktop Platform	org.freedesktop.Platform	freedesktop-sdk-25.08.14	25.08	system
+Gear Lever	it.mijorus.gearlever	4.6.1	stable	system
+GNOME Application Platform version 50	org.gnome.Platform		50	system
+Mesa (Extra)	org.freedesktop.Platform.GL.default	26.1.4	25.08-extra	system
+Mesa	org.freedesktop.Platform.GL.default	26.1.4	25.08	system
+ONLYOFFICE Desktop Editors	org.onlyoffice.desktopeditors	9.4.0	stable	system

@@ -1,5 +1,6 @@
 bibata-cursor-git
 linktui
+linuxtoys
 localsend-bin
 qview
 tide-island

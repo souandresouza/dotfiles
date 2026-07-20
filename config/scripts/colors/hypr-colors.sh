@@ -1,62 +1,64 @@
 #!/bin/sh
 #hypr-colors.sh
 
-# Extrair cores do colors.lua
-COLORS_FILE="$HOME/.cache/wal/colors.lua"
+HYPR_FILE="$HOME/.config/hypr/config/colors.lua"
+COLORS_FILE="$HOME/.cache/wal/colors.css"
 
-# Verifica se o arquivo existe
 if [ ! -f "$COLORS_FILE" ]; then
     echo "ERRO: Arquivo $COLORS_FILE não encontrado!"
     exit 1
 fi
 
-# Extrair cores - mantendo formato HEX
+# Extrair cores do formato Pywal/CSS (--color0: #xxx;)
 extract_color() {
-    local color_name=$1
-    local color_value
-    
-    # Tenta diferentes padrões de extração
-    color_value=$(grep "$color_name" "$COLORS_FILE" | head -1 | sed -E 's/.*"([^"]+)".*/\1/' | tr -d ';#')
-    
-    # Se não encontrou com aspas, tenta sem aspas
-    if [ -z "$color_value" ]; then
-        color_value=$(grep "$color_name" "$COLORS_FILE" | head -1 | awk '{print $NF}' | tr -d ',;')
-    fi
-    
-    # Remove # se existir
-    color_value=$(echo "$color_value" | sed 's/^#//')
-    
-    echo "$color_value"
+    grep -- "--color$1:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; '
 }
 
-# Extrair as cores (mantém HEX)
-color0=$(extract_color "color0")
-color15=$(extract_color "color15")
+# Extrair também background, foreground e cursor
+background=$(grep -- "--background:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; ')
+foreground=$(grep -- "--foreground:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; ')
+cursor=$(grep -- "--cursor:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; ')
+
+# Extrair cores 0-15
+color0=$(extract_color 0)
+color1=$(extract_color 1)
+color2=$(extract_color 2)
+color3=$(extract_color 3)
+color4=$(extract_color 4)
+color5=$(extract_color 5)
+color6=$(extract_color 6)
+color7=$(extract_color 7)
+color8=$(extract_color 8)
+color9=$(extract_color 9)
+color10=$(extract_color 10)
+color11=$(extract_color 11)
+color12=$(extract_color 12)
+color13=$(extract_color 13)
+color14=$(extract_color 14)
+color15=$(extract_color 15)
+
+# Limpar cores (remover colchetes, espaços e #)
+clean_color() {
+    echo "$1" | tr -d '[]# '
+}
 
 # DEBUG
-echo "DEBUG: color0 = [$color0]"
-echo "DEBUG: color15 = [$color15]"
+echo "foreground = [$(clean_color "$foreground")]"
+echo "background = [$(clean_color "$background")]"
+echo "cursor = [$(clean_color "$cursor")]"
+for i in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
+    eval "echo \"color$i = [\$(clean_color \"\$color$i\")]\""
+done
 
-# Verifica se extraiu corretamente
-if [ -z "$color0" ] || [ -z "$color15" ]; then
-    echo "ERRO: Não consegui extrair as cores"
-    echo "Conteúdo do arquivo:"
-    cat "$COLORS_FILE"
+# Verificar se as cores foram extraídas
+if [ -z "$color0" ]; then
+    echo "ERRO: Nenhuma cor extraída."
     exit 1
 fi
 
-# Remove # se existir (por segurança)
-background=$(echo "$color0" | sed 's/^#//')
-active=$(echo "$color15" | sed 's/^#//')
-inactive=$(echo "$color0" | sed 's/^#//')
+mkdir -p "$(dirname "$HYPR_FILE")"
 
-echo "DEBUG: background = [$background]"
-echo "DEBUG: active = [$active]"
-
-# Cria o arquivo de configuração
-mkdir -p "$HOME/.config/hypr/config"
-
-cat >"$HOME/.config/hypr/config/colors.lua" <<EOF
+cat >"$HYPR_FILE" <<EOF
 local colors = {
     active_border = "rgba(${color15}ee)",
     inactive_border = "rgba(${color0}aa)"
@@ -66,4 +68,4 @@ return colors
 EOF
 
 # Recarrega o Hyprland
-hyprctl reload
+#hyprctl reload
