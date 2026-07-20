@@ -6,7 +6,7 @@ WALLPAPER_HISTORY="$HOME/.cache/wallpapers/wallpaper_history.txt"
 HYPRLOCK_CONF="$HOME/.config/hypr/hyprlock.conf"
 profile="$HOME/Documentos/eu.png"
 wallpaper="$HOME/.cache/current_wallpaper.png"
-
+font_family="DS-Digital"
 
 # Verifica se o arquivo de histórico existe
 if [ ! -f "$WALLPAPER_HISTORY" ]; then
@@ -37,7 +37,7 @@ cat > "$HYPRLOCK_CONF" << EOF
 # Configuração gerada automaticamente
 # Wallpaper atual: $WALLPAPER_PATH
 
-font_family = monospace
+font_family = $font_family
 wallpaper = "$HOME/.cache/current_wallpaper.png"
 profile = $HOME/Documentos/eu.png
 inner_color  = #c8c8c8
@@ -81,7 +81,7 @@ label {
     shadow_passes = 1
     color = $gradient
     font_size = 11
-    font_family = monospace
+    font_family = $font_family
 
     position = 170, -35
     halign = left
@@ -94,7 +94,7 @@ label {
     text = cmd[update:18000000] echo "<b> "$(date +'%A, %-d %B %Y')" </b>"
     color = $border_color
     font_size = 30
-    font_family = monospace
+    font_family = $font_family
     position = 0, 200
     halign = center
     valign = center
@@ -109,7 +109,7 @@ label {
     shadow_color = rgb(0,0,0)
     shadow_boost = 1.2
     font_size = 200
-    font_family = monospace
+    font_family = $font_family
     position = -410, -10
     halign = center
     valign = center
@@ -122,7 +122,7 @@ label {
     text = cmd[update:1000] date +"%M:"
     color = $border_color
     font_size = 200
-    font_family = monospace
+    font_family = $font_family
     position = 10, -15
     halign = center
     valign = center
@@ -138,7 +138,7 @@ label {
     shadow_color = rgb(0,0,0)
     shadow_boost = 1.2
     font_size = 200
-    font_family = monospace
+    font_family = $font_family
     position = 400, -6
     halign = center
     valign = center
@@ -181,7 +181,7 @@ label { # Status
     text = cmd[update:5000] ${XDG_CONFIG_HOME:-$HOME/.config}/scripts/music-progress.sh
     color = $gradient
     font_size = 14
-    font_family = monospace
+    font_family = $font_family
 
     position = 30, 30
     halign = center
@@ -192,7 +192,7 @@ label { # Status
     text = cmd[update:86400] ${XDG_CONFIG_HOME:-$HOME/.config}/scripts/year-progress.sh
     color = $gradient
     font_size = 14
-    font_family = monospace
+    font_family = $font_family
 
     position = 500, 30
     halign = center
@@ -203,7 +203,7 @@ label { # Status
     text = cmd[update:300] ${XDG_CONFIG_HOME:-$HOME/.config}/scripts/battery-status.sh
     color = $gradient
     font_size = 14
-    font_family = monospace
+    font_family = $font_family
 
     position = -500, 30
     halign = center
