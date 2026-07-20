@@ -1,12 +1,6 @@
-cachyos-snapper-support
-chwd
-hellwal
-limine-mkinitcpio-hook
-limine-snapper-sync
+bibata-cursor-git
 linktui
-linuxtoys
+localsend-bin
 qview
 tide-island
-vesktop-bin
-walogram-git
-yay
+wal-telegram-git
