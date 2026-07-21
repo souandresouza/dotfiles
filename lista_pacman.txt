@@ -13,6 +13,7 @@ b43-fwcutter
 base
 base-devel
 bash-completion
+bc
 bind
 bluez
 bluez-hid2hci

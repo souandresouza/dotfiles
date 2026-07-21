@@ -1,4 +1,5 @@
 bibata-cursor-git
+cwal-git
 linktui
 linuxtoys
 localsend-bin
