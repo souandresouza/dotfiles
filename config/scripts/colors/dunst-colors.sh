@@ -1,8 +1,8 @@
 #!/bin/bash
 
-WAL_COLORS="/home/andre/.cache/wal/colors.css"
-DUNST_CONFIG_DIR="/home/andre/.config/dunst/"
-DUNST_FILE="/home/andre/.config/dunst/dunstrc"
+WAL_COLORS="$HOME/.cache/wal/colors.css"
+DUNST_CONFIG_DIR="$HOME/.config/dunst/"
+DUNST_FILE="$HOME/.config/dunst/dunstrc"
 
 if [ ! -f "$WAL_COLORS" ]; then
     echo "Erro: $WAL_COLORS não encontrado"

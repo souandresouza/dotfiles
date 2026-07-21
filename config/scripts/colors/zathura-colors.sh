@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WAL_COLORS="/home/andre/.cache/wal/colors.css"
+WAL_COLORS="$HOME/.cache/wal/colors.css"
 
 if [ ! -f "$WAL_COLORS" ]; then
     echo "Erro: $WAL_COLORS não encontrado"
