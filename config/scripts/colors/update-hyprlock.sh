@@ -6,7 +6,7 @@ WALLPAPER_HISTORY="$HOME/.cache/wallpapers/wallpaper_history.txt"
 HYPRLOCK_CONF="$HOME/.config/hypr/hyprlock.conf"
 profile="$HOME/Documentos/eu.png"
 wallpaper="$HOME/.cache/current_wallpaper.png"
-font_family="DS-Digital"
+font_family="Nasalization"
 
 # Verifica se o arquivo de histórico existe
 if [ ! -f "$WALLPAPER_HISTORY" ]; then
