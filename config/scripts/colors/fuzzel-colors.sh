@@ -1,6 +1,6 @@
 #!/bin/sh
 
-COLORS_FILE="$HOME/.cache/wal/colors.css"
+COLORS_FILE="$HOME/.cache/cwal/colors.css"
 FUZZEL_FILE="$HOME/.config/fuzzel/colors-fuzzel.ini"
 
 if [ ! -f "$COLORS_FILE" ]; then

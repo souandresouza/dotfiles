@@ -1,6 +1,6 @@
 #!/bin/sh
 
-COLORS_FILE="$HOME/.cache/wal/colors.css"
+COLORS_FILE="$HOME/.cache/cwal/colors.css"
 NIRI_FILE="$HOME/.config/niri/layout.kdl"
 
 if [ ! -f "$COLORS_FILE" ]; then

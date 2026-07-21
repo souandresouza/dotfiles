@@ -1,6 +1,6 @@
 #!/bin/sh
 
-COLORS_FILE="$HOME/.cache/wal/colors.css"
+COLORS_FILE="$HOME/.cache/cwal/colors.css"
 KITTY_FILE="$HOME/.cache/wal/colors-kitty.conf"
 
 if [ ! -f "$COLORS_FILE" ]; then

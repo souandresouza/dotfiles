@@ -1,6 +1,6 @@
 #!/bin/sh
 
-COLORS_FILE="$HOME/.cache/wal/colors.css"
+COLORS_FILE="$HOME/.cache/cwal/colors.css"
 CAVA_FILE="$HOME/.config/cava/themes/colors"
 
 if [ ! -f "$COLORS_FILE" ]; then
