@@ -1,0 +1,60 @@
+/*
+ *  cwal: Blazing-fast pywal-like color palette generator written in C.
+ *  Copyright (c) 2026 Nitin Bhat <nitinbhat972@gmail.com>
+ *  Repository: https://github.com/nitinbhat972/cwal
+ *
+ *  Licensed under the GNU General Public License v3.0.
+ *  If you find this code useful, please consider giving it a star on GitHub!
+ *  Any contributions or forks must retain this original header.
+ */
+
+#include "backend.h"
+
+#include <libimagequant.h>
+
+static int generate_palette_libimagequant(RawImage *image, Palette *palette) {
+  if (!image || !palette || !image->pixels) {
+    return -1;
+  }
+
+  liq_attr *attr = liq_attr_create();
+  if (!attr) {
+    return -1;
+  }
+
+  liq_set_max_colors(attr, 8); // Generate 8 colors
+
+  liq_image *liq_img = liq_image_create_rgba(attr, image->pixels, image->width,
+                                             image->height, 0);
+  if (!liq_img) {
+    liq_attr_destroy(attr);
+    return -1;
+  }
+
+  liq_result *res;
+  if (liq_image_quantize(liq_img, attr, &res) != LIQ_OK) {
+    liq_image_destroy(liq_img);
+    liq_attr_destroy(attr);
+    return -1;
+  }
+
+  const liq_palette *liq_pal = liq_get_palette(res);
+
+  for (unsigned i = 0; i < liq_pal->count; ++i) {
+    palette->colors[i].red = liq_pal->entries[i].r;
+    palette->colors[i].green = liq_pal->entries[i].g;
+    palette->colors[i].blue = liq_pal->entries[i].b;
+  }
+
+  liq_result_destroy(res);
+  liq_image_destroy(liq_img);
+  liq_attr_destroy(attr);
+
+  return 0;
+}
+
+ImageBackend libimagequant = {.name = "libimagequant",
+                              .init_backend = NULL,
+                              .terminate_backend = NULL,
+                              .generate_palette =
+                                  generate_palette_libimagequant};
