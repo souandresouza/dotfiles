@@ -91,3 +91,5 @@ colors:
     cyan:    "${color14}"
     white:   "${color15}"
 EOF
+# Recarregar termusic
+pkill -SIGUSR1 -x termusic
