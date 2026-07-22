@@ -1,0 +1,141 @@
+// -*- mode: jsonc -*-
+{
+    "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    "max-height": 34, // Waybar height (to be removed for auto height)
+    "max-width": 1900, // Waybar width
+    "spacing": 10, // Gaps between modules (4px)
+    // Choose the order of the modules
+    "modules-left": [
+        "hyprland/workspaces",
+        "hyprland/window",
+        "custom/year",
+        "mpris"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "network",
+        "pulseaudio",
+        "backlight",
+        "bluetooth",
+        "battery"
+    ],
+    // Modules configuration
+"hyprland/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": false,  // Isso é importante!
+    "warp-on-scroll": false,
+    "format": "{}",
+    "format-icons": {
+        "urgent": "",
+        "focused": "", 
+        "default": ""
+    },
+    "persistent-workspaces": {
+        "*": 5  // Todos os workspaces 1-10 disponíveis
+    }
+},
+
+"hyprland/window": {
+     "format": "{}",
+     "max-length": 42,
+     "separate-outputs": true
+},
+
+"clock": {
+        "timezone": "America/Sao_Paulo",
+        "interval": 1,
+        "locale": "pt_BR.UTF-8",
+        "format": "{:L%A, %d/%m/%Y, %T}",
+        "tooltip-format": "<big>{:%Y}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+"bluetooth": {
+    "format": " Bluetooth on",
+    "format-disabled": "󰂲 Bluetooth off",
+    "format-off": "󰂲",
+    "format-no-controller": "󰂲",
+    "format-device-preference": ["BT-5.2", "Ba-FON192", "KA-8778"],
+    "format-connected": "{device_alias} {device_battery_percentage}%",
+    "format-connected-battery": "{device_alias} {device_battery_percentage}%",
+    
+    "tooltip": true,
+    "tooltip-format": "Bluetooth",
+    "tooltip-format-connected": "{controller_alias}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias} - {device_battery_percentage}%",
+    "tooltip-format-enumerate-connected-battery": "{device_alias} - {device_battery_percentage}%",
+    
+    "on-click": "blueman-manager"
+},
+    
+"backlight": {
+        // "device": "acpi_video1",
+        "format": "Brilho {percent}%",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+"battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
+"network": {
+        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+"pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    
+"custom/year": {
+        "format": "{}",
+        "exec": "~/.config/scripts/year-progress.sh",
+        "interval": 86400,
+    },
+"mpris": {
+        "format": "{player_icon} {title}",
+        "format-paused": "{player_icon}  {title}",
+        "player-icons": {
+        "spotify": "",
+        "mpv": "",
+        "firefox": "",
+        "chromium": "",
+        "default": ""
+        },
+        "tooltip-format": "{player}\n{artist} — {title}",
+        "max-length": 25
+}    
+}

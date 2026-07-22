@@ -1,47 +1,92 @@
+// Inspired by Catnap
 {
-  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
-"logo": {
-        "source": "endeavouros",
-        "type": "auto",
-        "color": {
-          "1": "38;2;57;255;20"
-          //"2": "38;2;220;255;255"
-        },
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "source": "~/.config/fastfetch/ascii.txt", // Path to your logo file
+        "type": "auto",                    // 'auto' detects the best protocol for your terminal
+        "width": 12,                       // Adjust width (in characters)
         "padding": {
-          "right": 4
+            "top": 1
         }
-},
-"modules": [
-    "title",
-    "separator",
-    "os",
-    "host",
-    "kernel",
-    "uptime",
-    "packages",
-    "separator",
-    "shell",
-    //"display",
-    //"de",
-    "wm",
-    //"wmtheme",
-    //"theme",
-    //"icons",
-    //"font",
-    // "cursor",
-    "terminal",
-    //"terminalfont",
-    "cpu",
-    "gpu",
-    "separator",
-    "memory",
-    "swap",
-    "disk",
-    // "localip",
-    "battery",
-    // "poweradapter",
-    // "locale",
-    "break",
-    "colors"
-  ]
+    },
+    "display": {
+        "separator": " "
+    },
+    "modules": [
+        {
+            "key": "╭───────────╮",
+            "type": "custom"
+        },
+        {
+            "key": "│ {#34} user    {#keys}│",
+            "type": "title",
+            "format": "{user-name}"
+        },
+        {
+            "key": "│ {#34}󰇅 hname   {#keys}│",
+            "type": "title",
+            "format": "{host-name}"
+        },
+        {
+            "type": "command",
+            "key": "│ {#34}󱦟 os age  {#keys}│",
+            "keyColor": "magenta",
+            "text": "printf \"\\e[0m%s days\\e[0m\" \"$(( ($(date +%s) - $(stat -c %W /)) / 86400 ))\""
+        },
+        {
+            "key": "│ {#34}󰅐 uptime  {#keys}│",
+            "type": "uptime"
+        },
+        {
+            "key": "│ {#34}{icon} distro  {#keys}│",
+            "type": "os"
+        },
+        {
+            "key": "│ {#34} kernel  {#keys}│",
+            "type": "kernel"
+        },
+        {
+            "key": "│ {#34} wm      {#keys}│",
+            "type": "wm"
+        },
+        {
+            "key": "│ {#34}󰇄 desktop {#keys}│",
+            "type": "de"
+        },
+        {
+            "key": "│ {#34} term    {#keys}│",
+            "type": "terminal"
+        },
+        {
+            "key": "│ {#34} shell   {#keys}│",
+            "type": "shell"
+        },
+        {
+            "key": "│ {#34}󰍛 cpu     {#keys}│",
+            "type": "cpu",
+            "showPeCoreCount": true
+        },
+        {
+            "key": "│ {#34}󰉉 disk    {#keys}│",
+            "type": "disk",
+            "folders": "/"
+        },
+        {
+            "key": "│ {#34} memory  {#keys}│",
+            "type": "memory"
+        },
+        {
+            "key": "├───────────┤",
+            "type": "custom"
+        },
+        {
+            "key": "│ {#34} colors  {#keys}│",
+            "type": "colors",
+            "symbol": "circle"
+        },
+        {
+            "key": "╰───────────╯",
+            "type": "custom"
+        }
+    ]
 }

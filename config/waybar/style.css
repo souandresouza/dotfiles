@@ -1,0 +1,58 @@
+@import "/home/andre/.cache/wal/colors-waybar.css";
+
+* {
+    background-color: transparent;
+}
+
+.modules-left {
+    background-color: @background;
+    border: 1px solid @border;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.modules-center {
+    background-color: @background;
+    border: 1px solid @border;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.modules-right {
+    background-color: @background;
+    border: 1px solid @border;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+#tray {
+    padding: 0px 8px 0px 0px;
+}
+
+#tray menu {
+    background-color: @background;
+}
+
+#mpd {
+    min-width: 100px;
+    color: @foreground;
+}
+
+/* Adicione isto para todos os widgets terem a cor correta */
+#clock,
+#battery,
+#network,
+#pulseaudio,
+#workspaces button,
+#custom-notification,
+#window {
+    color: @foreground;
+}
+
+tooltip {
+    background-color: @background;
+    color: @foreground;
+    font-size: 15px;
+    border-radius: 6px;
+    border: 1px solid @border;
+}
