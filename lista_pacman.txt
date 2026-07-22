@@ -16,9 +16,11 @@ bash-completion
 bc
 bind
 blueman
+bluetui
 bluez
 bluez-hid2hci
 bluez-obex
+bluez-tools
 bluez-utils
 brightnessctl
 btop

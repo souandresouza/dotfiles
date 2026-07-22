@@ -12,18 +12,22 @@ else
     AUR=0
 fi
 
-# Conta Flatpaks (mesmo método do FastFetch)
+# Conta Flatpaks
 if command -v flatpak &> /dev/null; then
-    # O FastFetch conta todos os flatpaks (sistema + usuário)
     FLATPAK=$(flatpak list --columns=application | tail -n +1 | grep -v "Application ID" | wc -l)
 else
     FLATPAK=0
 fi
 
-TOTAL=$((OFICIAIS + AUR + FLATPAK))
+# Conta AppImages
+APPIMAGE=$(find ~ -type f -iname "*.appimage" 2>/dev/null | wc -l)
 
-# Formata o tooltip com os detalhes
-TOOLTIP="📦 Pacman: $OFICIAIS\n📦 AUR: $AUR\n📦 Flatpak: $FLATPAK"
+# Soma total de todas as fontes
+TOTAL=$((OFICIAIS + AUR + FLATPAK + APPIMAGE))
 
-# Retorna no formato que a Waybar espera para tooltip
-echo "{\"text\": \"📦 $TOTAL\", \"tooltip\": \"$TOOLTIP\"}"
+# Saída de texto puro formatada para o Hyprlock
+echo "📦 Total: $TOTAL"
+echo "  ├─ Pacman: $OFICIAIS"
+echo "  ├─ AUR: $AUR"
+echo "  ├─ Flatpak: $FLATPAK"
+echo "  └─ AppImage: $APPIMAGE"
