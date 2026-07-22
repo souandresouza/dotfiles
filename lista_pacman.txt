@@ -15,6 +15,7 @@ base-devel
 bash-completion
 bc
 bind
+blueman
 bluez
 bluez-hid2hci
 bluez-obex
@@ -69,8 +70,6 @@ font-manager
 fuzzel
 git
 glances
-gpart
-gparted
 gst-libav
 gst-plugin-pipewire
 gst-plugins-bad
@@ -181,6 +180,7 @@ thunar-vcs-plugin
 thunar-volman
 tldr
 tlp
+tlp-rdw
 ttf-bitstream-vera
 ttf-dejavu
 ttf-jetbrains-mono
