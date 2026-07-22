@@ -1,141 +1,192 @@
-// -*- mode: jsonc -*-
-{
-    "layer": "top", // Waybar at top layer
-    // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "max-height": 34, // Waybar height (to be removed for auto height)
-    "max-width": 1900, // Waybar width
-    "spacing": 10, // Gaps between modules (4px)
-    // Choose the order of the modules
+[
+  {
+    "name": "topbar",
+    "layer": "top",
+    "position": "top",
+    "height": 36,
+    "mode": "dock",
+    "exclusive": true,
+    "spacing": 0,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "reload_style_on_change": true,
     "modules-left": [
-        "niri/workspaces",
-        "niri/window",
-        "custom/year",
-        "mpris"
+       "niri/window",
+       "wlr/taskbar",
+       "mpris"
     ],
     "modules-center": [
-        "clock"
+       "clock"
     ],
     "modules-right": [
-        "network",
-        "pulseaudio",
-        "backlight",
-        "bluetooth",
-        "battery"
+       "network",
+       "bluetooth",
+       "battery",
+       "backlight",
+       "wireplumber",
+       "memory"
     ],
     // Modules configuration
-"niri/workspaces": {
-    "disable-scroll": true,
-    "all-outputs": false,  // Isso é importante!
-    "warp-on-scroll": false,
-    "format": "{}",
-    "format-icons": {
-        "urgent": "",
-        "focused": "", 
-        "default": ""
+    "backlight": {
+       "device": "intel_backlight",
+       "format": "{icon} {percent}%",
+       "format-icons": [
+       "",
+       "",
+       "",
+       "",
+       "",
+       "",
+       "",
+       "",
+       ""
+      ],
+       "on-scroll-up": "brightnessctl set 1%+",
+       "on-scroll-down": "brightnessctl set 1%-",
     },
-    "persistent-workspaces": {
-        "*": 5  // Todos os workspaces 1-10 disponíveis
+    "memory": {
+       "interval": 30,
+       "format": " {}%",
+       "format-alt": " {used}G",
+       "tooltip": true,
+       "tooltip-format": "{used:0.1f}G/{total:0.1f}G",
+    },
+    "bluetooth": {
+       "format": " {status}",
+       "format-connected": " {device_alias}",
+       "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+     //"format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+       "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+       "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+       "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+       "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+    },
+    "niri/window": {
+       "format": "{}",
+       "max-length": 50,
+       "separate-outputs": true,
+    },
+    "network": {
+     //"interface": "wlp2s0",
+       "format": "{ifname} [󰾆 {bandwidthTotalBytes}]",
+       "format-wifi": "{icon} {essid} [󰾆 {bandwidthTotalBytes}]",
+       "format-ethernet": "󱘖  {ifname} [󰾆 {bandwidthTotalBytes}]",
+       "format-disconnected": "󰌙 Disconnected ⚠",
+       "format-alt": "  {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}",
+       "tooltip-format": "{ifname} via {gwaddr} ",
+       "tooltip-format-wifi": "{frequency} MHz ({signalStrength}%)",
+       "tooltip-format-ethernet": "{ipaddr}/{cidr}  {bandwidthUpBytes}  {bandwidthDownBytes}",
+       "tooltip-format-disconnected": "Disconnected ⚠",
+       "max-length": 50,
+       "format-icons": [
+       "󰤯 ",
+       "󰤟 ",
+       "󰤢 ",
+       "󰤢 ",
+       "󰤨 "
+      ],
+    },
+    "clock": {
+       "format": "{:L%A, %d/%m/%Y - %T}",
+       "timezone": "America/Sao_Paulo",
+       "locale": "pt_BR.UTF-8",
+       "interval": 1,
+       "tooltip-format": "<tt><small>{calendar}</small></tt>",
+       "calendar": {
+       "mode": "month",
+       "mode-mon-col": 3,
+       "on-scroll": 1,
+       "format": {
+       "months": "<span color='#ffead3'><b>{}</b></span>",
+       "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+       "actions": {
+       "on-click-right": "mode",
+       "on-scroll-up": "shift_up",
+       "on-scroll-down": "shift_down"
+       }
+    },
+    "battery": {
+     //"bat": "BAT2",
+       "interval": 60,
+       "states": {
+       "good": 95,
+       "warning": 30,
+       "critical": 20,
+      },
+       "format": "{icon} {capacity}%",
+       "format-warning": "{icon} {capacity}%",
+       "format-critical": "{icon} {capacity}%",
+       "format-charging": " {capacity}%",
+       "tooltip": "{time} {icon}",
+       "format-alt": "{timeTo} / {health}",
+       "format-full": "⚡ {capacity}%",
+       "format-icons": [
+       "󰂎",
+       "󰁺",
+       "󰁻",
+       "󰁼",
+       "󰁽",
+       "󰁾",
+       "󰁿",
+       "󰂀",
+       "󰂁",
+       "󰂂",
+       "󰁹"
+      ],
+    },
+    "wireplumber": {
+       "format": "{icon} {volume}%",
+       "format-muted": " Muted",
+     //"format-muted": " {format_source}",
+     //"format-source": "{source_volume}% ",
+     //"format-source-muted": " ",
+       "format-icons": [
+       " ",
+       " ",
+       " "
+      ],
+       "scroll-step": 0.2,
+       "max-volume": 100,
+       "on-click": "pavucontrol",
+       "on-click-right": "qpwgraph",
+    },
+    "mpris": {
+	"format": "{player_icon} {dynamic}",
+	"format-paused": "DEFAULT: {status_icon} <i>{dynamic}</i>",
+	"player-icons": {
+		"default": "▶",
+		"mpv": "🎵"
+	},
+	"max-length": 50,
+	"status-icons": {
+	   "paused": "⏸"
+	},
+	// "ignored-players": ["firefox"]
+    },
+    "wlr/taskbar": {
+       "format": "{icon}",
+       "icon-size": 14,
+       "icon-theme": "Numix-Circle",
+       "tooltip-format": "{title}",
+       "on-click": "activate",
+       "on-click-middle": "close",
+       "ignore-list": [
+       "Alacritty"
+    ],
+    "app_ids-mapping": {
+      "firefoxdeveloperedition": "firefox-developer-edition"
+    },
+    "rewrite": {
+        "Firefox Web Browser": "Firefox",
+        "Foot Server": "Terminal",
+        ".*(steam_app_[0-9]+).*": "Game"
     }
-},
-
-"niri/window": {
-     "format": "{title}",
-     "max-length": 42,
-     "separate-outputs": true
-},
-
-"clock": {
-        "timezone": "America/Sao_Paulo",
-        "interval": 1,
-        "locale": "pt_BR.UTF-8",
-        "format": "{:L%A, %d/%m/%Y, %T}",
-        "tooltip-format": "<big>{:%Y}</big>\n<tt><small>{calendar}</small></tt>"
     },
-"bluetooth": {
-    "format": " Bluetooth on",
-    "format-disabled": "󰂲 Bluetooth off",
-    "format-off": "󰂲",
-    "format-no-controller": "󰂲",
-    "format-device-preference": ["BT-5.2", "Ba-FON192", "KA-8778"],
-    "format-connected": "{device_alias} {device_battery_percentage}%",
-    "format-connected-battery": "{device_alias} {device_battery_percentage}%",
-    
-    "tooltip": true,
-    "tooltip-format": "Bluetooth",
-    "tooltip-format-connected": "{controller_alias}\n\n{device_enumerate}",
-    "tooltip-format-enumerate-connected": "{device_alias} - {device_battery_percentage}%",
-    "tooltip-format-enumerate-connected-battery": "{device_alias} - {device_battery_percentage}%",
-    "exec": "~/.config/scripts/waybar-bluetooth.sh",
-    "on-click": "bluetoothctl power $(bluetoothctl show | grep -q 'Powered: yes' && echo 'off' || echo 'on')"
-},
-    
-"backlight": {
-        // "device": "acpi_video1",
-        "format": "Brilho {percent}%",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
-    },
-"battery": {
-        "states": {
-            // "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
-    },
-    "battery#bat2": {
-        "bat": "BAT2"
-    },
-"network": {
-        "format-wifi": " {essid} ({signalStrength}%)",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
-    },
-"pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
-    },
-    
-"custom/year": {
-        "format": "{}",
-        "exec": "~/.config/scripts/year-progress.sh",
-        "interval": 3600
-    },
-"mpris": {
-        "format": "{player_icon} {title}",
-        "format-paused": "{player_icon}  {title}",
-        "player-icons": {
-        "spotify": "",
-        "mpv": "",
-        "firefox": "",
-        "chromium": "",
-        "default": ""
-        },
-        "tooltip-format": "{player}\n{artist} — {title}",
-        "max-length": 50
-}    
+    "tray": {
+        "icon-size": 14,
+        "spacing": 10,
+    }
 }
+]

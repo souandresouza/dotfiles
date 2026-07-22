@@ -1,109 +1,196 @@
-@import "/home/andre/.config/waybar/colors-waybar.css";
-
+@import './colors-waybar.css';
 * {
-    background-color: transparent;
+  font-family: FiraCode Nerd Font;
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding: 0.1rem;
 }
-
+.module {
+  padding: 0 0.8rem;
+  color: @foreground;
+}
+.modules-left,
+.modules-right,
+.modules-center,
+window#waybar.top .modules-center {
+  background: transparent;
+}
+window#waybar.bottom .modules-center {
+  background: transparent;
+}
 .modules-left {
-    background-color: @background;
-    border: 1px solid @foreground;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  margin-left: 4px;
 }
-
-.modules-center {
-    background-color: @background;
-    border: 1px solid @foreground;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
 .modules-right {
+  margin-right: 4px;
+}
+window#waybar {
+  background: transparent;
+  transition: background 0.5s;
+}
+window#waybar.empty #window {
+  background: transparent;
+  background-color: transparent;
+}
+window#waybar.hidden {
+  opacity: 0.5;
+}
+button {
+  /* Use box-shadow instead of border so the text isn't offset */
+  box-shadow: inset 0 -3px @background;
+  /* Avoid rounded borders under each button name */
+  background: @background;
+}
+button:hover {
+  color: @foreground;
+  background: @background;
+}
+#workspaces button {
+  color: @foreground;
+  background: @background;
+  font-weight: bolder;
+  box-shadow: inset 0 -3px @background;
+  transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+  padding: 0 5px;
+}
+#workspaces button.active {
+  color: @background;
+  background: @foreground
+}
+#workspaces button.current_output {
+  background-color: @background;
+}
+#workspaces button.focused {
+  color: @background;
+}
+#workspaces button.urgent {
+  color: red;
+}
+#workspaces button:hover {
+  color: @shadow;
+}
+.modules-left>widget:first-child>#workspaces {
+  margin-left: 0;
+}
+.modules-right>widget:last-child>#workspaces {
+  margin-right: 0;
+}
+#taskbar {
+  background: @background;
+  border-radius: 0.4rem;
+  padding: 0 0.8rem;
+}
+#taskbar button {
+  color: @background;
+  background: transparent;
+  border-radius: 0.4rem;
+  box-shadow: inset 0 -3px @background;
+}
+#taskbar button.active {
+  color: @foreground;
+  background: @background;
+  border-radius: 0.4rem;
+  box-shadow: inset 0 -3px @foreground;
+}
+#taskbar.empty {
+  background: transparent;
+}
+tooltip {
+  border-radius: 0.4rem;
+  padding: 0.2rem;
+}
+tooltip label {
+  color: white;
+  padding: 0.4rem;
+}
+#battery.charging {
+  color: @foreground;
+  font-weight: 900;
+  background: @background;
+}
+#battery.plugged {
+  font-weight: 900;
+  background: @background;
+  color: @foreground;
+}
+@keyframes blink {
+  to {
     background-color: @background;
-    border: 1px solid @foreground;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    color: red;
+  }
 }
-
-#tray {
-    padding: 0px 8px 0px 0px;
+#battery.critical:not(.charging) {
+  animation: blink 1s linear infinite alternate;
+  border-radius: 0.4rem;
+  margin-left: 0.5rem;
 }
-
-#tray menu {
-    background-color: @background;
+label:focus {
+  background-color: @background;
 }
-
-#mpd {
-    min-width: 100px;
-    color: @foreground;
+#tray>.passive {
+  -gtk-icon-effect: dim;
 }
-
-/* Adicione isto para todos os widgets terem a cor correta */
-#clock {
-    background-color: @background;
-    color: @foreground;
-    font-size: 15px;
-    border-radius: 6px;
-    border: 1px solid @foreground;
-}
-#battery {
-    background-color: @background;
-    color: @foreground;
-    font-size: 15px;
-    border-radius: 6px;
-    border: 1px solid @foreground;
-}
-#network {
-    background-color: @background;
-    color: @foreground;
-    font-size: 15px;
-    border-radius: 6px;
-    border: 1px solid @foreground;
-}
-#pulseaudio {
-    background-color: @background;
-    color: @foreground;
-    font-size: 15px;
-    border-radius: 6px;
-    border: 1px solid @foreground;
+#tray>.needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: red;
 }
 #mpris {
-    background-color: @background;
-    color: @foreground;
-    font-size: 15px;
-    border-radius: 6px;
-    border: 1px solid @foreground;
-}
-#backlight {
-    background-color: @background;
-    color: @foreground;
-    font-size: 15px;
-    border-radius: 6px;
-    border: 1px solid @foreground;
+  color: @foreground;
+  background: @background;
+  border-radius: 0.4rem;
+  box-shadow: inset 0 -3px @foreground;
 }
 #bluetooth {
-    background-color: @foreground;
-    color: @background;
-    font-size: 15px;
-    border-radius: 6px;
-    border: 1px solid @foreground;
+  color: @foreground;
+  background: @background;
+  border-radius: 0.4rem;
+  box-shadow: inset 0 -3px @foreground;
 }
-#custom-year {
-    background-color: @foreground;
-    color: @background;
-    font-size: 15px;
-    border-radius: 6px;
-    border: 1px solid @foreground;
+#bluetooth.on {
+  color: @background;
+  background: @foreground;
+  border-radius: 0.4rem;
+  box-shadow: inset 0 -3px @background;
 }
-#workspaces button,
+#battery {
+  color: @foreground;
+  background: @background;
+  border-radius: 0.4rem;
+  box-shadow: inset 0 -3px @foreground;
+}
+#wireplumber {
+  color: @foreground;
+  background: @background;
+  border-radius: 0.4rem;
+  box-shadow: inset 0 -3px @foreground;
+}
+#backlight {
+  color: @foreground;
+  background: @background;
+  border-radius: 0.4rem;
+  box-shadow: inset 0 -3px @foreground;
+}
+#memory {
+  color: @foreground;
+  background: @background;
+  border-radius: 0.4rem;
+  box-shadow: inset 0 -3px @foreground;
+}
+#network {
+  color: @foreground;
+  background: @background;
+  border-radius: 0.4rem;
+  box-shadow: inset 0 -3px @foreground;
+}
+#clock {
+  color: @foreground;
+  background: @background;
+  border-radius: 0.4rem;
+  box-shadow: inset 0 -3px @foreground;
+}
 #window {
-    color: @foreground;
-}
-
-tooltip {
-    background-color: @background;
-    color: @foreground;
-    font-size: 15px;
-    border-radius: 6px;
-    border: 1px solid @foreground;
+  color: @foreground;
+  background: @background;
+  border-radius: 0.4rem;
+  box-shadow: inset 0 -3px @foreground;
 }
