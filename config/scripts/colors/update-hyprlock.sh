@@ -76,12 +76,12 @@ image {
 # User Info
 label {
     monitor =
-    text = cmd[update:1000000] echo -e "$USER\n$(hostname)\n$(uname -r)\nPacotes:\n$(pacman -Q | wc -l) pacman\n$(yay -Qqm | wc -l) aur\n$(flatpak list --columns=application | tail -n +1 | grep -v "Application ID" | wc -l) flatpak"
+    text = cmd[update:1000000] $HOME/.config/scripts/contador_pacotes.sh
     shadow_boost = 0.5
     shadow_passes = 1
-    color = $gradient
+    color = 
     font_size = 11
-    font_family = $font_family
+    font_family = Nasalization
 
     position = 170, -35
     halign = left
