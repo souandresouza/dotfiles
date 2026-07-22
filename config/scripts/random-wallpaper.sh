@@ -177,7 +177,7 @@ main() {
     # Cria cópia do wallpaper
     cp "$SELECTED" "$CURRENT_WALLPAPER" 2>/dev/null || true
     
-    cwal --img "$SELECTED"
+    #wal -i "$SELECTED"
     echo "✨ Concluído!" >&2
 }
 

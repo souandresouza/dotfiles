@@ -7,8 +7,8 @@
     "spacing": 10, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": [
-        "hyprland/workspaces",
-        "hyprland/window",
+        "niri/workspaces",
+        "niri/window",
         "custom/year",
         "mpris"
     ],
@@ -23,7 +23,7 @@
         "battery"
     ],
     // Modules configuration
-"hyprland/workspaces": {
+"niri/workspaces": {
     "disable-scroll": true,
     "all-outputs": false,  // Isso é importante!
     "warp-on-scroll": false,
@@ -38,8 +38,8 @@
     }
 },
 
-"hyprland/window": {
-     "format": "{}",
+"niri/window": {
+     "format": "{title}",
      "max-length": 42,
      "separate-outputs": true
 },
@@ -65,8 +65,8 @@
     "tooltip-format-connected": "{controller_alias}\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias} - {device_battery_percentage}%",
     "tooltip-format-enumerate-connected-battery": "{device_alias} - {device_battery_percentage}%",
-    
-    "on-click": "blueman-manager"
+    "exec": "~/.config/scripts/waybar-bluetooth.sh",
+    "on-click": "bluetoothctl power $(bluetoothctl show | grep -q 'Powered: yes' && echo 'off' || echo 'on')"
 },
     
 "backlight": {
@@ -123,7 +123,7 @@
 "custom/year": {
         "format": "{}",
         "exec": "~/.config/scripts/year-progress.sh",
-        "interval": 86400,
+        "interval": 3600
     },
 "mpris": {
         "format": "{player_icon} {title}",
@@ -136,6 +136,6 @@
         "default": ""
         },
         "tooltip-format": "{player}\n{artist} — {title}",
-        "max-length": 25
+        "max-length": 50
 }    
 }
