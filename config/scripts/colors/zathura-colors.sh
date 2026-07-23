@@ -1,37 +1,63 @@
 #!/bin/bash
 
-WAL_COLORS="/home/andre/.cache/wal/colors.css"
+COLORS_FILE="$HOME/.cache/wal/colors.css"
+ZATHURA_FILE=~/.config/zathura/zathurarc
 
-if [ ! -f "$WAL_COLORS" ]; then
-    echo "Erro: $WAL_COLORS não encontrado"
+if [ ! -f "$COLORS_FILE" ]; then
+    echo "ERRO: Arquivo $COLORS_FILE não encontrado!"
     exit 1
 fi
 
-# Extrair cores principais do Pywal
-color0=$(grep 'color0' "$WAL_COLORS" | awk '{print $3}' | tr -d ';')
-color1=$(grep 'color1' "$WAL_COLORS" | awk '{print $3}' | tr -d ';')
-color2=$(grep 'color2' "$WAL_COLORS" | awk '{print $3}' | tr -d ';')
-color3=$(grep 'color3' "$WAL_COLORS" | awk '{print $3}' | tr -d ';')
-color4=$(grep 'color4' "$WAL_COLORS" | awk '{print $3}' | tr -d ';')
-color5=$(grep 'color5' "$WAL_COLORS" | awk '{print $3}' | tr -d ';')
-color6=$(grep 'color6' "$WAL_COLORS" | awk '{print $3}' | tr -d ';')
-color7=$(grep 'color7' "$WAL_COLORS" | awk '{print $3}' | tr -d ';')
-color8=$(grep 'color8' "$WAL_COLORS" | awk '{print $3}' | tr -d ';')
-color9=$(grep 'color9' "$WAL_COLORS" | awk '{print $3}' | tr -d ';')
-color10=$(grep 'color10' "$WAL_COLORS" | awk '{print $3}' | tr -d ';')
-color11=$(grep 'color11' "$WAL_COLORS" | awk '{print $3}' | tr -d ';')
-color12=$(grep 'color12' "$WAL_COLORS" | awk '{print $3}' | tr -d ';')
-color13=$(grep 'color13' "$WAL_COLORS" | awk '{print $3}' | tr -d ';')
-color14=$(grep 'color14' "$WAL_COLORS" | awk '{print $3}' | tr -d ';')
-color15=$(grep 'color15' "$WAL_COLORS" | awk '{print $3}' | tr -d ';')
+# Extrair cores do formato Pywal/CSS (--color0: #xxx;)
+extract_color() {
+    grep -- "--color$1:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; '
+}
 
-# Carrega as cores do pywal
-source ~/.cache/wal/colors.sh
+# Extrair também background, foreground e cursor
+background=$(grep -- "--background:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; ')
+foreground=$(grep -- "--foreground:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; ')
+cursor=$(grep -- "--cursor:" "$COLORS_FILE" | head -1 | awk -F': ' '{print $2}' | tr -d '; ')
 
-# Define o arquivo de saída
-CONFIG_FILE=~/.config/zathura/zathurarc
+# Extrair cores 0-15
+color0=$(extract_color 0)
+color1=$(extract_color 1)
+color2=$(extract_color 2)
+color3=$(extract_color 3)
+color4=$(extract_color 4)
+color5=$(extract_color 5)
+color6=$(extract_color 6)
+color7=$(extract_color 7)
+color8=$(extract_color 8)
+color9=$(extract_color 9)
+color10=$(extract_color 10)
+color11=$(extract_color 11)
+color12=$(extract_color 12)
+color13=$(extract_color 13)
+color14=$(extract_color 14)
+color15=$(extract_color 15)
 
-cat > "$CONFIG_FILE" << EOF
+# Limpar cores (remover colchetes, espaços e #)
+clean_color() {
+    echo "$1" | tr -d '[]# '
+}
+
+# DEBUG
+echo "foreground = [$(clean_color "$foreground")]"
+echo "background = [$(clean_color "$background")]"
+echo "cursor = [$(clean_color "$cursor")]"
+for i in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
+    eval "echo \"color$i = [\$(clean_color \"\$color$i\")]\""
+done
+
+# Verificar se as cores foram extraídas
+if [ -z "$color0" ]; then
+    echo "ERRO: Nenhuma cor extraída."
+    exit 1
+fi
+
+mkdir -p "$(dirname "$ZATHURA_FILE")"
+
+cat > "$ZATHURA_FILE" << EOF
 # ==============================================================================
 # Gerado em $(date)
 # ==============================================================================

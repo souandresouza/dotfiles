@@ -216,5 +216,6 @@ xterm
 xwayland-satellite
 yazi
 yt-dlp
+zathura-pdf-mupdf
 zenity
 zoxide

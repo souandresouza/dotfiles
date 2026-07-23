@@ -1,0 +1,37 @@
+# ==============================================================================
+# Gerado em qui 23 jul 2026 12:37:44 -03
+# ==============================================================================
+
+# UI and Window Settings
+set girara-theme default
+set guioptions "s"
+set show-scrollbars false
+set window-title-basename false
+
+# Behaviour Settings
+set pages-per-row 1
+set scroll-step 40
+set zoom-min 10
+set zoom-max 1000
+set adjust-open "best-fit"
+
+# Cores do Pywal
+set default-bg           "#171a21"
+set default-fg           "#b77841"
+set statusbar-bg         "#171a21"
+set statusbar-fg         "#b77841"
+set inputbar-bg          "#171a21"
+set inputbar-fg          "#5f453a"
+
+# Highlight Colors (Hexadecimal com 80 no final para 50% de transparência)
+set highlight-color        "#2d354080"
+set highlight-active-color "#586b7780"
+
+# Clipboard
+set selection-clipboard "primary"
+
+# Recolor (Dark Mode)
+set recolor false
+set recolor-lightcolor   "#b77841"
+set recolor-darkcolor    "#171a21"
+set recolor-reverse-video false
