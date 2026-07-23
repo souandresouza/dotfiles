@@ -15,9 +15,10 @@ binds {
     Mod+P { spawn "vesktop"; }
     Mod+K { spawn "wineserver" "-k"; }
     Mod+Z { spawn "dev.zed.Zed"; }
+    Mod+L { spawn "hyprlock"; }
+    Mod+Shift+A { spawn "kitty" "-e" "linktui"; }
 
     Mod+Slash { show-hotkey-overlay; }
-    Mod+A { spawn "sh" "-c" "$HOME/.config/scripts/keys.sh"; }
     Mod+0 hotkey-overlay-title="Previous Workspace" { focus-workspace-previous; }
     Mod+Q hotkey-overlay-title="Close Window" repeat=false { close-window; }
     
@@ -111,14 +112,15 @@ binds {
     Alt+Print { screenshot-window show-pointer=false; }
 
     // Misc
-    Mod+R { spawn "sh" "-c" "$HOME/.config/scripts/screenrecord.sh"; }
+    Mod+R { spawn "sh" "-c" "$HOME/.config/scripts/refreshWaybar.sh"; }
     Mod+M { spawn "sh" "-c" "$HOME/.config/scripts/exit-menu.sh"; }
     Mod+N { spawn "sh" "-c" "$HOME/.config/scripts/qr.sh"; }
     Mod+G { spawn "sh" "-c" "$HOME/.config/scripts/sequencia.sh"; }
     Mod+H { spawn "sh" "-c" "$HOME/.config/scripts/random-wallpaper.sh"; }
     Mod+J { spawn "sh" "-c" "$HOME/.config/scripts/extract_frames.sh"; }
     Mod+I { spawn "sh" "-c" "$HOME/.config/scripts/converter_imagens.sh"; }
-    Mod+L { spawn "sh" "-c" "$HOME/.config/scripts/lock.sh"; }
+    Mod+O { spawn "sh" "-c" "$HOME/.config/scripts/colors/telegram-colors.sh"; }
+    Mod+A { spawn "sh" "-c" "$HOME/.config/scripts/keys.sh"; }
     
     // Seletores de cor
     Mod+Shift+C { spawn "sh" "-c" "$HOME/.config/scripts/hyprpicker.sh -hex"; }
@@ -132,9 +134,4 @@ binds {
 
     // Sair
     Ctrl+Alt+Delete { quit; }
-
-    Mod+Shift+J { spawn "/usr/bin/quickshell" "ipc" "--any-display" "-p" "/usr/share/tide-island" "call" "tide" "showCustom"; }
-    Mod+Shift+K { spawn "/usr/bin/quickshell" "ipc" "--any-display" "-p" "/usr/share/tide-island" "call" "tide" "showClock"; }
-    Mod+Shift+L { spawn "/usr/bin/quickshell" "ipc" "--any-display" "-p" "/usr/share/tide-island" "call" "tide" "togglePlayer"; }
-    Mod+Shift+M { spawn "/usr/bin/quickshell" "ipc" "--any-display" "-p" "/usr/share/tide-island" "call" "tide" "toggleControlCenter"; }
 }

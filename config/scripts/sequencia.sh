@@ -1,7 +1,7 @@
 #!/bin/bash
 # sequencia.sh -- executa scripts
 
-$HOME/.config/scripts/colors/walgen.sh
+$HOME/.config/scripts/walgen.sh
 sleep 4
 $HOME/.config/scripts/colors/cava-colors.sh
 $HOME/.config/scripts/colors/fuzzel-colors.sh

@@ -35,7 +35,7 @@ window-rule {
 }
 window-rule {
     match app-id="kitty"
-    open-maximized true;
+    open-maximized false;
 }
 window-rule {
     match app-id="com.rtosta.zapzap"

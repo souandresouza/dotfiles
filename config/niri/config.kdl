@@ -10,7 +10,7 @@ include "spawn.kdl"
 
 // Configurações globais
 prefer-no-csd
-screenshot-path "~/Imagens/Screenshot from %d-%m-%Y %H-%M-%S.png"
+screenshot-path "~/Imagens/%d-%m-%Y/Screenshot from %d-%m-%Y %H-%M-%S.png"
 
 // Don't show hotkey-overlay on startup
 hotkey-overlay {
@@ -23,6 +23,3 @@ blur {
     noise 0.02
     saturation 1.5
 }
-
-// Tide Island shortcut bindings
-include "/home/andre/.config/tide-island/niri-shortcuts.kdl"
