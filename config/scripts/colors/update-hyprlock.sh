@@ -76,7 +76,7 @@ image {
 # User Info
 label {
     monitor =
-    text = cmd[update:1000000] $HOME/.config/scripts/contador_pacotes.sh
+    text = cmd[update:1000000] /home/andre/.config/scripts/contador_pacotes.sh
     shadow_boost = 0.5
     shadow_passes = 1
     color = 

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-COLORS_FILE="$HOME/.cache/cwal/colors.css"
+COLORS_FILE="$HOME/.cache/wal/colors.css"
 TERMUSIC_FILE="$HOME/.config/termusic/themes/termusic-color.yml"
 
 if [ ! -f "$COLORS_FILE" ]; then

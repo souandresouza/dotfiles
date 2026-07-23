@@ -28,7 +28,7 @@ while getopts ":ln:h" opt; do
 done
 shift $((OPTIND - 1))
 
-IMG="${1:-}"
+IMG="$HOME/.cache/current_wallpaper.png"
 [[ -z "$IMG" || ! -f "$IMG" ]] && { echo "Erro: imagem invalida: $IMG" >&2; exit 1; }
 
 if command -v magick >/dev/null 2>&1; then
