@@ -2,6 +2,7 @@ bibata-cursor-git
 linktui
 linuxtoys
 localsend-bin
+onlyoffice-bin
 qview
 wal-telegram-git
 waybar-git
