@@ -1,4 +1,4 @@
-@import '/home/andre/.cache/wal/colors-waybar.css';
+@import '/home/andre/.config/waybar/colors-waybar.css';
 * {
   font-family: FiraCode Nerd Font;
   font-weight: 600;
@@ -106,7 +106,7 @@ tooltip label {
 #battery.charging {
   color: @foreground;
   font-weight: 900;
-  background: @background;
+  background: #6b974e;
 }
 #battery.plugged {
   font-weight: 900;

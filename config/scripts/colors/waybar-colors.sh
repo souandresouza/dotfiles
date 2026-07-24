@@ -57,7 +57,7 @@ rm -f "$WAYBAR_FILE"
 cat > "$WAYBAR_FILE" << EOF
 @define-color foreground $foreground;
 @define-color background $background;
-@define-color cursor $cursor;
+@define-color cursor $color7;
 
 @define-color color0 $color0;
 @define-color color1 $color1;
