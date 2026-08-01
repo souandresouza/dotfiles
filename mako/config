@@ -1,0 +1,28 @@
+sort=-time
+layer=top
+anchor=top-right
+width=300
+margin=12
+height=150
+border-size=4
+border-radius=8
+padding=20
+icons=1
+icon-location=left
+markup=1
+max-icon-size=64
+default-timeout=5000
+ignore-timeout=1
+font=Millimetre 10
+text-alignment=center
+max-visible=5
+
+[urgency=normal]
+background-color=#181919
+text-color=#FCFCFB
+border-color=#423D35
+
+# urgency= high
+background-color=#181919
+text-color=#FCFCFB
+border-color=#423D35

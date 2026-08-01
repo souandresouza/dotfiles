@@ -1,0 +1,6 @@
+bibata-cursor-git
+linuxtoys-bin
+localsend-bin
+wal-telegram-git
+yay
+yay-debug

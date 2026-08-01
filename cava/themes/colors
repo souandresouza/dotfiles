@@ -1,0 +1,24 @@
+[color]
+
+gradient = 1
+gradient_count = 8
+gradient_color_1 = '181919'
+gradient_color_2 = '423D35'
+gradient_color_3 = '4C4D4D'
+gradient_color_4 = 'A3640E'
+gradient_color_5 = '7A8385'
+gradient_color_6 = 'AA8C64'
+gradient_color_7 = 'F19308'
+gradient_color_8 = 'FCFCFB'
+
+horizontal_gradient = 1
+horizontal_gradient_count = 8
+horizontal_gradient_color_1 = '747575'
+horizontal_gradient_color_2 = '5E5A53'
+horizontal_gradient_color_3 = '666767'
+horizontal_gradient_color_4 = 'B07B32'
+horizontal_gradient_color_5 = '8D9597'
+horizontal_gradient_color_6 = 'B69D7B'
+horizontal_gradient_color_7 = 'F3A32D'
+horizontal_gradient_color_8 = 'FCFCFB'
+
