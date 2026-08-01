@@ -48,6 +48,7 @@ noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra
 nwg-look
+obsidian
 obs-studio
 orchis-theme
 pamixer
@@ -76,6 +77,7 @@ thunar-shares-plugin
 thunar-vcs-plugin
 thunar-volman
 tlp
+trash-cli
 tumbler
 udiskie
 waybar
