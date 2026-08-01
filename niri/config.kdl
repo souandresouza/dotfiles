@@ -1,0 +1,276 @@
+// =============================================================================
+// CONFIGURAÇÃO NIRI - WAYLAND COMPOSITOR
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// 1. DISPOSITIVOS DE ENTRADA
+// ---------------------------------------------------------------------------
+input {
+    // --- Teclado ---
+    keyboard {
+        xkb {
+            layout "br"          // Layout brasileiro
+            variant "abnt2"      // Padrão ABNT2 (com tecla Ç)
+        }
+        repeat-delay 250         // Atraso antes de repetir tecla (ms)
+        repeat-rate 25           // Velocidade de repetição
+        numlock                  // Ativa numlock ao iniciar
+    }
+
+    // --- Touchpad ---
+    touchpad {
+        tap                      // Toque para clicar
+        natural-scroll           // Rolagem natural (estilo macOS)
+    }
+
+    // --- Mouse ---
+    mouse {
+        accel-speed 0.5          // Velocidade do cursor (-1.0 a 1.0)
+        accel-profile "flat"     // Sem aceleração (velocidade consistente)
+    }
+
+    // --- Trackpoint (para ThinkPads) ---
+    trackpoint {}
+
+    // Foco segue o mouse sem rolagem automática
+    focus-follows-mouse max-scroll-amount="0%"
+}
+
+// ---------------------------------------------------------------------------
+// 2. CONFIGURAÇÃO DE MONITORES
+// ---------------------------------------------------------------------------
+
+// Monitor principal (laptop)
+output "eDP-1" {
+    mode "1366x768@60"           // Resolução nativa do laptop
+    position x=0 y=0             // Canto superior esquerdo
+    scale 1                      // Escala 100%
+    transform "normal"           // Sem rotação
+}
+
+// Monitor externo HDMI
+output "HDMI-A-1" {
+    mode "1920x1080@100"         // Full HD a 100Hz
+    position x=1366 y=0          // À direita do monitor principal
+    scale 1                      // Escala 100%
+    transform "normal"           // Sem rotação
+}
+
+// ---------------------------------------------------------------------------
+// 3. WORKSPACES
+// ---------------------------------------------------------------------------
+
+// Workspace dedicado para o monitor externo
+workspace "externo" {
+    open-on-output "HDMI-A-1"
+}
+
+// ---------------------------------------------------------------------------
+// 4. VARIÁVEIS DE AMBIENTE
+// ---------------------------------------------------------------------------
+environment {
+    // Suporte a Qt no Wayland
+    QT_QPA_PLATFORM "wayland;xcb"
+    QT_QPA_PLATFORMTHEME "qt5ct:qt6ct"
+
+    // Suporte a SDL no Wayland
+    SDL_VIDEODRIVER "wayland"
+
+    // Correção para aplicações Java no Wayland
+    _JAVA_AWT_WM_NONREPARENTING "1"
+
+    // Display X11 (para XWayland)
+    DISPLAY "0"
+}
+
+// ---------------------------------------------------------------------------
+// 5. PROGRAMAS INICIADOS AUTOMATICAMENTE
+// ---------------------------------------------------------------------------
+
+// --- Autenticação e Sistema ---
+spawn-at-startup "/usr/lib/polkit-gnome/polkit-kde-authentication-agent-1"
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
+spawn-at-startup "dbus-update-activation-environment" "--all"
+
+// --- Notificações e Interface ---
+spawn-at-startup "mako"                                  // Daemon de notificações
+spawn-at-startup "waybar"                                // Barra de status
+spawn-at-startup "blueman-applet"                        // Applet Bluetooth
+
+// --- Gerenciamento de Energia e Bloqueio ---
+spawn-at-startup "sh" "-c" "$HOME/.config/scripts/screenlock.sh"
+spawn-sh-at-startup "swayidle"                           // Gerenciador de inatividade
+
+// --- Clipboard ---
+spawn-sh-at-startup "wl-paste --type text --watch cliphist store"   // Histórico de texto
+spawn-sh-at-startup "wl-paste --type image --watch cliphist store"  // Histórico de imagens
+
+// --- Aparência e Ambiente ---
+spawn-at-startup "sh" "-c" "$HOME/.config/scripts/random-wallpaper.sh"  // Wallpaper aleatório
+spawn-at-startup "sh" "-c" "$HOME/.config/scripts/wlsunset.sh"          // Temperatura de cor da tela
+spawn-at-startup "sh" "-c" "$HOME/.config/scripts/sequencia.sh"         // Script personalizado
+spawn-at-startup "sh" "-c" "$HOME/.config/scripts/battery_tracker.sh"   // Monitor de bateria
+
+// --- Portais XDG (compatibilidade com Flatpak) ---
+spawn-at-startup "/usr/lib/xdg-desktop-portal" "-r"
+
+// --- X11 (para aplicações legadas) ---
+spawn-at-startup "xhost" "+SI:localuser:root"
+
+// ---------------------------------------------------------------------------
+// 6. ARQUIVOS INCLUÍDOS
+// ---------------------------------------------------------------------------
+include "layout.kdl"       // Configuração de layouts de teclado adicionais
+include "animations.kdl"   // Configuração de animações
+include "binds.kdl"        // Atalhos de teclado
+
+// ---------------------------------------------------------------------------
+// 7. CONFIGURAÇÕES GLOBAIS
+// ---------------------------------------------------------------------------
+
+// Preferir decorações do lado do cliente (CSD)
+prefer-no-csd
+
+// Caminho para screenshots
+screenshot-path "~/Imagens/%d-%m-%Y/Screenshot from %d-%m-%Y %H-%M-%S.png"
+
+// Animações (sobrescreve o include se necessário)
+animations {}
+
+// ---------------------------------------------------------------------------
+// 8. SOBREPOSIÇÃO DE TECLAS DE ATALHO
+// ---------------------------------------------------------------------------
+hotkey-overlay {
+    skip-at-startup           // Não mostra ao iniciar
+    hide-not-bound            // Esconde atalhos não configurados
+}
+
+// ---------------------------------------------------------------------------
+// 9. VISÃO GERAL (OVERVIEW)
+// ---------------------------------------------------------------------------
+overview {
+    zoom 0.9                  // Zoom de 90% na visão geral
+    workspace-shadow {
+        softness 15
+        spread 0
+        offset x=0 y=0
+        color "#00000088"     // Sombra preta semi-transparente
+    }
+}
+
+// ---------------------------------------------------------------------------
+// 10. EFEITO DE DESFOQUE (BLUR)
+// ---------------------------------------------------------------------------
+blur {
+    passes 3                  // 3 passagens (qualidade)
+    offset 3.0                // Intensidade do desfoque
+    noise 0.02                // Ruído (0.02 = sutil)
+    saturation 1.5            // Saturação aumentada (1.5x)
+}
+
+// ---------------------------------------------------------------------------
+// 11. REGRAS DE JANELAS
+// ---------------------------------------------------------------------------
+
+// --- Desfoque e transparência para todas as janelas ---
+window-rule {
+    background-effect {
+        blur true
+        xray true             // Efeito de transparência
+    }
+}
+
+// --- Abrir maximizado no monitor HDMI ---
+window-rule {
+    match app-id="firefox"
+    match app-id="telegram"
+    match app-id="helium"       // Navegador minimalista
+    match app-id="btop"         // Monitor de recursos
+    match app-id="yazi"         // Gerenciador de arquivos TUI
+    match app-id="mpv"          // Reprodutor de mídia
+    open-maximized true
+    open-on-output "HDMI-A-1"
+}
+
+// --- Picture-in-Picture do Firefox como flutuante ---
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+// --- Workaround para bug do WezTerm ---
+window-rule {
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}     // Permite redimensionamento correto
+}
+
+// --- Cantos arredondados para todas as janelas ---
+window-rule {
+    geometry-corner-radius 4   // Raio de 4px
+    clip-to-geometry true      // Recorta conteúdo nos cantos
+}
+
+// --- Diálogos comuns como flutuantes ---
+window-rule {
+    match title="^Salvar como$"
+    match title="^Salvar arquivo$"
+    match title="^Abrir arquivo$"
+    match title="^Open File$"
+    match title="^Save As$"
+    open-floating true
+}
+
+// --- Aplicativos TUI e utilitários como flutuantes ---
+window-rule {
+    match app-id="bluetui"          // Gerenciador Bluetooth TUI
+    match app-id="pamixer"          // Controle de áudio TUI
+    match app-id="nmtui"            // Gerenciador de rede TUI
+    match app-id="localsend"        // Compartilhamento de arquivos
+    match app-id="cava"             // Visualizador de áudio
+    match app-id="linktui"          // Gerenciador de links TUI
+    match app-id="org.gnome.Nautilus" // Gerenciador de arquivos
+    match app-id="blueman"          // Gerenciador Bluetooth GUI
+    match app-id="nwg-look"         // Configurador de temas GTK
+    match app-id="battery"          // Informações de bateria
+    match app-id="sensors"          // Sensores do sistema
+    open-floating true
+    open-focused true
+    open-maximized false
+    open-fullscreen false
+    open-maximized-to-edges true
+    default-floating-position x=300 y=300
+    default-column-width { proportion 0.5; }
+    default-window-height { proportion 0.5; }
+}
+
+// --- Desfoque em terminais ---
+window-rule {
+    match app-id="^kitty$"
+    match app-id="^Alacritty$"
+    background-effect {
+        blur true
+    }
+}
+
+// ---------------------------------------------------------------------------
+// 12. REGRAS DE CAMADAS (LAYER RULES)
+// ---------------------------------------------------------------------------
+
+// Desfoque no lançador (fuzzel/rofi)
+layer-rule {
+    match namespace="^launcher$"
+    background-effect {
+        blur true
+    }
+}
+
+// ---------------------------------------------------------------------------
+// 13. PRIVACIDADE - BLOQUEIO DE GRAVAÇÃO DE TELA
+// ---------------------------------------------------------------------------
+
+// Bloqueia gerenciadores de senha de screencasts
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+    block-out-from "screencast"
+}

@@ -1,0 +1,162 @@
+// =============================================================================
+// CONFIGURAÇÃO DE ANIMAÇÕES - NIRI
+// =============================================================================
+// Este arquivo controla todas as animações visuais do compositor.
+// As animações podem ser desativadas individualmente ou globalmente.
+// =============================================================================
+
+animations {
+    // =========================================================================
+    // CONFIGURAÇÕES GLOBAIS
+    // =========================================================================
+    
+    // Descomente para desativar TODAS as animações de uma vez
+    off
+
+    // Fator de desaceleração global das animações
+    // Valores > 1.0 = mais lentas | Valores < 1.0 = mais rápidas
+    // slowdown 3.0
+
+    // =========================================================================
+    // 1. TRANSIÇÃO ENTRE WORKSPACES
+    // =========================================================================
+    workspace-switch {
+        spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
+        // damping-ratio: 1.0 = criticamente amortecido (sem oscilação)
+        // stiffness: 1000 = mola bem rígida (transição rápida)
+        // epsilon: 0.0001 = precisão muito alta (animação suave até o fim)
+    }
+
+    // =========================================================================
+    // 2. ABERTURA DE JANELAS
+    // =========================================================================
+    window-open {
+        duration-ms 150                    // Duração: 150 milissegundos
+        curve "ease-out-expo"              // Curva: desaceleração exponencial
+        // Efeito: Janela surge rapidamente e desacelera suavemente no final
+        // Ideal para: dar sensação de rapidez com final suave
+    }
+
+    // =========================================================================
+    // 3. FECHAMENTO DE JANELAS
+    // =========================================================================
+    window-close {
+        duration-ms 150                    // Duração: 150 milissegundos
+        curve "ease-out-quad"              // Curva: desaceleração quadrática
+        // Efeito: Janela fecha com desaceleração mais linear
+        // Ideal para: fechamento rápido mas perceptível
+    }
+
+    // =========================================================================
+    // 4. MOVIMENTO HORIZONTAL DA VISUALIZAÇÃO
+    // =========================================================================
+    horizontal-view-movement {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+        // Controla o deslocamento horizontal ao navegar entre colunas
+        // stiffness: 800 = um pouco menos rígida que workspace-switch
+        // Movimento suave e controlado sem overshoot
+    }
+
+    // =========================================================================
+    // 5. MOVIMENTO DE JANELAS
+    // =========================================================================
+    window-movement {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+        // Anima janelas sendo movidas entre posições
+        // Mesma configuração do movimento horizontal para consistência
+        // Sem oscilação (damping-ratio=1.0)
+    }
+
+    // =========================================================================
+    // 6. REDIMENSIONAMENTO DE JANELAS
+    // =========================================================================
+    window-resize {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+        // Anima o redimensionamento de janelas
+        // Consistente com outras animações de movimento
+        // Transição suave ao ajustar alturas de janelas
+    }
+
+    // =========================================================================
+    // 7. NOTIFICAÇÕES DE CONFIGURAÇÃO
+    // =========================================================================
+    config-notification-open-close {
+        spring damping-ratio=0.6 stiffness=1000 epsilon=0.001
+        // damping-ratio: 0.6 = sub-amortecido (leve oscilação)
+        // stiffness: 1000 = mola rígida
+        // epsilon: 0.001 = precisão ligeiramente menor
+        // Efeito: Pequeno "bounce" elegante nas notificações
+        // Ideal para: feedback visual agradável em notificações do sistema
+    }
+
+    // =========================================================================
+    // 8. CONFIRMAÇÃO DE SAÍDA
+    // =========================================================================
+    exit-confirmation-open-close {
+        spring damping-ratio=0.6 stiffness=500 epsilon=0.01
+        // damping-ratio: 0.6 = sub-amortecido (oscilação perceptível)
+        // stiffness: 500 = mola mais suave (transição mais lenta)
+        // epsilon: 0.01 = precisão mais baixa (performance)
+        // Efeito: Animação mais "elástica" e chamativa
+        // Ideal para: chamar atenção do usuário para ação importante
+    }
+
+    // =========================================================================
+    // 9. INTERFACE DE SCREENSHOT
+    // =========================================================================
+    screenshot-ui-open {
+        duration-ms 200                    // Duração: 200 milissegundos
+        curve "ease-out-quad"              // Curva: desaceleração quadrática
+        // Ligeiramente mais longa que outras aberturas
+        // Dá tempo para o usuário perceber a transição para modo de captura
+    }
+
+    // =========================================================================
+    // 10. ABERTURA/FECHAMENTO DO OVERVIEW
+    // =========================================================================
+    overview-open-close {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+        // Anima a transição para/durante a visão geral (Mod+Tab)
+        // Consistente com outras animações principais
+        // Movimento suave e controlado sem oscilação
+    }
+
+    // =========================================================================
+    // 11. FECHAMENTO DE JANELAS RECENTES
+    // =========================================================================
+    recent-windows-close {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.001
+        // Anima o fechamento da lista de janelas recentes
+        // Similar ao overview mas com epsilon ligeiramente maior
+        // Boa performance sem sacrificar suavidade
+    }
+}
+
+// =============================================================================
+// GUIA DE REFERÊNCIA RÁPIDA
+// =============================================================================
+//
+// TIPOS DE CURVAS DISPONÍVEIS:
+// - "ease-out-expo"  : Desaceleração exponencial (mais dramática)
+// - "ease-out-quad"  : Desaceleração quadrática (mais linear)
+//
+// PARÂMETROS DE MOLA (SPRING):
+// - damping-ratio: 
+//   * 1.0 = criticamente amortecido (sem oscilação)
+//   * 0.5-0.9 = sub-amortecido (oscilação sutil)
+//   * < 0.5 = muito oscilante (efeito "gelatina")
+// - stiffness:
+//   * 1000+ = muito rígida (rápida)
+//   * 500-800 = média (equilibrada)
+//   * < 500 = suave (lenta)
+// - epsilon:
+//   * 0.0001 = alta precisão (mais suave, mais CPU)
+//   * 0.001 = precisão média
+//   * 0.01 = baixa precisão (mais performance)
+//
+// DICAS DE OTIMIZAÇÃO:
+// - Use damping-ratio=1.0 para movimentos profissionais e limpos
+// - Use damping-ratio=0.6 para feedbacks mais "divertidos"
+// - Aumente epsilon para economizar CPU em animações menos importantes
+// - Durações de 100-200ms são ideais para não parecerem lentas
+// =============================================================================

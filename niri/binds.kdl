@@ -1,0 +1,209 @@
+// =============================================================================
+// ATALHOS DE TECLADO - NIRI BINDS
+// =============================================================================
+
+binds {
+    // Mod = Tecla Super (Windows)
+
+    // =========================================================================
+    // 1. LANÇAMENTO DE PROGRAMAS
+    // =========================================================================
+
+    // Terminal (detecta automaticamente o terminal preferido)
+    Mod+Return { spawn-sh "bash $HOME/.config/scripts/auto_detect_terminal.sh"; }
+
+    // Lançador de aplicativos
+    Mod+Space { spawn "fuzzel"; }
+
+    // Aplicativos principais
+    Mod+E { spawn "thunar"; }
+    Mod+B { spawn "firefox"; }
+    Mod+T { spawn "Telegram"; }
+    Mod+L { spawn "hyprlock"; }
+
+    // Ferramentas de terminal (TUI)
+    Mod+Y { spawn "kitty" "-e" "yazi"; }
+    Mod+W { spawn "kitty" "-e" "btop"; }
+    Mod+X { spawn "kitty" "-e" "scrcpy"; }
+    Mod+P { spawn "kitty" "-e" "nmtui"; }
+    Mod+Shift+A { spawn "kitty" "-e" "bluetui"; }
+
+    // Aplicativos especiais
+    Mod+K { spawn "wineserver" "-k"; }
+
+    // Emoji picker (copia emoji para clipboard)
+    Mod+U { spawn "bash" "-c" "fuzzel --dmenu < ~/.config/niri/emoji-list.txt | awk '{print $1}' | tr -d '\\n' | wl-copy"; }
+
+    // =========================================================================
+    // 2. GERENCIAMENTO DE JANELAS
+    // =========================================================================
+
+    // Fechar janela
+    Mod+Q hotkey-overlay-title="Close Window" repeat=false { close-window; }
+
+    // Overview (visão geral)
+    Mod+Tab hotkey-overlay-title="Overview" repeat=false { toggle-overview; }
+
+    // Consumir/expelir janelas (reorganizar dentro da coluna)
+    Mod+Comma { consume-or-expel-window-left; }
+    Mod+Period { consume-or-expel-window-right; }
+
+    // =========================================================================
+    // 3. NAVEGAÇÃO ENTRE JANELAS E COLUNAS
+    // =========================================================================
+
+    // Foco em janelas e colunas
+    Mod+Left  { focus-column-left; }
+    Mod+Down  { focus-window-down; }
+    Mod+Up    { focus-window-up; }
+    Mod+Right { focus-column-right; }
+
+    // Mover janelas e colunas
+    Mod+Ctrl+Left  { move-column-left; }
+    Mod+Ctrl+Down  { move-window-down; }
+    Mod+Ctrl+Up    { move-window-up; }
+    Mod+Ctrl+Right { move-column-right; }
+
+    // =========================================================================
+    // 4. NAVEGAÇÃO ENTRE MONITORES
+    // =========================================================================
+
+    // Foco em monitores
+    Mod+Shift+Left  { focus-monitor-left; }
+    Mod+Shift+Down  { focus-monitor-down; }
+    Mod+Shift+Up    { focus-monitor-up; }
+    Mod+Shift+Right { focus-monitor-right; }
+
+    // Mover coluna para outro monitor
+    Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
+    Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
+    Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+
+    // =========================================================================
+    // 5. NAVEGAÇÃO ENTRE WORKSPACES
+    // =========================================================================
+
+    // Workspace anterior
+    Mod+0 hotkey-overlay-title="Previous Workspace" { focus-workspace-previous; }
+
+    // Rolagem do mouse para workspaces (com cooldown para evitar trocas acidentais)
+    Mod+WheelScrollDown hotkey-overlay-title="Workspace Down" cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp hotkey-overlay-title="Workspace Up" cooldown-ms=150 { focus-workspace-up; }
+
+    // Mover coluna entre workspaces com mouse
+    Mod+Ctrl+WheelScrollDown hotkey-overlay-title="Move Column Workspace Down" cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Ctrl+WheelScrollUp hotkey-overlay-title="Move Column Workspace Up" cooldown-ms=150 { move-column-to-workspace-up; }
+
+    // Teclas alternativas para navegação de workspaces
+    Mod+Shift+U         { move-workspace-down; }
+    Mod+Shift+I         { move-workspace-up; }
+    Mod+Shift+Page_Down { move-workspace-down; }
+    Mod+Shift+Page_Up   { move-workspace-up; }
+
+    // =========================================================================
+    // 6. WORKSPACES NUMÉRICOS
+    // =========================================================================
+
+    // Alternar para workspace (1-9)
+    Mod+1 hotkey-overlay-title="Switch to Workspace 1" { focus-workspace 1; }
+    Mod+2 hotkey-overlay-title="Switch to Workspace 2" { focus-workspace 2; }
+    Mod+3 hotkey-overlay-title="Switch to Workspace 3" { focus-workspace 3; }
+    Mod+4 hotkey-overlay-title="Switch to Workspace 4" { focus-workspace 4; }
+    Mod+5 hotkey-overlay-title="Switch to Workspace 5" { focus-workspace 5; }
+    Mod+6 hotkey-overlay-title="Switch to Workspace 6" { focus-workspace 6; }
+    Mod+7 hotkey-overlay-title="Switch to Workspace 7" { focus-workspace 7; }
+    Mod+8 hotkey-overlay-title="Switch to Workspace 8" { focus-workspace 8; }
+    Mod+9 hotkey-overlay-title="Switch to Workspace 9" { focus-workspace 9; }
+
+    // Mover coluna para workspace (1-9) sem seguir o foco
+    Mod+Shift+1 hotkey-overlay-title="Move Column to Workspace 1" { move-column-to-workspace 1 focus=false; }
+    Mod+Shift+2 hotkey-overlay-title="Move Column to Workspace 2" { move-column-to-workspace 2 focus=false; }
+    Mod+Shift+3 hotkey-overlay-title="Move Column to Workspace 3" { move-column-to-workspace 3 focus=false; }
+    Mod+Shift+4 hotkey-overlay-title="Move Column to Workspace 4" { move-column-to-workspace 4 focus=false; }
+    Mod+Shift+5 hotkey-overlay-title="Move Column to Workspace 5" { move-column-to-workspace 5 focus=false; }
+    Mod+Shift+6 hotkey-overlay-title="Move Column to Workspace 6" { move-column-to-workspace 6 focus=false; }
+    Mod+Shift+7 hotkey-overlay-title="Move Column to Workspace 7" { move-column-to-workspace 7 focus=false; }
+    Mod+Shift+8 hotkey-overlay-title="Move Column to Workspace 8" { move-column-to-workspace 8 focus=false; }
+    Mod+Shift+9 hotkey-overlay-title="Move Column to Workspace 9" { move-column-to-workspace 9 focus=false; }
+
+    // =========================================================================
+    // 7. AJUSTES DE TAMANHO E LAYOUT
+    // =========================================================================
+
+    // Redimensionar colunas e janelas
+    Mod+Minus { set-column-width "-10%"; }                       // Reduzir largura da coluna
+    Mod+Equal { set-column-width "+10%"; }                       // Aumentar largura da coluna
+    Mod+Shift+Minus { set-window-height "-10%"; }                // Reduzir altura da janela
+    Mod+Shift+Equal { set-window-height "+10%"; }                // Aumentar altura da janela
+
+    // Modos de exibição
+    Mod+Shift+R { switch-preset-window-height; }                 // Alternar altura predefinida
+    Mod+Ctrl+R { reset-window-height; }                          // Resetar altura da janela
+    Mod+F { maximize-column; }                                   // Maximizar coluna
+    Mod+Shift+F { fullscreen-window; }                           // Tela cheia
+    Mod+C { center-column; }                                     // Centralizar coluna
+
+    // =========================================================================
+    // 8. CONTROLE DE ÁUDIO
+    // =========================================================================
+
+    // Volume (funciona mesmo com tela bloqueada)
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+
+    // =========================================================================
+    // 9. SCREENSHOTS
+    // =========================================================================
+
+    Print { screenshot; }                                        // Captura área selecionada
+    Ctrl+Print { screenshot-screen; }                            // Captura tela inteira
+    Alt+Print { screenshot-window; }                             // Captura janela ativa
+    Mod+Z { spawn "sh" "-c" "$HOME/.config/scripts/take-screenshot.sh"; }        // Captura usando satty
+
+    // =========================================================================
+    // 10. FERRAMENTAS E SCRIPTS
+    // =========================================================================
+
+    // Sistema e interface
+    Mod+R { spawn "sh" "-c" "$HOME/.config/scripts/refreshWaybar.sh"; }        // Recarregar Waybar
+    Mod+M { spawn "sh" "-c" "$HOME/.config/scripts/exit-menu.sh"; }            // Menu de saída
+    Mod+G { spawn "sh" "-c" "$HOME/.config/scripts/sequencia.sh"; }            // Script sequencial
+    Mod+Shift+P { power-off-monitors; }                                         // Desligar monitores
+
+    // Papel de parede e aparência
+    Mod+H { spawn "sh" "-c" "$HOME/.config/scripts/random-wallpaper.sh"; }     // Wallpaper aleatório
+
+    // Ferramentas de produtividade
+    Mod+N { spawn "sh" "-c" "$HOME/.config/scripts/qr.sh"; }                   // Gerar QR code
+    Mod+V { spawn "sh" "-c" "$HOME/.config/scripts/fuzzel-clipboard.sh"; }     // Histórico de clipboard
+    Mod+A { spawn "sh" "-c" "$HOME/.config/scripts/keys.sh"; }                 // Visualizar atalhos
+
+    // Processamento de mídia
+    Mod+J { spawn "sh" "-c" "$HOME/.config/scripts/extract_frames.sh"; }       // Extrair frames de vídeo
+    Mod+I { spawn "sh" "-c" "$HOME/.config/scripts/converter_imagens.sh"; }    // Converter imagens
+    Mod+Shift+G { spawn "sh" "-c" "$HOME/.config/scripts/screenrecord.sh"; }   // Gravar tela
+
+    // =========================================================================
+    // 11. SELETORES DE COR (HYPRPICKER)
+    // =========================================================================
+
+    Mod+Shift+C { spawn "sh" "-c" "$HOME/.config/scripts/hyprpicker.sh -hex"; } // Cor em hexadecimal
+    Mod+Shift+W { spawn "sh" "-c" "$HOME/.config/scripts/hyprpicker.sh -hsv"; } // Cor em HSV
+    Mod+Shift+X { spawn "sh" "-c" "$HOME/.config/scripts/hyprpicker.sh -rgb"; } // Cor em RGB
+
+    // =========================================================================
+    // 12. CONTROLES DO SISTEMA
+    // =========================================================================
+
+    // Mostrar sobreposição de atalhos
+    Mod+Slash { show-hotkey-overlay; }
+
+    // Inibir/liberar atalhos de teclado (para aplicativos que precisam de teclas específicas)
+    Mod+Escape { toggle-keyboard-shortcuts-inhibit; }
+
+    // Sair do niri (confirmação de segurança com Ctrl+Alt+Delete)
+    Ctrl+Alt+Delete { quit; }
+}
