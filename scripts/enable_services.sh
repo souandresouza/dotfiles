@@ -31,12 +31,12 @@ REAL_HOME=$(getent passwd "$REAL_USER" | cut -d: -f6)
 # Detectar Desktop Environment (DE)
 detect_de() {
     local de=""
-    
+
     # Verificar variáveis de ambiente
     if [ -n "$XDG_CURRENT_DESKTOP" ]; then
         de="$XDG_CURRENT_DESKTOP"
     fi
-    
+
     # Verificar processos específicos de DEs
     if [ -z "$de" ] || [ "$de" = "Unknown" ]; then
         if pgrep -x "plasmashell" > /dev/null; then
@@ -59,14 +59,14 @@ detect_de() {
             de="Deepin"
         fi
     fi
-    
+
     echo "$de"
 }
 
 # Detecção do WM/Compositor
 detect_wm() {
     local wm=""
-    
+
     # Verificar variáveis de ambiente (mais confiável quando em sessão gráfica)
     if [ -n "$XDG_CURRENT_DESKTOP" ]; then
         wm="$XDG_CURRENT_DESKTOP"
@@ -75,7 +75,7 @@ detect_wm() {
     elif [ -n "$GDMSESSION" ]; then
         wm="$GDMSESSION"
     fi
-    
+
     # Verificar processos em execução
     if [ -z "$wm" ] || [ "$wm" = "Unknown" ]; then
         if pgrep -x "hyprland" > /dev/null; then
@@ -124,12 +124,12 @@ detect_wm() {
             wm="WayV"
         fi
     fi
-    
+
     # Verificar arquivos de sessão instalados
     if [ -z "$wm" ] || [ "$wm" = "Unknown" ]; then
         local sessions_dir="/usr/share/wayland-sessions"
         local x11_sessions_dir="/usr/share/xsessions"
-        
+
         # Prioridade para Wayland
         if [ -d "$sessions_dir" ]; then
             if ls "$sessions_dir"/niri*.desktop &> /dev/null; then
@@ -150,7 +150,7 @@ detect_wm() {
                 wm="Hikari"
             fi
         fi
-        
+
         # Verificar X11 sessions se nenhum Wayland encontrado
         if [ -z "$wm" ] && [ -d "$x11_sessions_dir" ]; then
             if ls "$x11_sessions_dir"/qtile*.desktop &> /dev/null; then
@@ -178,14 +178,14 @@ detect_wm() {
             fi
         fi
     fi
-    
+
     echo "$wm"
 }
 
 # Detectar agente Polkit disponível
 detect_polkit_agent() {
     local polkit_agent=""
-    
+
     # KDE
     if [ -f /usr/lib/polkit-kde-authentication-agent-1 ] || command -v polkit-kde-authentication-agent-1 &> /dev/null; then
         polkit_agent="kde"
@@ -208,7 +208,7 @@ detect_polkit_agent() {
             polkit_agent="custom:$found_agent"
         fi
     fi
-    
+
     echo "$polkit_agent"
 }
 
@@ -228,7 +228,7 @@ is_wayland() {
 # Detectar Display Manager instalado
 detect_dm() {
     local dm=""
-    
+
     if command -v sddm &> /dev/null; then
         dm="sddm"
     elif command -v gdm &> /dev/null; then
@@ -242,7 +242,7 @@ detect_dm() {
     elif command -v entrance &> /dev/null; then
         dm="entrance"
     fi
-    
+
     echo "$dm"
 }
 
@@ -298,7 +298,7 @@ log_with_timestamp() {
 safe_enable_service() {
     local service="$1"
     local type="${2:-system}"
-    
+
     if [ "$type" = "user" ]; then
         if timeout 10 systemctl --user enable --now "$service" 2>/dev/null; then
             return 0
@@ -330,10 +330,10 @@ check_sudo() {
 
 check_disk_space() {
     print_step "Verificando espaço em disco..."
-    
+
     local available=$(df / | awk 'NR==2 {print $4}')
     local available_gb=$((available / 1024 / 1024))
-    
+
     if [ "$available_gb" -lt 1 ]; then
         print_error "Espaço em disco insuficiente: ${available_gb}GB disponível"
         print_message "Mínimo recomendado: 1GB"
@@ -347,14 +347,14 @@ check_dependencies() {
     print_step "Verificando serviços instalados..."
     local missing_services=()
     local required_services=("NetworkManager" "bluetooth" "pipewire" "wireplumber")
-    
+
     for service in "${required_services[@]}"; do
         if ! systemctl list-unit-files 2>/dev/null | grep -q "^${service}\.service" && \
            ! systemctl --user list-unit-files 2>/dev/null | grep -q "^${service}\.service"; then
             missing_services+=("$service")
         fi
     done
-    
+
     if [ ${#missing_services[@]} -gt 0 ]; then
         print_warning "Serviços não encontrados: ${missing_services[*]}"
         print_message "Execute ./install_packages.sh primeiro"
@@ -366,7 +366,7 @@ check_dependencies() {
 
 check_permissions() {
     print_step "Verificando permissões..."
-    
+
     if [ "$EUID" -eq 0 ]; then
         print_warning "Script executado como root. Usando usuário real: $REAL_USER"
     else
@@ -383,7 +383,7 @@ show_menu() {
         print_header "SERVIÇOS A CONFIGURAR"
         echo "Selecione os serviços (Enter = todos, número para toggle):"
         echo ""
-        
+
         local options=(
             "1. Rede (NetworkManager, IWD)"
             "2. Bluetooth"
@@ -394,11 +394,11 @@ show_menu() {
             "7. Android udev"
             "8. Display Manager ($DM_INSTALLED)"
         )
-        
+
         printf '%s\n' "${options[@]}"
         echo ""
         read -p "Opção (ex: 1 3 5 ou Enter para todos): " -r choice
-        
+
         if [ -n "$choice" ]; then
             SELECTED_SERVICES=" $choice "
         fi
@@ -422,13 +422,13 @@ should_run() {
 setup_network() {
     should_run "1" || return 0
     print_header "CONFIGURANDO SERVIÇOS DE REDE"
-    
+
     print_step "Desabilitando serviços conflitantes..."
     sudo systemctl disable --now dhcpcd 2>/dev/null || true
     sudo systemctl disable --now systemd-networkd 2>/dev/null || true
-    
+
     safe_enable_service "NetworkManager"
-    
+
     if systemctl list-unit-files | grep -q "iwd.service"; then
         print_step "Configurando IWD como backend..."
         sudo mkdir -p /etc/NetworkManager/conf.d/
@@ -438,7 +438,7 @@ wifi.backend=iwd
 EOF
         safe_enable_service "iwd"
     fi
-    
+
     safe_enable_service "wpa_supplicant"
     safe_enable_service "NetworkManager-wait-online"
 }
@@ -447,9 +447,9 @@ EOF
 setup_bluetooth() {
     should_run "2" || return 0
     print_header "CONFIGURANDO BLUETOOTH"
-    
+
     safe_enable_service "bluetooth"
-    
+
     # Configuração básica do Bluetooth
     sudo tee /etc/bluetooth/main.conf << EOF
 [General]
@@ -459,7 +459,7 @@ AutoEnable = true
 [Policy]
 AutoEnable = true
 EOF
-    
+
     print_success "Bluetooth configurado para iniciar automaticamente"
 }
 
@@ -467,20 +467,20 @@ EOF
 setup_audio() {
     should_run "3" || return 0
     print_header "CONFIGURANDO ÁUDIO"
-    
+
     if command -v pipewire &> /dev/null; then
         print_message "PipeWire detectado"
-        
+
         # Desabilitar serviços conflitantes
         systemctl --user disable --now pulseaudio.socket 2>/dev/null || true
         systemctl --user disable --now pulseaudio.service 2>/dev/null || true
         systemctl --user disable --now pipewire-media-session.service 2>/dev/null || true
         sudo systemctl --global disable pipewire.socket 2>/dev/null || true
-        
+
         safe_enable_service "pipewire" "user"
         safe_enable_service "pipewire-pulse" "user"
         safe_enable_service "wireplumber" "user"
-        
+
         # Configuração de alta qualidade
         mkdir -p "$REAL_HOME/.config/pipewire/pipewire.conf.d"
         cat > "$REAL_HOME/.config/pipewire/pipewire.conf.d/99-quality.conf" << EOF
@@ -492,7 +492,7 @@ context.properties = {
 }
 EOF
         print_success "PipeWire configurado para qualidade máxima"
-        
+
     elif command -v pulseaudio &> /dev/null; then
         print_message "PulseAudio detectado"
         safe_enable_service "pulseaudio" "user"
@@ -507,7 +507,7 @@ EOF
 setup_power() {
     should_run "4" || return 0
     print_header "CONFIGURANDO GERENCIAMENTO DE ENERGIA"
-    
+
     # ZRAM
     if [ ! -f /etc/systemd/zram-generator.conf ]; then
         print_step "Configurando ZRAM..."
@@ -519,18 +519,18 @@ EOF
         print_success "ZRAM configurado (50% da RAM)"
     fi
     sudo systemctl enable --now systemd-zram-setup@zram0.service 2>/dev/null || true
-    
+
     # TLP para laptops
     if ls /sys/class/power_supply/BAT* 1> /dev/null 2>&1; then
         print_message "Laptop detectado"
-        
+
         if command -v tlp &> /dev/null; then
             print_step "Configurando TLP..."
-            
+
             if systemctl list-unit-files | grep -q "tlp.service"; then
                 sudo systemctl enable tlp.service 2>/dev/null
                 sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket 2>/dev/null || true
-                
+
                 if ! grep -q "CPU_SCALING_GOVERNOR_ON_AC=performance" /etc/tlp.conf 2>/dev/null; then
                     print_message "Aplicando configurações otimizadas..."
                     sudo tee -a /etc/tlp.conf << 'EOF'
@@ -543,7 +543,7 @@ PCIE_ASPM_ON_BAT=powersupersave
 WIFI_PWR_ON_BAT=on
 EOF
                 fi
-                
+
                 sudo tlp start 2>/dev/null || true
                 print_success "TLP habilitado e configurado para laptop"
             else
@@ -553,11 +553,11 @@ EOF
             print_warning "TLP não instalado. Instale com: sudo pacman -S tlp tlp-rdw"
         fi
     fi
-    
+
     # Auto-montagem USB
     if command -v udiskie &> /dev/null; then
         print_step "Configurando auto-montagem USB..."
-        
+
         if [ -n "$DISPLAY" ] || [ -n "$WAYLAND_DISPLAY" ]; then
             mkdir -p "$REAL_HOME/.config/autostart"
             cat > "$REAL_HOME/.config/autostart/udiskie.desktop" << EOF
@@ -590,24 +590,24 @@ EOF
 setup_system_services() {
     should_run "5" || return 0
     print_header "CONFIGURANDO SERVIÇOS DO SISTEMA"
-    
+
     # plocate
     if command -v updatedb &> /dev/null; then
         sudo systemctl enable --now plocate-updatedb.timer 2>/dev/null || true
         print_success "plocate atualização diária agendada"
     fi
-    
+
     # smartmontools
     if command -v smartd &> /dev/null; then
         safe_enable_service "smartd"
     fi
-    
+
     # reflector
     if command -v reflector &> /dev/null; then
         sudo systemctl enable --now reflector.timer 2>/dev/null || true
         print_success "Reflector configurado para atualizar mirrors"
     fi
-    
+
     # Firewall (firewalld ou ufw)
     if command -v firewall-cmd &> /dev/null; then
         safe_enable_service "firewalld"
@@ -616,7 +616,7 @@ setup_system_services() {
         safe_enable_service "ufw"
         print_success "UFW habilitado"
     fi
-    
+
     # Cron ou systemd timers
     if command -v cronie &> /dev/null; then
         safe_enable_service "cronie"
@@ -628,38 +628,38 @@ setup_system_services() {
 setup_display_manager() {
     should_run "8" || return 0
     print_header "CONFIGURANDO DISPLAY MANAGER"
-    
+
     local session_file=""
-    
+
     # Verificar se existe sessão para o WM atual
     if [ -n "$WM_NAME" ] && [ "$WM_NAME" != "Unknown" ]; then
         # Converter nome do WM para formato de arquivo
         local wm_lower=$(echo "$WM_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/ (x11)//')
-        
+
         if [ -d "/usr/share/wayland-sessions" ]; then
             session_file=$(ls /usr/share/wayland-sessions/${wm_lower}*.desktop 2>/dev/null | head -n1)
         fi
-        
+
         if [ -z "$session_file" ] && [ -d "/usr/share/xsessions" ]; then
             session_file=$(ls /usr/share/xsessions/${wm_lower}*.desktop 2>/dev/null | head -n1)
         fi
-        
+
         if [ -z "$session_file" ]; then
             print_warning "Nenhum arquivo de sessão encontrado para $WM_NAME"
             print_message "Isso pode ser normal se o WM iniciar via .xinitrc ou similar"
         fi
     fi
-    
+
     if [ -z "$DM_INSTALLED" ]; then
         print_warning "Nenhum Display Manager detectado"
         print_message "Seu WM pode ser iniciado via .xinitrc ou script personalizado"
         return
     fi
-    
+
     case "$DM_INSTALLED" in
         sddm)
             print_step "Configurando SDDM..."
-            
+
             sudo mkdir -p /etc/sddm.conf.d/
             sudo tee /etc/sddm.conf.d/sddm.conf << EOF
 [General]
@@ -671,46 +671,46 @@ RebootCommand=/usr/bin/systemctl reboot
 Current=breeze
 CursorTheme=Adwaita
 EOF
-            
+
             # Configurar sessão padrão se detectada
             if [ -n "$session_file" ]; then
                 local session_name=$(basename "$session_file" .desktop)
                 echo -e "\n[Autologin]\nSession=$session_name" | sudo tee -a /etc/sddm.conf.d/sddm.conf
                 print_message "Sessão padrão configurada: $session_name"
             fi
-            
+
             safe_enable_service "sddm"
             print_success "SDDM configurado e habilitado"
             ;;
-            
+
         gdm)
             print_step "Configurando GDM..."
             safe_enable_service "gdm"
             print_success "GDM habilitado"
             print_message "GDM usa configuração padrão, edite manualmente se necessário"
             ;;
-            
+
         lightdm)
             print_step "Configurando LightDM..."
-            
+
             # Tentar detectar o melhor greeter
             if command -v lightdm-gtk-greeter &> /dev/null; then
                 sudo sed -i 's/^#greeter-session=.*/greeter-session=lightdm-gtk-greeter/' /etc/lightdm/lightdm.conf 2>/dev/null || true
             elif command -v lightdm-webkit2-greeter &> /dev/null; then
                 sudo sed -i 's/^#greeter-session=.*/greeter-session=lightdm-webkit2-greeter/' /etc/lightdm/lightdm.conf 2>/dev/null || true
             fi
-            
+
             safe_enable_service "lightdm"
             print_success "LightDM configurado e habilitado"
             ;;
-            
+
         ly)
             print_step "Configurando Ly..."
             safe_enable_service "ly"
             print_success "Ly habilitado (TUI display manager)"
             print_message "Ly funciona com qualquer WM/X11/Wayland automaticamente"
             ;;
-            
+
         lxdm)
             print_step "Configurando LXDM..."
             safe_enable_service "lxdm"
@@ -723,12 +723,12 @@ EOF
 setup_android_udev() {
     should_run "7" || return 0
     print_header "CONFIGURANDO ANDROID UDEV"
-    
+
     if [ -f /usr/lib/udev/rules.d/51-android.rules ]; then
         sudo udevadm control --reload-rules
         sudo udevadm trigger
         print_success "Regras Android udev carregadas"
-        
+
         if getent group adbusers &> /dev/null; then
             sudo usermod -aG adbusers "$REAL_USER"
             print_success "Usuário $REAL_USER adicionado ao grupo adbusers"
@@ -741,13 +741,13 @@ setup_android_udev() {
 # Configurar XDG User Directories
 setup_xdg_dirs() {
     print_header "CONFIGURANDO DIRETÓRIOS DO USUÁRIO"
-    
+
     if command -v xdg-user-dirs-update &> /dev/null; then
         su - "$REAL_USER" -c "xdg-user-dirs-update" 2>/dev/null || xdg-user-dirs-update
         print_success "Diretórios XDG configurados"
-        
+
         if locale -a | grep -qi "pt_br"; then
-            su - "$REAL_USER" -c "xdg-user-dirs-gtk-update" 2>/dev/null || xdg-user-dirs-gtk-update
+            su - "$REAL_USER" -c "xdg-user-dirs-update" 2>/dev/null || xdg-user-dirs-update
             print_success "Configuração de localidade aplicada"
         fi
     fi
@@ -757,11 +757,11 @@ setup_xdg_dirs() {
 setup_user_services() {
     should_run "6" || return 0
     print_header "CONFIGURANDO SERVIÇOS DO USUÁRIO"
-    
+
     # Polkit agent
     print_step "Configurando agente Polkit..."
     local polkit_configured=false
-    
+
     case "$POLKIT_AGENT" in
         kde)
             print_message "Adicionando Polkit KDE ao autostart..."
@@ -780,7 +780,7 @@ EOF
             print_success "Polkit KDE configurado"
             polkit_configured=true
             ;;
-            
+
         gnome)
             print_message "Adicionando Polkit GNOME ao autostart..."
             mkdir -p "$REAL_HOME/.config/autostart"
@@ -797,7 +797,7 @@ EOF
             print_success "Polkit GNOME configurado"
             polkit_configured=true
             ;;
-            
+
         mate)
             print_message "Adicionando Polkit MATE ao autostart..."
             mkdir -p "$REAL_HOME/.config/autostart"
@@ -814,7 +814,7 @@ EOF
             print_success "Polkit MATE configurado"
             polkit_configured=true
             ;;
-            
+
         xfce)
             print_message "Adicionando XFCE Polkit ao autostart..."
             mkdir -p "$REAL_HOME/.config/autostart"
@@ -826,7 +826,7 @@ EOF
             else
                 xfce_polkit_path="xfce-polkit"
             fi
-            
+
             cat > "$REAL_HOME/.config/autostart/xfce-polkit.desktop" << EOF
 [Desktop Entry]
 Type=Application
@@ -840,7 +840,7 @@ EOF
             print_success "XFCE Polkit configurado"
             polkit_configured=true
             ;;
-            
+
         lxde)
             print_message "Adicionando LXPolkit ao autostart..."
             mkdir -p "$REAL_HOME/.config/autostart"
@@ -857,7 +857,7 @@ EOF
             print_success "LXPolkit configurado"
             polkit_configured=true
             ;;
-            
+
         custom:*)
             local custom_path="${POLKIT_AGENT#custom:}"
             print_message "Agente Polkit encontrado: $custom_path"
@@ -874,7 +874,7 @@ EOF
             print_success "Agente Polkit genérico configurado"
             polkit_configured=true
             ;;
-            
+
         *)
             print_warning "Nenhum agente Polkit encontrado"
             print_message "Recomendado instalar um dos seguintes:"
@@ -885,18 +885,18 @@ EOF
             print_message "  • mate-polkit (MATE)"
             ;;
     esac
-    
+
     # Verificar se há processos polkit em execução
     if pgrep -a "polkit" 2>/dev/null | grep -v "polkitd" > /dev/null; then
         print_success "Agente Polkit já está em execução"
     fi
-    
+
     # Clipboard manager
     print_step "Configurando clipboard manager..."
     if [ "$IS_WAYLAND" = true ] && command -v wl-paste &> /dev/null; then
         print_message "Configurando clipboard manager para Wayland..."
         mkdir -p "$REAL_HOME/.config/autostart"
-        
+
         if command -v clipman &> /dev/null; then
             cat > "$REAL_HOME/.config/autostart/clipman.desktop" << EOF
 [Desktop Entry]
@@ -941,7 +941,7 @@ EOF
             print_success "Parcellite configurado"
         fi
     fi
-    
+
     # Idle management
     print_step "Configurando gerenciamento de inatividade..."
     if command -v swayidle &> /dev/null && [ "$IS_WAYLAND" = true ]; then
@@ -960,7 +960,7 @@ EOF
     elif command -v xautolock &> /dev/null && [ -n "$DISPLAY" ]; then
         print_message "xautolock disponível para X11"
     fi
-    
+
     # Notification daemon
     print_step "Verificando notification daemon..."
     if command -v dunst &> /dev/null; then
@@ -973,7 +973,7 @@ EOF
         print_warning "Nenhum notification daemon encontrado"
         print_message "Recomendado: dunst (leve e configurável)"
     fi
-    
+
     # Wallpaper setter
     print_step "Verificando wallpaper setter..."
     if command -v swaybg &> /dev/null && [ "$IS_WAYLAND" = true ]; then
@@ -985,7 +985,7 @@ EOF
     elif command -v nitrogen &> /dev/null && [ -n "$DISPLAY" ]; then
         print_message "Nitrogen disponível para X11"
     fi
-    
+
     # Screen locker
     print_step "Verificando screen locker..."
     if command -v hyprlock &> /dev/null; then
@@ -1018,23 +1018,23 @@ EOF
 # Mostrar informações do sistema
 show_system_info() {
     print_header "INFORMAÇÕES DO SISTEMA"
-    
+
     echo -e "${CYAN}Sistema:${NC}"
     echo -e "  Kernel: $(uname -r)"
     echo -e "  Arquitetura: $(uname -m)"
     echo -e "  Hostname: $(hostname)"
-    
+
     echo -e "\n${CYAN}Ambiente Gráfico:${NC}"
     if [ -n "$DE_NAME" ] && [ "$DE_NAME" != "Unknown" ]; then
         echo -e "  ${GREEN}✓${NC} Desktop Environment: ${GREEN}$DE_NAME${NC}"
     fi
-    
+
     if [ -n "$WM_NAME" ] && [ "$WM_NAME" != "Unknown" ]; then
         echo -e "  ${GREEN}✓${NC} Window Manager: ${GREEN}$WM_NAME${NC}"
     elif [ -z "$DE_NAME" ] || [ "$DE_NAME" = "Unknown" ]; then
         echo -e "  ${YELLOW}⚠${NC} Nenhum WM/DE detectado automaticamente"
     fi
-    
+
     if [ "$IS_WAYLAND" = true ]; then
         echo -e "  ${GREEN}✓${NC} Protocolo: Wayland"
     elif [ -n "$DISPLAY" ]; then
@@ -1042,7 +1042,7 @@ show_system_info() {
     else
         echo -e "  ${YELLOW}⚠${NC} Ambiente gráfico não detectado (modo texto?)"
     fi
-    
+
     # Mostrar qual agente polkit está em execução
     local polkit_process=$(pgrep -a "polkit" 2>/dev/null | grep -v "polkitd" | head -n1)
     echo -e "\n${CYAN}Agente Polkit:${NC}"
@@ -1055,7 +1055,7 @@ show_system_info() {
     else
         echo -e "  ${RED}✗${NC} Nenhum agente Polkit detectado"
     fi
-    
+
     echo -e "\n${CYAN}Display Manager:${NC}"
     if [ -n "$DM_INSTALLED" ]; then
         if systemctl is-enabled --quiet "$DM_INSTALLED" 2>/dev/null; then
@@ -1071,7 +1071,7 @@ show_system_info() {
 # Mostrar status dos serviços
 show_services_status() {
     print_header "STATUS DOS SERVIÇOS"
-    
+
     echo -e "${CYAN}Serviços do sistema:${NC}"
     local system_services=("NetworkManager" "bluetooth" "sddm" "gdm" "lightdm" "ly" "lxdm" "iwd" "smartd" "tlp" "firewalld" "ufw" "cronie")
     for service in "${system_services[@]}"; do
@@ -1083,7 +1083,7 @@ show_services_status() {
             echo -e "  ${RED}✗${NC} $service: ${RED}desabilitado${NC}"
         fi
     done
-    
+
     echo -e "\n${CYAN}Serviços do usuário:${NC}"
     local user_services=("pipewire" "pipewire-pulse" "wireplumber" "pulseaudio")
     for service in "${user_services[@]}"; do
@@ -1100,17 +1100,17 @@ show_services_status() {
 # Mostrar recomendações finais
 show_reboot_warning() {
     print_header "PRÓXIMOS PASSOS"
-    
+
     echo -e "${YELLOW}⚠️  IMPORTANTE:${NC}"
     echo -e "  Para que todas as configurações tenham efeito, é recomendado:"
     echo -e "\n  1. ${GREEN}Reiniciar o sistema${NC}"
-    
+
     if [ -n "$WM_NAME" ] && [ "$WM_NAME" != "Unknown" ]; then
         echo -e "  2. Fazer login e iniciar ${GREEN}$WM_NAME${NC}"
     else
         echo -e "  2. Fazer login manualmente"
     fi
-    
+
     # Verificar se existem dotfiles para o WM detectado
     local wm_config_dir=""
     case "${WM_NAME,,}" in
@@ -1132,13 +1132,13 @@ show_reboot_warning() {
         spectrwm) wm_config_dir="$REAL_HOME/.config/spectrwm" ;;
         *) wm_config_dir="" ;;
     esac
-    
+
     if [ -n "$wm_config_dir" ] && [ ! -d "$wm_config_dir" ]; then
         echo -e "  3. Configurar ${GREEN}$WM_NAME${NC} em $wm_config_dir"
     elif [ -n "$wm_config_dir" ] && [ -d "$wm_config_dir" ]; then
         echo -e "  3. Configuração do ${GREEN}$WM_NAME${NC} já existe em $wm_config_dir"
     fi
-    
+
     # Verificar grupos do usuário
     local groups_to_check=("adbusers" "lp" "network" "power" "video" "audio" "wheel" "storage" "input")
     echo -e "\n${CYAN}Grupos do usuário $REAL_USER:${NC}"
@@ -1147,7 +1147,7 @@ show_reboot_warning() {
             echo -e "  ${GREEN}✓${NC} $group"
         fi
     done
-    
+
     # Recomendações específicas por WM
     if [ -n "$WM_NAME" ] && [ "$WM_NAME" != "Unknown" ]; then
         echo -e "\n${CYAN}Dicas para $WM_NAME:${NC}"
@@ -1210,10 +1210,10 @@ show_reboot_warning() {
                 ;;
         esac
     fi
-    
+
     # Verificar e sugerir pacotes complementares
     echo -e "\n${CYAN}Pacotes complementares sugeridos:${NC}"
-    
+
     if [ "$IS_WAYLAND" = true ]; then
         if ! command -v grim &> /dev/null; then
             echo -e "  ${YELLOW}○${NC} grim + slurp (screenshots para Wayland)"
@@ -1230,11 +1230,11 @@ show_reboot_warning() {
             fi
         fi
     fi
-    
+
     if ! command -v dunst &> /dev/null && ! command -v mako &> /dev/null; then
         echo -e "  ${YELLOW}○${NC} dunst (notification daemon leve)"
     fi
-    
+
     if ! command -v alacritty &> /dev/null && ! command -v kitty &> /dev/null; then
         echo -e "  ${YELLOW}○${NC} alacritty ou kitty (terminais modernos)"
     fi
@@ -1252,7 +1252,7 @@ main() {
     echo "║         POST-INSTALLATION SCRIPT         ║"
     echo "╚══════════════════════════════════════════╝"
     echo -e "${NC}"
-    
+
     # Inicializar log
     log_with_timestamp "=== Iniciando configuração de serviços ==="
     log_with_timestamp "Usuário: $REAL_USER"
@@ -1262,19 +1262,19 @@ main() {
     log_with_timestamp "Agente Polkit: $POLKIT_AGENT"
     log_with_timestamp "Display Manager: $DM_INSTALLED"
     log_with_timestamp "Wayland: $IS_WAYLAND"
-    
+
     # Verificações iniciais
     check_sudo
     check_disk_space
     check_dependencies
     check_permissions
-    
+
     # Mostrar informações do sistema
     show_system_info
-    
+
     # Menu interativo (se ativado)
     show_menu
-    
+
     # Configurar todos os serviços
     setup_network
     setup_bluetooth
@@ -1285,14 +1285,14 @@ main() {
     setup_user_services
     setup_android_udev
     setup_xdg_dirs
-    
+
     # Mostrar status
     show_services_status
     show_reboot_warning
-    
+
     print_header "CONFIGURAÇÃO CONCLUÍDA"
     print_success "Todos os serviços foram configurados!"
-    
+
     echo -e "\n${BLUE}📝 Log completo:${NC} $LOG_FILE\n"
     log_with_timestamp "=== Configuração finalizada com sucesso ==="
 }

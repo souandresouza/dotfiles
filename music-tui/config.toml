@@ -1,0 +1,26 @@
+music_dir = "/home/andre/Músicas"
+
+[theme]
+# Colors accept a name ("cyan", "lightmagenta"), hex ("#ff8800"),
+# or a 256-color index ("39"). Restart music-tui to apply changes.
+accent = "cyan"         # highlights, focused borders, progress & volume
+selection_fg = "black"  # text drawn on the accent background
+border = "darkgray"     # unfocused panel borders
+dim = "darkgray"        # years, track numbers, hints
+muted = "gray"          # artist subtext, status line
+
+[playback]
+# Gapless playback: crossfade seconds between tracks (0 = hard cut).
+gapless_fade_secs = 3.0
+
+[ui]
+# Render transport icons at 2x (needs kitty >= 0.40).
+big_transport_icons = true
+# Pre-cache all cover-art thumbnails in the background.
+cache_all_art = true
+# Display "The Doors" as "Doors, The" and sort accordingly.
+sort_articles = true
+
+[layout]
+columns = [25, 30, 45]
+queue_pct = 28

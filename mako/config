@@ -3,7 +3,7 @@ layer=top
 anchor=top-right
 width=300
 margin=12
-height=150
+height=250
 border-size=4
 border-radius=8
 padding=20
@@ -18,11 +18,11 @@ text-alignment=center
 max-visible=5
 
 [urgency=normal]
-background-color=#181919
-text-color=#FCFCFB
-border-color=#423D35
+background-color=#181C1D
+text-color=#A0A3A3
+border-color=#363C42
 
 # urgency= high
-background-color=#181919
-text-color=#FCFCFB
-border-color=#423D35
+background-color=#181C1D
+text-color=#A0A3A3
+border-color=#363C42

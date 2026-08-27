@@ -61,6 +61,10 @@ output "HDMI-A-1" {
 // ---------------------------------------------------------------------------
 
 // Workspace dedicado para o monitor externo
+workspace "laptop" {
+    open-on-output "eDP-1"
+}
+// Workspace dedicado para o monitor externo
 workspace "externo" {
     open-on-output "HDMI-A-1"
 }
@@ -99,7 +103,6 @@ spawn-at-startup "blueman-applet"                        // Applet Bluetooth
 
 // --- Gerenciamento de Energia e Bloqueio ---
 spawn-at-startup "sh" "-c" "$HOME/.config/scripts/screenlock.sh"
-spawn-sh-at-startup "swayidle"                           // Gerenciador de inatividade
 
 // --- Clipboard ---
 spawn-sh-at-startup "wl-paste --type text --watch cliphist store"   // Histórico de texto
@@ -132,7 +135,7 @@ include "binds.kdl"        // Atalhos de teclado
 prefer-no-csd
 
 // Caminho para screenshots
-screenshot-path "~/Imagens/%d-%m-%Y/Screenshot from %d-%m-%Y %H-%M-%S.png"
+screenshot-path "~/Imagens/Screenshots/%d-%m-%Y/Screenshot from %d-%m-%Y %H-%M-%S.png"
 
 // Animações (sobrescreve o include se necessário)
 animations {}
@@ -174,40 +177,41 @@ blur {
 
 // --- Desfoque e transparência para todas as janelas ---
 window-rule {
+    match is-floating=true
     background-effect {
         blur true
-        xray true             // Efeito de transparência
+        xray true
     }
 }
 
-// --- Abrir maximizado no monitor HDMI ---
+// --- Abrir maximizado ---
 window-rule {
     match app-id="firefox"
     match app-id="telegram"
-    match app-id="helium"       // Navegador minimalista
-    match app-id="btop"         // Monitor de recursos
-    match app-id="yazi"         // Gerenciador de arquivos TUI
-    match app-id="mpv"          // Reprodutor de mídia
+    match app-id="kitty"
+    match app-id="btop"
+    match app-id="elio"
     open-maximized true
-    open-on-output "HDMI-A-1"
+}
+
+// --- Abrir tela cheia ---
+window-rule {
+    match app-id="mpv"
+    open-fullscreen true
+    open-on-workspace "externo"
 }
 
 // --- Picture-in-Picture do Firefox como flutuante ---
 window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
-}
-
-// --- Workaround para bug do WezTerm ---
-window-rule {
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}     // Permite redimensionamento correto
+    default-floating-position x=32 y=32 relative-to="bottom-left"
 }
 
 // --- Cantos arredondados para todas as janelas ---
 window-rule {
-    geometry-corner-radius 4   // Raio de 4px
-    clip-to-geometry true      // Recorta conteúdo nos cantos
+    geometry-corner-radius 12
+    clip-to-geometry true
 }
 
 // --- Diálogos comuns como flutuantes ---
@@ -222,25 +226,19 @@ window-rule {
 
 // --- Aplicativos TUI e utilitários como flutuantes ---
 window-rule {
-    match app-id="bluetui"          // Gerenciador Bluetooth TUI
-    match app-id="pamixer"          // Controle de áudio TUI
-    match app-id="nmtui"            // Gerenciador de rede TUI
-    match app-id="localsend"        // Compartilhamento de arquivos
-    match app-id="cava"             // Visualizador de áudio
-    match app-id="linktui"          // Gerenciador de links TUI
-    match app-id="org.gnome.Nautilus" // Gerenciador de arquivos
-    match app-id="blueman"          // Gerenciador Bluetooth GUI
-    match app-id="nwg-look"         // Configurador de temas GTK
-    match app-id="battery"          // Informações de bateria
-    match app-id="sensors"          // Sensores do sistema
+    match app-id="bluetui"
+    match app-id="pamixer"
+    match app-id="nmtui"
+    match app-id="localsend"
+    match app-id="cava"
+    match app-id="org.gnome.Nautilus"
+    match app-id="blueman"
+    match app-id="nwg-look"
+    match app-id="battery"
+    match app-id="sensors"
     open-floating true
-    open-focused true
-    open-maximized false
-    open-fullscreen false
-    open-maximized-to-edges true
-    default-floating-position x=300 y=300
-    default-column-width { proportion 0.5; }
-    default-window-height { proportion 0.5; }
+    default-window-height { proportion 0.6; }
+    default-column-width { proportion 0.4; }
 }
 
 // --- Desfoque em terminais ---
@@ -250,6 +248,13 @@ window-rule {
     background-effect {
         blur true
     }
+}
+
+// Make inactive windows semitransparent.
+window-rule {
+    match is-active=false
+
+    opacity 0.8
 }
 
 // ---------------------------------------------------------------------------

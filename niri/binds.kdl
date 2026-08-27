@@ -19,14 +19,15 @@ binds {
     Mod+E { spawn "thunar"; }
     Mod+B { spawn "firefox"; }
     Mod+T { spawn "Telegram"; }
-    Mod+L { spawn "hyprlock"; }
+    Mod+L { spawn "sh" "-c" "swaylock -f -s fill -i $HOME/.cache/current_wallpaper.png"; }
 
     // Ferramentas de terminal (TUI)
-    Mod+Y { spawn "kitty" "-e" "yazi"; }
+    Mod+Y { spawn "kitty" "-e" "elio"; }
     Mod+W { spawn "kitty" "-e" "btop"; }
     Mod+X { spawn "kitty" "-e" "scrcpy"; }
     Mod+P { spawn "kitty" "-e" "nmtui"; }
     Mod+Shift+A { spawn "kitty" "-e" "bluetui"; }
+    Mod+O { spawn "kitty" "-e" "music-tui"; }
 
     // Aplicativos especiais
     Mod+K { spawn "wineserver" "-k"; }
@@ -171,6 +172,7 @@ binds {
     Mod+R { spawn "sh" "-c" "$HOME/.config/scripts/refreshWaybar.sh"; }        // Recarregar Waybar
     Mod+M { spawn "sh" "-c" "$HOME/.config/scripts/exit-menu.sh"; }            // Menu de saída
     Mod+G { spawn "sh" "-c" "$HOME/.config/scripts/sequencia.sh"; }            // Script sequencial
+    Mod+S { spawn "sh" "-c" "$HOME/.config/scripts/screenlock.sh"; }
     Mod+Shift+P { power-off-monitors; }                                         // Desligar monitores
 
     // Papel de parede e aparência

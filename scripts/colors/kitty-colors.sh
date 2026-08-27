@@ -1,7 +1,7 @@
 #!/bin/sh
 
 COLORS_FILE="$HOME/.cache/wal/colors.css"
-KITTY_FILE="$HOME/.cache/wal/colors-kitty.conf"
+KITTY_FILE="$HOME/.config/kitty/colors-kitty.conf"
 
 if [ ! -f "$COLORS_FILE" ]; then
     echo "ERRO: Arquivo $COLORS_FILE não encontrado!"
@@ -59,26 +59,17 @@ mkdir -p "$(dirname "$KITTY_FILE")"
 
 # Gerar arquivo no formato Waybar (sem aspas)
 cat > "$KITTY_FILE" << EOF
-foreground $foreground
-background $background
-cursor $cursor
-
-color0 $color0
-color1 $color1
-color2 $color2
-color3 $color3
-color4 $color4
-color5 $color5
-color6 $color6
-color7 $color7
-color8 $color8
-color9 $color9
-color10 $color10
-color11 $color11
-color12 $color12
-color13 $color13
-color14 $color14
-color15 $color15
+foreground $color7
+background $color0
+selection_foreground $color4
+selection_background $color2
+cursor $color7
+active_border_color $color7
+inactive_border_color $color0
+active_tab_foreground $color7
+active_tab_background $color0
+inactive_tab_foreground $color7
+inactive_tab_background $color0
 EOF
 
 pkill -SIGUSR1 -x kitty

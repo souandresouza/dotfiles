@@ -11,9 +11,9 @@
 
     separator_color = frame
     frame_width = 3
-    frame_color = "#FCFCFB"
+    frame_color = "#c2c2c5"
     notification_limit = 20
-
+    
     progress_bar = true
     progress_bar_height = 10
     progress_bar_frame_width = 1
@@ -21,7 +21,7 @@
     progress_bar_max_width = 300
     progress_bar_corner_radius = 4
     progress_bar_corners = all
-
+    
     indicate_hidden = yes
     transparency = 0
     padding = 8
@@ -29,7 +29,7 @@
     text_icon_padding = 0
     gap_size = 0
     sort = yes
-
+    
     line_height = 0
     markup = full
     alignment = center
@@ -45,7 +45,7 @@
     icon_theme = Adwaita
     icon_position = left
     max_icon_size = 128
-
+    
     sticky_history = yes
     history_length = 20
     dmenu = /usr/bin/dmenu -p dunst:
@@ -63,14 +63,14 @@
     mouse_right_click = close_all
 
 [urgency_low]
-    background = "#181919"
-    foreground = "#FCFCFB"
+    background = "#0d0b1a"
+    foreground = "#c2c2c5"
     timeout = 4
     default_icon = dialog-information
 
 [urgency_normal]
-    background = "#181919"
-    foreground = "#FCFCFB"
+    background = "#0d0b1a"
+    foreground = "#c2c2c5"
     timeout = 5
     override_pause_level = 30
     default_icon = dialog-information
