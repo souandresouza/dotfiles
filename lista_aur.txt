@@ -1,6 +1,10 @@
-bibata-cursor-git
-linuxtoys-bin
-localsend-bin
+elio
+linuxtoys
+localsend-git
+mangowm-git
+music-tui
 wal-telegram-git
+waybar-git
+wayfreeze
 yay
 yay-debug
