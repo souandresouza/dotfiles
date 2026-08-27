@@ -1,8 +1,0 @@
-Codecs Extra Extension	org.freedesktop.Platform.codecs-extra		25.08-extra	user
-Freedesktop Platform	org.freedesktop.Platform	freedesktop-sdk-25.08.15	25.08	user
-KDE Application Platform	org.kde.Platform		6.10	user
-LibreOffice	org.libreoffice.LibreOffice	26.2.4.2	stable	user
-Mesa (Extra)	org.freedesktop.Platform.GL.default	26.1.5	25.08-extra	user
-Mesa	org.freedesktop.Platform.GL.default	26.1.5	25.08	user
-Orchis (Dark) Gtk Theme	org.gtk.Gtk3theme.Orchis-Dark	2024-05-30	3.22	user
-ZapZap	com.rtosta.zapzap	7.2	stable	user
