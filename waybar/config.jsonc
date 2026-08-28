@@ -27,8 +27,6 @@
     ],
     "modules-right": [
       "custom/sep",
-      "bluetooth",
-      "custom/sep",
       "network",
       "custom/sep",
       "battery",
@@ -57,7 +55,7 @@
     },
     "custom/sep": {
       "format": "|",
-      "interval": 0
+      "tooltip": false
       },
     "tray": {
       "icon-size": 14,
@@ -78,16 +76,6 @@
         "activated": "✅",
         "desactivated": "❗"
       },
-    },
-    "bluetooth": {
-      "format": " {status}",
-      "format-connected": " {device_alias}",
-      "format-connected-battery": " {device_alias} {device_battery_percentage}%",
-      // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
-      "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-      "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-      "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-      "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
     },
     "mango/workspaces": {
       "format": "{}",
@@ -121,33 +109,46 @@
       ],
     },
     "battery": {
-      //"bat": "BAT2",
-      "interval": 60,
-      "states": {
-        "good": 95,
-        "warning": 30,
-        "critical": 20,
-      },
       "format": "{icon} {capacity}%",
-      "format-warning": "{icon} {capacity}%",
-      "format-critical": "{icon} {capacity}%",
-      "format-charging": " {capacity}%",
-      "tooltip": "{time} {icon}",
-      "format-alt": "{timeTo} / {health}",
-      "format-full": "⚡ {capacity}%",
-      "format-icons": [
-        "󰂎",
-        "󰁺",
-        "󰁻",
-        "󰁼",
-        "󰁽",
-        "󰁾",
-        "󰁿",
-        "󰂀",
-        "󰂁",
-        "󰂂",
-        "󰁹"
+      "format-discharging": "{icon} {capacity}%",
+      "format-charging": "{icon} {capacity}%",
+      "format-plugged": "",
+      "format-icons": {
+      "charging": [
+      "󰢜 <span size='8pt' color='#df6124'>━</span>",
+      "󰢜 <span size='8pt' color='#df6124'>■</span>",
+      "󰂆 <span size='8pt' color='#dd7006'>■■</span>",
+      "󰂇 <span size='8pt' color='#d88000'>■■■</span>",
+      "󰂈 <span size='8pt' color='#d09000'>■■■■</span>",
+      "󰢝 <span size='8pt' color='#c5a000'>■■■■■</span>",
+      "󰂉 <span size='8pt' color='#b5af00'>■■■■■■</span>",
+      "󰢞 <span size='8pt' color='#a2be00'>■■■■■■■</span>",
+      "󰂊 <span size='8pt' color='#8acc00'>■■■■■■■■</span>",
+      "󰂋 <span size='8pt' color='#68da00'>■■■■■■■■■</span>",
+      "󰂅 <span size='8pt' color='#25e712'>■■■■■■■■■■</span>"
       ],
+      "default": [
+      "󰁺 <span size='8pt' color='#df6124'>━</span>",
+      "󰁺 <span size='8pt' color='#df6124'>■</span>",
+      "󰁻 <span size='8pt' color='#dd7006'>■■</span>",
+      "󰁼 <span size='8pt' color='#d88000'>■■■</span>",
+      "󰁽 <span size='8pt' color='#d09000'>■■■■</span>",
+      "󰁾 <span size='8pt' color='#c5a000'>■■■■■</span>",
+      "󰁿 <span size='8pt' color='#b5af00'>■■■■■■</span>",
+      "󰂀 <span size='8pt' color='#a2be00'>■■■■■■■</span>",
+      "󰂁 <span size='8pt' color='#8acc00'>■■■■■■■■</span>",
+      "󰂂 <span size='8pt' color='#68da00'>■■■■■■■■■</span>",
+      "󰁹 <span size='8pt' color='#25e712'>■■■■■■■■■■</span>"
+      ]
+      },
+      "format-full": "󰂅",
+      "tooltip-format-discharging": "{timeTo}",
+      "tooltip-format-charging": "{timeTo}",
+      "interval": 5,
+      "states": {
+      "warning": 20,
+      "critical": 10
+      }
     },
     "mpris": {
       "format": "{player_icon} {dynamic}",
@@ -198,6 +199,8 @@
       "custom/sep",
       "wireplumber",
       "custom/sep",
+      "bluetooth",
+      "custom/sep"
     ],
     "modules-right": [
       "custom/sep",
@@ -229,14 +232,25 @@
       },
     "custom/sep": {
       "format": "|",
-      "interval": 0
+      "tooltip": false
       },
     "cpu": {
-      "interval": 1,
-      "format": "󰍛 {usage}%",
-      "on-click": "",
-      "tooltip": "{avg_frequency}",
-    },
+      "interval": 2,
+      "format": "<span size='10pt'></span> {icon} {usage}%",
+      "format-icons": [
+      "<span size='8pt'>━</span>",
+      "<span size='8pt'>■</span>",
+      "<span size='8pt' color='#ff79d2'>■■</span>",
+      "<span size='8pt' color='#ff6fbe'>■■■</span>",
+      "<span size='8pt' color='#ff66a9'>■■■■</span>",
+      "<span size='8pt' color='#ff5f94'>■■■■■</span>",
+      "<span size='8pt' color='#ff5b7e'>■■■■■■</span>",
+      "<span size='8pt' color='#fe5968'>■■■■■■■</span>",
+      "<span size='8pt' color='#f65a52'>■■■■■■■■</span>",
+      "<span size='8pt' color='#ec5d3c'>■■■■■■■■■</span>",
+      "<span size='8pt' color='#df6124'>■■■■■■■■■■</span>"
+      ]
+      },
     "wireplumber": {
       "format": "{icon} {volume}%",
       "format-muted": " Muted",
@@ -255,21 +269,17 @@
     },
     "backlight": {
       "device": "intel_backlight",
+      "rotate": 0,
       "format": "{icon} {percent}%",
+      "tooltip-format": "🌕 {percent}%",
       "format-icons": [
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      "on-scroll-up": "brightnessctl set 1%+",
-      "on-scroll-down": "brightnessctl set 1%-",
-    },
+      "󰃜",
+      "󰃝",
+      "󰃞",
+      "󰃟",
+      "󰃠"
+      ]
+     },
     "temperature": {
       // "thermal-zone": 2,
       // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
@@ -285,11 +295,29 @@
       "tooltip": false,
     },
     "memory": {
-      "interval": 30,
-      "format": " {}%",
-      "format-alt": " {used}G",
-      "tooltip": true,
-      "tooltip-format": "{used:0.1f}G/{total:0.1f}G",
+      "interval": 2,
+      "format": "<span size='9pt'></span> {icon} {used:0.1f}G",
+      "format-icons": [
+      "<span size='8pt'>━</span>",
+      "<span size='8pt'>■</span>",
+      "<span size='8pt' color='#f7b69a'>■■</span>",
+      "<span size='8pt' color='#ef9875'>■■■</span>",
+      "<span size='8pt' color='#e77b50'>■■■■</span>",
+      "<span size='8pt' color='#df6124'>■■■■■</span>",
+      "<span size='8pt' color='#d35720'>■■■■■■</span>",
+      "<span size='8pt' color='#c64e1c'>■■■■■■■</span>",
+      "<span size='8pt' color='#aa4318'>■■■■■■■■</span>",
+      "<span size='8pt' color='#8e3813'>■■■■■■■■■</span>",
+      "<span size='8pt' color='#722d0f'>■■■■■■■■■■</span>"
+      ]
+    },
+    "bluetooth": {
+      "format": " {status} {num_connections}",
+      "format-off": "󰂲 OFF",
+      "format-disabled": "󰂲 {status}",
+      "format-connected": "󰂱 {num_connections}",
+      "tooltip-format": "Devices connected: {num_connections}",
+      "on-click": "omarchy-launch-bluetooth"
     },
   },
 ]
