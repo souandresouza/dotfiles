@@ -75,6 +75,7 @@ iwd
 jfsutils
 jq
 kitty
+lib32-vulkan-radeon
 libdvdcss
 libgepub
 libgsf
