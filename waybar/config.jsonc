@@ -11,26 +11,18 @@
     "gtk-layer-shell": true,
     "reload_style_on_change": true,
     "modules-left": [
-      "mango/workspaces",
-      "custom/sep",
+      "ext/workspaces",
       "custom/mpris"
       //"mpris"
-      //"custom/sep"
     ],
     "modules-center": [
-      "custom/sep",
       "clock",
       "tray",
-      "custom/sep",
-      "idle_inhibitor",
-      "custom/sep"
+      "idle_inhibitor"
     ],
     "modules-right": [
-      "custom/sep",
       "network",
-      "custom/sep",
-      "battery",
-      "custom/sep"
+      "battery"
     ],
     "clock": {
       "format": "{:L%A, %d/%m/%Y - %T}",
@@ -53,10 +45,6 @@
       "on-scroll-down": "shift_down"
       }
     },
-    "custom/sep": {
-      "format": "|",
-      "tooltip": false
-      },
     "tray": {
       "icon-size": 14,
       "spacing": 10,
@@ -77,12 +65,12 @@
         "desactivated": "❗"
       },
     },
-    "mango/workspaces": {
-      "format": "{}",
+    "ext/workspaces": {
+      "format": "{name}",
       "ignore-hidden": true,
       "on-click": "activate",
-      "on-click-right": "toggle",
-      "sort-by-id": false,
+      "on-click-right": "deactivate",
+      "sort-by-id": true,
       },
     "mango/window": {
       "format": "{}",
@@ -194,22 +182,15 @@
       "custom/sep"
     ],
     "modules-center": [
-      "custom/sep",
       "backlight",
-      "custom/sep",
       "wireplumber",
-      "custom/sep",
       "bluetooth",
-      "custom/sep"
+      "mango/layout",
     ],
     "modules-right": [
-      "custom/sep",
       "cpu",
-      "custom/sep",
       "memory",
-      "custom/sep",
       "temperature",
-      "custom/sep"
     ],
     "wlr/taskbar": {
       // "format": "{icon}",
@@ -230,9 +211,22 @@
       "interval": 1800,
       "exec": "~/.config/scripts/weather.sh"
       },
-    "custom/sep": {
-      "format": "|",
-      "tooltip": false
+    "mango/layout": {
+      "format": "{}",
+      "format-S": "Scroller",
+      "format-T": "Tile",
+      "format-G": "Grid",
+      "format-M": "Monocle",
+      "format-DW": "Dwindle",
+      "format-F": "Fair",
+      "format-VF": "Vertical Fair",
+      "format-CT": "Center Tile",
+      "format-RT": "Right Tile",
+      "format-VS": "Vertical Scroller",
+      "format-VT": "Vertical Tile",
+      "format-VG": "Vertical Grid",
+      "format-K": "Deck",
+      "format-VK": "Vertical Deck",
       },
     "cpu": {
       "interval": 2,
