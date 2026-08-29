@@ -75,7 +75,6 @@ imv
 iwd
 jfsutils
 jq
-kdeconnect
 kitty
 lib32-vulkan-radeon
 libdvdcss
@@ -99,7 +98,6 @@ mpv
 mtools
 nano
 nano-syntax-highlighting
-neovim
 netctl
 networkmanager
 network-manager-applet
@@ -171,7 +169,6 @@ unrar
 unzip
 usb_modeswitch
 v4l2loopback-dkms
-vim
 vlc
 vlc-plugins-all
 vte3
