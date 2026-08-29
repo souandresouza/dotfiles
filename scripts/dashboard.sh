@@ -6,8 +6,8 @@ trap "tput cnorm; tput clear; exit" EXIT INT TERM
 draw() {
   tput cup 0 0
 
-  bat=$(cat /sys/class/power_supply/BAT0/capacity 2>/dev/null)
-  bat_status=$(cat /sys/class/power_supply/BAT0/status 2>/dev/null)
+  bat=$(cat /sys/class/power_supply/BAT1/capacity 2>/dev/null)
+  bat_status=$(cat /sys/class/power_supply/BAT1/status 2>/dev/null)
 
   bright=$(brightnessctl -m 2>/dev/null | cut -d, -f4 | tr -d '%')
 
