@@ -28,6 +28,7 @@ cabextract
 cantarell-fonts
 catfish
 cava
+cliphist
 cpupower
 cronie
 ddcutil
@@ -74,6 +75,7 @@ imv
 iwd
 jfsutils
 jq
+kdeconnect
 kitty
 lib32-vulkan-radeon
 libdvdcss
