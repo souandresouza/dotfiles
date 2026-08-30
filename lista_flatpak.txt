@@ -1,6 +1,11 @@
 adw-gtk3 GTK Theme	org.gtk.Gtk3theme.adw-gtk3-dark	6.5	3.22	system
+adw-gtk3 GTK Theme	org.gtk.Gtk3theme.adw-gtk3-dark	6.5	3.22	user
 Codecs Extra Extension	org.freedesktop.Platform.codecs-extra		25.08-extra	system
+Codecs Extra Extension	org.freedesktop.Platform.codecs-extra		25.08-extra	user
 Freedesktop Platform	org.freedesktop.Platform	freedesktop-sdk-25.08.16	25.08	system
+KDE Application Platform	org.kde.Platform		5.15-25.08	user
 Mesa (Extra)	org.freedesktop.Platform.GL.default	26.1.6	25.08-extra	system
+Mesa (Extra)	org.freedesktop.Platform.GL.default	26.1.6	25.08-extra	user
 Mesa	org.freedesktop.Platform.GL.default	26.1.6	25.08	system
+Mesa	org.freedesktop.Platform.GL.default	26.1.6	25.08	user
 ytDownloader	io.github.aandrew_me.ytdn	4.0.0	stable	system
