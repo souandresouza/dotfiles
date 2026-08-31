@@ -80,90 +80,12 @@ mkdir -p "$(dirname "$MANGO_FILE")"
 
 # Criar configuração com alpha ff
 cat > "$MANGO_FILE" << EOF
-# Window effect
-blur=1
-blur_layer=0
-blur_optimized=1
-blur_params_num_passes = 2
-blur_params_radius = 5
-blur_params_noise = 0.002
-blur_params_brightness = 0.905
-blur_params_contrast = 0.9
-blur_params_saturation = 1.2
-
-shadows = 1
-layer_shadows = 1
-shadow_only_floating = 1
-shadows_size = 8
-shadows_blur = 15
-shadows_position_x = 0
-shadows_position_y = 0
 shadowscolor= 0x${color0}ff
-
-border_radius=8
-no_radius_when_single=0
-focused_opacity=0.95
-unfocused_opacity=0.875
-
-# Animation Configuration(support type:zoom,slide)
-# tag_animation_direction: 1-horizontal,0-vertical
-animations=1
-layer_animations=1
-
-animation_type_open=zoom
-animation_type_close=zoom
-zoom_initial_ratio=0.5
-zoom_end_ratio=0.7
-
-animation_fade_in=1
-animation_fade_out=1
-fadein_begin_opacity=0.0
-fadeout_begin_opacity=0.6
-
-tag_animation_direction=1
-animation_duration_move=250
-animation_duration_open=300
-animation_duration_tag=400
-animation_duration_close=350
-animation_duration_focus=350
-
-animation_curve_open=0.46,1.0,0.29,0.99
-animation_curve_move=0.46,1.0,0.29,1
-animation_curve_tag=0.46,1.0,0.29,1
-animation_curve_close=0.08,0.92,0,1
-animation_curve_focus=0.46,1.0,0.29,1
-animation_curve_opafadeout=0.5,0.5,0.5,0.5
-animation_curve_opafadein=0.46,1.0,0.29,1
-
-# Misc
-no_border_when_single=0
-axis_bind_apply_timeout=100
-focus_on_activate=1
-idleinhibit_ignore_visible=0
-sloppyfocus=1
-warpcursor=1
-focus_cross_monitor=0
-focus_cross_tag=0
-enable_floating_snap=0
-cursor_size=24
-drag_tile_to_tile=1
-drag_tile_small=1
-
-# Appearance
-gappih=3
-gappiv=3
-gappoh=5
-gappov=5
-borderpx=3
-
-scratchpad_width_ratio=0.8
-scratchpad_height_ratio=0.9
-
 rootcolor=0x${color0}ff
 bordercolor=0x${color6}ff
 dropcolor=0x${color6}55
 splitcolor=0x${color14}ff
-focuscolor=0x${color6}ff
+focuscolor=0x${color5}ff
 maximizescreencolor=0x${color6}ff
 urgentcolor=0x${color7}ff
 scratchpadcolor=0x${color13}ff
@@ -172,3 +94,4 @@ overlaycolor=0x${color14}ff
 EOF
 
 echo "Configuração gerada em $MANGO_FILE"
+mangoctl reload

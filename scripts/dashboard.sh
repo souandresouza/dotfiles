@@ -32,16 +32,16 @@ draw() {
   song=$(playerctl metadata --format '{{title}}' 2>/dev/null | cut -c1-25)
   [[ -z "$song" ]] && song="Nothing is playing"
 
-  printf "  TIME          %-35s\n" "$time"
-  printf "  BATTERY       %-35s\n" "${bat}% (${bat_status})"
-  printf "󰃞  BRIGHTNESS    %-35s\n" "${bright}%"
-  printf "  VOLUME        %-35s\n" "${vol_display}"
-  printf "  NETWORK       %-35s\n" "$net"
-  printf "  RAM           %-35s\n" "$ram"
-  printf "󰋊  STORAGE       %-35s\n" "$storage"
-  printf "  CPU TEMP      %-35s\n" "${temp}°C"
-  printf "󰔟  UPTIME        %-35s\n" "$uptime"
-  printf "󰝚  NOW PLAYING   %-35s\n" "$song"
+  printf "TIME          %-35s\n" "$time"
+  printf "BATTERY       %-35s\n" "${bat}% (${bat_status})"
+  printf "BRIGHTNESS    %-35s\n" "${bright}%"
+  printf "VOLUME        %-35s\n" "${vol_display}"
+  printf "NETWORK       %-35s\n" "$net"
+  printf "RAM           %-35s\n" "$ram"
+  printf "STORAGE       %-35s\n" "$storage"
+  printf "CPU TEMP      %-35s\n" "${temp}°C"
+  printf "UPTIME        %-35s\n" "$uptime"
+  printf "NOW PLAYING   %-35s\n" "$song"
 }
 
 while true; do
