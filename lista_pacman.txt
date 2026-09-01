@@ -13,7 +13,6 @@ base
 base-devel
 bash-completion
 bc
-bind
 blueman
 bluetui
 bluez
@@ -26,14 +25,12 @@ btrfs-assistant
 btrfs-progs
 cabextract
 cantarell-fonts
-catfish
 cava
 cliphist
 cpupower
 cronie
 ddcutil
 dmidecode
-dnsmasq
 duf
 efibootmgr
 efitools
@@ -50,14 +47,10 @@ fsarchiver
 fuzzel
 fzf
 galculator
-gamemode
 gedit
 geoclue
 gimp
 git
-glances
-gpart
-gparted
 gpu-screen-recorder
 gst-libav
 gst-plugin-pipewire
@@ -131,7 +124,6 @@ python-pipx
 python-pywal
 python-requests
 qbittorrent
-realtime-privileges
 rebuild-detector
 refind
 reflector
@@ -168,7 +160,6 @@ ufw-extras
 unrar
 unzip
 usb_modeswitch
-v4l2loopback-dkms
 vlc
 vlc-plugins-all
 vte3
@@ -185,8 +176,6 @@ xdg-user-dirs
 xf86-video-amdgpu
 xfsprogs
 xl2tpd
-xorg-xev
-xorg-xhost
 xsettingsd
 yt-dlp
 zathura-pdf-mupdf
