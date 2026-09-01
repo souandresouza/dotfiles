@@ -70,6 +70,7 @@ gvfs-nfs
 gvfs-smb
 hwdetect
 hwinfo
+hypridle
 hyprlock
 hyprpicker
 imv
@@ -146,7 +147,6 @@ speech-dispatcher
 steam
 sudo
 swaybg
-swayidle
 telegram-desktop
 thunar
 thunar-archive-plugin
