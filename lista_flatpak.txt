@@ -8,4 +8,3 @@ Mesa (Extra)	org.freedesktop.Platform.GL.default	26.1.6	25.08-extra	system
 Mesa (Extra)	org.freedesktop.Platform.GL.default	26.1.6	25.08-extra	user
 Mesa	org.freedesktop.Platform.GL.default	26.1.6	25.08	system
 Mesa	org.freedesktop.Platform.GL.default	26.1.6	25.08	user
-ytDownloader	io.github.aandrew_me.ytdn	4.0.0	stable	system
