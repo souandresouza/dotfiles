@@ -2,9 +2,11 @@ elio
 linuxtoys
 localsend-git
 mangowm-git
+mpvpaper
 music-tui
 wal-telegram-git
 waybar-git
 wayfreeze
+waypaper
 yay
 yay-debug
