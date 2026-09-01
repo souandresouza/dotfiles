@@ -3,6 +3,7 @@ linuxtoys
 localsend-git
 mangowm-git
 music-tui
+python-pywal
 wal-telegram-git
 waybar-git
 wayfreeze

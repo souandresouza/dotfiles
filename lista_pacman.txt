@@ -121,12 +121,12 @@ poppler-glib
 power-profiles-daemon
 pv
 python-pipx
-python-pywal
 python-requests
 qbittorrent
 rebuild-detector
 refind
 reflector
+rofi
 rsync
 satty
 scrcpy
