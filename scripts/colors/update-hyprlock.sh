@@ -5,7 +5,7 @@ WALLPAPER_HISTORY="$HOME/.cache/wallpapers/wallpaper_history.txt"
 # Caminho do arquivo de configuração do hyprlock
 HYPRLOCK_CONF="$HOME/.config/hypr/hyprlock.conf"
 profile="$HOME/Documentos/eu.png"
-wallpaper="$HOME/.cache/current_wallpaper.png"
+wallpaper="~/.cache/current_wallpaper.png"
 font_family="SquareFont"
 
 # Verifica se o arquivo de histórico existe
