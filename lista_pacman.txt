@@ -133,7 +133,6 @@ scrcpy
 sddm
 sg3_utils
 smartmontools
-snapper
 sof-firmware
 speech-dispatcher
 steam
