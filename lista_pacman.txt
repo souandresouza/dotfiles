@@ -47,7 +47,6 @@ fsarchiver
 fuzzel
 fzf
 galculator
-gedit
 geoclue
 gimp
 git
@@ -80,19 +79,16 @@ libpulse
 libreoffice-fresh
 libvips
 linux-firmware
-linux-zen
 lsb-release
 lsscsi
 mako
 materia-gtk-theme
-meld
 mesa-utils
 mkinitcpio
 modemmanager
 mpv
 mtools
 nano
-nano-syntax-highlighting
 netctl
 networkmanager
 network-manager-applet
@@ -126,7 +122,6 @@ qbittorrent
 rebuild-detector
 refind
 reflector
-rofi
 rsync
 satty
 scrcpy
