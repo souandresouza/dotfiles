@@ -212,3 +212,12 @@ window#waybar.empty #window {
     border: 2px solid @foreground;
     opacity: 1;
 }
+
+#power-profiles-daemon {
+    background: @background;
+    color: @foreground;
+    margin: 0px 2px;
+    border-radius: 2px;
+    border: 2px solid @foreground;
+    opacity: 1;
+}

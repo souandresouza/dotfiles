@@ -21,6 +21,7 @@
       "idle_inhibitor"
     ],
     "modules-right": [
+      "power-profiles-daemon",
       "network",
       "battery"
     ],
@@ -49,6 +50,16 @@
       "icon-size": 14,
       "spacing": 10,
     },
+    "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+      "tooltip": true,
+      "format-icons": {
+      "performance": "",
+      "balanced": "",
+      "power-saver": "",
+      },
+      },
     "custom/mpris": {
       "exec": "python3 -u ~/.config/scripts/scrolling-mpris.py",
       "format": "{text}",
@@ -71,10 +82,6 @@
       "on-click": "activate",
       "on-click-right": "deactivate",
       "sort-by-id": true,
-      },
-    "mango/window": {
-      "format": "{}",
-      "icon-size": 20
       },
     "network": {
       //"interface": "wlp2s0",
@@ -172,9 +179,6 @@
     "gtk-layer-shell": true,
     "reload_style_on_change": true,
     "modules-left": [
-      //"custom/weather",
-      //"custom/sep",
-      //"custom/year",
       "custom/sep",
       "wlr/taskbar",
       "custom/sep",
@@ -193,18 +197,13 @@
       "temperature",
     ],
     "wlr/taskbar": {
-      // "format": "{icon}",
-      "format": "{icon} {title:.16}",
+      "format": "{icon}",
+      //"format": "{icon} {title:.16}",
       "icon-size": 14,
       "icon-theme": "BeautyLine",
       "tooltip-format": "{title}",
       "on-click": "activate",
       "on-click-middle": "close",
-    },
-    "custom/year": {
-      "format": "{}",
-      "exec": "~/.config/scripts/year-progress.sh",
-      "interval": 3600
     },
     "custom/weather": {
       "format": "{}",
