@@ -32,4 +32,13 @@ for ((d=1; d<=dias_no_mes; d++)); do
     fi
 done
 
+# Adiciona espaços para completar a última semana (se necessário)
+if [ "$col" -ne 0 ]; then
+    while [ "$col" -lt 7 ]; do
+        texto+="    "
+        ((col++))
+    done
+    texto+="\n"
+fi
+
 notify-send -a "Calendar" "󰃭 ${nome_mes} ${ano}" "<tt>${texto}</tt>" -i x-office-calendar
