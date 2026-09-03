@@ -4,7 +4,7 @@ layout {
     center-focused-column "never"
     empty-workspace-above-first
     default-column-display "tabbed"
-    background-color "#0d0d0e"
+    background-color "#010101"
 
     preset-column-widths {
         proportion 0.33333
@@ -23,16 +23,16 @@ layout {
     focus-ring {
         on
         width 4
-        active-color "#e1e1de"
-        inactive-color "#0d0d0e"
+        active-color "#adadad"
+        inactive-color "#010101"
         urgent-color "#9b0000"
     }
 
     border {
         off
         width 4
-        active-color "#e1e1de"
-        inactive-color "#0d0d0e"
+        active-color "#adadad"
+        inactive-color "#010101"
         urgent-color "#9b0000"
     }
 
@@ -42,7 +42,7 @@ layout {
         spread 5
         offset x=0 y=5
         draw-behind-window true
-        color "#0d0d0e"
+        color "#010101"
     }
 
     tab-indicator {

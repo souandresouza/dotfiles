@@ -18,11 +18,11 @@ text-alignment=center
 max-visible=5
 
 [urgency=normal]
-background-color=#181C1D
-text-color=#A0A3A3
-border-color=#363C42
+background-color=#010101
+text-color=#adadad
+border-color=#232323
 
 # urgency= high
-background-color=#181C1D
-text-color=#A0A3A3
-border-color=#363C42
+background-color=#010101
+text-color=#adadad
+border-color=#232323
