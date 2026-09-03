@@ -172,7 +172,9 @@ binds {
     Mod+R { spawn "sh" "-c" "$HOME/.config/scripts/refreshWaybar.sh"; }        // Recarregar Waybar
     Mod+M { spawn "sh" "-c" "$HOME/.config/scripts/exit-menu.sh"; }            // Menu de saída
     Mod+G { spawn "sh" "-c" "$HOME/.config/scripts/sequencia.sh"; }            // Script sequencial
-    Mod+S { spawn "sh" "-c" "$HOME/.config/scripts/calendar.sh"; }
+    Mod+S { spawn "sh" "-c" "$HOME/.config/scripts/calendar.sh"; }              // Calendário via notificação
+    Mod+Shift+D { spawn "sh" "-c" "$HOME/.config/scripts/dashboard_toggle.sh"; } // Dashboard
+    Mod+Shift+B { spawn "sh" "-c" "$HOME/.config/scripts/clipboard_toggle.sh"; } // Clipboard
     Mod+Shift+P { power-off-monitors; }                                         // Desligar monitores
 
     // Papel de parede e aparência
@@ -181,7 +183,7 @@ binds {
     // Ferramentas de produtividade
     Mod+N { spawn "sh" "-c" "$HOME/.config/scripts/qr.sh"; }                   // Gerar QR code
     Mod+V { spawn "sh" "-c" "$HOME/.config/scripts/fuzzel-clipboard.sh"; }     // Histórico de clipboard
-    Mod+A { spawn "sh" "-c" "$HOME/.config/scripts/keys.sh"; }                 // Visualizar atalhos
+    Mod+A { spawn "sh" "-c" "$HOME/.config/scripts/niri-keys.sh"; }                 // Visualizar atalhos
 
     // Processamento de mídia
     Mod+J { spawn "sh" "-c" "$HOME/.config/scripts/extract_frames.sh"; }       // Extrair frames de vídeo

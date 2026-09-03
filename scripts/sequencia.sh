@@ -4,7 +4,7 @@
 $HOME/.config/scripts/colors/cava-colors.sh
 $HOME/.config/scripts/colors/fuzzel-colors.sh
 $HOME/.config/scripts/colors/kitty-colors.sh
-$HOME/.config/scripts/colors/mango-colors.sh
+$HOME/.config/scripts/colors/niri-colors.sh
 $HOME/.config/scripts/colors/mako-colors.sh
 $HOME/.config/scripts/colors/update-hyprlock.sh
 #$HOME/.config/scripts/colors/vesktop-colors.sh
