@@ -63,6 +63,10 @@ gvfs-smb
 htop
 hwdetect
 hwinfo
+hypridle
+hyprland
+hyprlock
+hyprpaper
 hyprpicker
 imv
 intel-media-driver
@@ -123,6 +127,7 @@ realtime-privileges
 rebuild-detector
 refind
 reflector
+rofi
 rsync
 satty
 scrcpy
@@ -137,6 +142,7 @@ sudo
 swaybg
 swayidle
 swaylock
+swaync
 telegram-desktop
 thunar
 thunar-archive-plugin
@@ -167,6 +173,7 @@ vulkan-intel
 vulkan-nouveau
 vulkan-radeon
 waybar
+wayland-protocols
 wget
 wireplumber
 wl-clip-persist
@@ -174,6 +181,7 @@ wlr-randr
 wlsunset
 wpa_supplicant
 xdg-desktop-portal-gnome
+xdg-desktop-portal-hyprland
 xdg-desktop-portal-wlr
 xdg-utils
 xf86-video-amdgpu
