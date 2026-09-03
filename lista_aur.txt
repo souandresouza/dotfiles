@@ -1,4 +1,5 @@
 elio
 python-pywal
+wal-telegram-git
 yay
 yay-debug
