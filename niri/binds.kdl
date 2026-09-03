@@ -172,7 +172,7 @@ binds {
     Mod+R { spawn "sh" "-c" "$HOME/.config/scripts/refreshWaybar.sh"; }        // Recarregar Waybar
     Mod+M { spawn "sh" "-c" "$HOME/.config/scripts/exit-menu.sh"; }            // Menu de saída
     Mod+G { spawn "sh" "-c" "$HOME/.config/scripts/sequencia.sh"; }            // Script sequencial
-    Mod+S { spawn "sh" "-c" "$HOME/.config/scripts/screenlock.sh"; }
+    Mod+S { spawn "sh" "-c" "$HOME/.config/scripts/calendar.sh"; }
     Mod+Shift+P { power-off-monitors; }                                         // Desligar monitores
 
     // Papel de parede e aparência
