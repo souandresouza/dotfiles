@@ -1,4 +1,5 @@
 elio
+mangowm-git
 python-pywal
 wal-telegram-git
 yay
