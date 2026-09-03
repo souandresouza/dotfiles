@@ -32,6 +32,31 @@ draw() {
   song=$(playerctl metadata --format '{{title}}' 2>/dev/null | cut -c1-25)
   [[ -z "$song" ]] && song="Nothing is playing"
 
+  # Conta pacotes oficiais
+  OFICIAIS=$(pacman -Qq | wc -l)
+
+  # Conta AUR (usa yay ou paru se existirem)
+  if command -v yay &> /dev/null; then
+      AUR=$(yay -Qqm | wc -l)
+  elif command -v paru &> /dev/null; then
+      AUR=$(paru -Qqm | wc -l)
+  else
+      AUR=0
+  fi
+
+  # Conta Flatpaks
+  if command -v flatpak &> /dev/null; then
+      FLATPAK=$(flatpak list --columns=application | tail -n +1 | grep -v "Application ID" | wc -l)
+  else
+      FLATPAK=0
+  fi
+
+  # Conta AppImages
+  APPIMAGE=$(find ~ -type f -iname "*.appimage" 2>/dev/null | wc -l)
+
+  # Soma total de todas as fontes
+  TOTAL=$((OFICIAIS + AUR + FLATPAK + APPIMAGE))
+
   printf "TIME          %-35s\n" "$time"
   printf "BATTERY       %-35s\n" "${bat}% (${bat_status})"
   printf "BRIGHTNESS    %-35s\n" "${bright}%"
@@ -42,6 +67,10 @@ draw() {
   printf "CPU TEMP      %-35s\n" "${temp}°C"
   printf "UPTIME        %-35s\n" "$uptime"
   printf "NOW PLAYING   %-35s\n" "$song"
+  printf "PACMAN        %-35s\n" "$OFICIAIS"
+  printf "AUR           %-35s\n" "$AUR"
+  printf "FLATPAK       %-35s\n" "$FLATPAK"
+  printf "AppImage      %-35s\n" "$APPIMAGE"
 }
 
 while true; do
