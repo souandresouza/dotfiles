@@ -25,7 +25,7 @@ DOTFILES=(
 
 declare -A HOME_FILES
 HOME_FILES=(
-    [".zshrc"]="$HOME/.zshrc"
+    [".bashrc"]="$HOME/.bashrc"
 )
 
 echo "Setting up dotfiles..."
