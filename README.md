@@ -39,6 +39,8 @@ cd yay && makepkg -si
 bash ~/dotfiles/install_aur.sh
 ```
 
+## Use symlinks to configure.
+
 ```bash
 bash install_dotfiles.sh
 ```
