@@ -1,7 +1,6 @@
 <div align="center">
 
-# Hobbyist dotfiles
-**Beautifully crafted desktop rice for Arch Linux**
+# Dotfiles
 
 ![Arch](https://img.shields.io/badge/OS-Arch_Linux-1793d1?style=flat-square&logo=archlinux&logoColor=white)
 ![Wayland](https://img.shields.io/badge/Protocol-Wayland-ffbc42?style=flat-square&logo=wayland&logoColor=white)
