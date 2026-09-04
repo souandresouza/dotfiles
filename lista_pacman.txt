@@ -153,6 +153,7 @@ thunar-shares-plugin
 thunar-vcs-plugin
 thunar-volman
 tlp
+tree
 ttf-bitstream-vera
 ttf-dejavu
 ttf-liberation
@@ -194,6 +195,7 @@ xl2tpd
 xorg-xhost
 xorg-xwayland
 xsettingsd
+xwayland-satellite
 yt-dlp
 zathura-pdf-mupdf
 zed
