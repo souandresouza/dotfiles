@@ -51,6 +51,8 @@ galculator
 geoclue
 gimp
 glances
+gpart
+gparted
 gpu-screen-recorder
 gst-libav
 gst-plugin-pipewire
@@ -189,6 +191,7 @@ xf86-video-ati
 xf86-video-nouveau
 xfsprogs
 xl2tpd
+xorg-xhost
 xorg-xwayland
 xsettingsd
 yt-dlp
