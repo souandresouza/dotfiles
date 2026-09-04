@@ -38,3 +38,7 @@ cd yay && makepkg -si
 ```bash
 bash ~/dotfiles/install_aur.sh
 ```
+
+```bash
+bash install_dotfiles.sh
+```
