@@ -213,3 +213,6 @@ This repository reflects EXACTLY what I currently use:
 - **fuzzel** (launcher, replaces rofi)
 - **waybar** (bar)
 - **kitty** (terminal)
+
+> [!IMPORTANT]
+> Regardless of whether you choose Hyprland, MangoWM, or Niri, the `random-wallpaper.sh` script will generate `current_wallpaper.png` inside `~/.cache`. After that, use the `SUPER + G` shortcut to run `sequencia.sh`, which will adjust the colors.
