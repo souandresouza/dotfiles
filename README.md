@@ -4,8 +4,6 @@
 
 ![Arch](https://img.shields.io/badge/OS-Arch_Linux-1793d1?style=flat-square&logo=archlinux&logoColor=white)
 ![Wayland](https://img.shields.io/badge/Protocol-Wayland-ffbc42?style=flat-square&logo=wayland&logoColor=white)
-![Shell](https://img.shields.io/badge/Shell-Fish-4e9a06?style=flat-square)
-![License](https://img.shields.io/badge/License-GPL_3.0-lightgrey?style=flat-square)
 
 </div>
 
