@@ -139,9 +139,7 @@ Configs
 │   │   ├── mango-colors.sh
 │   │   ├── niri-colors.sh
 │   │   ├── telegram-colors.sh
-│   │   ├── termusic-colors.sh
 │   │   ├── update-hyprlock.sh
-│   │   ├── vesktop-colors.sh
 │   │   ├── walstart.sh
 │   │   ├── waybar-colors.sh
 │   │   └── zathura-colors.sh
