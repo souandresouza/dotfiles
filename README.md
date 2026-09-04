@@ -42,3 +42,8 @@ bash ~/dotfiles/install_aur.sh
 ```bash
 bash install_dotfiles.sh
 ```
+
+### If you do not want to use symlinks, you can copy the configurations using the command below.
+```bash
+bash ~/dotfiles/copy_dotfiles.sh
+```
