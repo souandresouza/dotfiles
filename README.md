@@ -49,3 +49,20 @@ bash install_dotfiles.sh
 ```bash
 bash ~/dotfiles/copy_dotfiles.sh
 ```
+
+## 📦 O que está instalado (e o que não está)
+
+Este repositório reflete EXATAMENTE o que uso atualmente:
+
+### Compositor
+- **MangoWM** (principal)
+
+### Componentes Híbridos
+- **hyprlock** (bloqueio de tela, substitui swaylock)
+- **hypridle** (gerenciamento de energia, substitui swayidle)
+
+### Ferramentas
+- **mako** (notificações, substitui dunst/swaync)
+- **fuzzel** (lançador, substitui rofi)
+- **waybar** (barra)
+- **kitty** (terminal)
