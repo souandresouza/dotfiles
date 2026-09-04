@@ -62,7 +62,7 @@
       },
     "custom/mpris": {
       "exec": "python3 -u ~/.config/scripts/scrolling-mpris.py",
-      "format": "{text}",
+      "format": "{}",
       "return-type": "json",
       "on-click": "playerctl play-pause",
       "on-scroll-down": "playerctl previous",
@@ -179,11 +179,8 @@
     "gtk-layer-shell": true,
     "reload_style_on_change": true,
     "modules-left": [
-      "custom/sep",
       "wlr/taskbar",
-      "custom/sep",
-      "custom/weather",
-      "custom/sep"
+      "custom/weather"
     ],
     "modules-center": [
       "backlight",
