@@ -58,7 +58,7 @@ This repository reflects EXACTLY what I currently use:
 - **MangoWM** (main)
 
 ### Hybrid Components
-- **hyprlock** (screen locker, replaces swaylock)
+- **hyprlock** (replaces swaylock)
 - **hypridle** (power management, replaces swayidle)
 
 ### Tools
