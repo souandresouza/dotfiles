@@ -215,4 +215,4 @@ This repository reflects EXACTLY what I currently use:
 - **kitty** (terminal)
 
 > [!IMPORTANT]
-> Regardless of whether you choose Hyprland, MangoWM, or Niri, the `random-wallpaper.sh` script will generate `current_wallpaper.png` inside `~/.cache`. After that, use the `SUPER + G` shortcut to run `sequencia.sh`, which will adjust the colors.
+> Regardless of whether you choose Hyprland, MangoWM, or Niri, the `random-wallpaper.sh` will generate `current_wallpaper.png` inside `~/.cache`. After that, use `SUPER + G` shortcut to execute `sequencia.sh`, which will adjust the colors.
