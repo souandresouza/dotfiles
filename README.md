@@ -151,7 +151,6 @@ bash ~/dotfiles/copy_dotfiles.sh
 │   ├── auto_detect_terminal.sh
 │   ├── battery-status.sh
 │   ├── battery_tracker.sh
-│   ├── brilho.sh
 │   ├── calendar.sh
 │   ├── clipboard.sh
 │   ├── clipboard_toggle.sh
@@ -181,9 +180,6 @@ bash ~/dotfiles/copy_dotfiles.sh
 │   ├── sequencia.sh
 │   ├── status.sh
 │   ├── take-screenshot.sh
-│   ├── volume-down.sh
-│   ├── volume-up.sh
-│   ├── walgen.sh
 │   ├── weather.sh
 │   ├── wlsunset.sh
 │   └── year-progress.sh

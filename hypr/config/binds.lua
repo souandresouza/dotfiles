@@ -84,12 +84,11 @@ hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd(scripts .. "/screenshot.sh region"))
 hl.bind("ALT + PRINT", hl.dsp.exec_cmd(scripts .. "/screenshot.sh window"))
 
 -- Laptop multimedia keys for volume and LCD brightness
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(scripts .. "/volume-up.sh"))
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(scripts .. "/volume-down.sh"))
-hl.bind("XF86AudioMute",        hl.dsp.exec_cmd(scripts .. "/mute.sh"))
-hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd(scripts .. "/mute-mic.sh"))
-hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd(scripts .. "/brilho.sh --up"))
-hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd(scripts .. "/brilho.sh --down"))
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+"))
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"))
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
+hl.bind("XF86MonBrightnessUp",hl.dsp.exec_cmd("brightnessctl set 10%+"))
+hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("brightnessctl set 10%-"))
 
 -- Requires playerctl
 hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"))
