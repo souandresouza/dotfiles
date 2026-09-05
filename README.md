@@ -94,6 +94,8 @@ bash ~/dotfiles/copy_dotfiles.sh
 │   │   ├── env.lua
 │   │   ├── input.lua
 │   │   └── windowrules.lua
+│   ├── scripts
+│   │   └── hypr-colors.sh
 │   ├── emoji-list.txt
 │   ├── hypridle.conf
 │   ├── hyprland.lua
