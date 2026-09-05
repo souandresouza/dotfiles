@@ -220,9 +220,6 @@ Este repositório reflete EXATAMENTE o que utilizo atualmente:
 - **waybar** (barra)
 - **kitty** (terminal)
 
-> [!IMPORTANT]
-> Independentemente de você escolher Hyprland, MangoWM ou Niri, o script `random-wallpaper.sh` gerará o arquivo `current_wallpaper.png` em `~/.cache`. Em seguida, use `SUPER + G` para executar o `sequencia.sh`, que ajustará as cores.
-
 ## 🔔 Serviços de Notificação
 
 Todos os compositores suportados (MangoWM, Hyprland, Niri) utilizam o **mako** como o único daemon de notificação.
