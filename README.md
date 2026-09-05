@@ -21,11 +21,9 @@
 |      **Desktop**      |
 | :--------------------------------: |
 | ![Desktop](Screenshots/desktop-1.png) |
-|      **Waybar top**      |
-| :--------------------------------: |
+|      **Waybar 1**      |
 | ![Waybar](Screenshots/waybar-top.png) |
-|      **Waybar bottom**      |
-| :--------------------------------: |
+|      **Waybar 2**      |
 | ![Waybar](Screenshots/waybar-bottom.png) |
 
 ### Pré-requisitos
