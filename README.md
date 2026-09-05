@@ -16,6 +16,13 @@
 ## MangoWM
 > O [MangoWM](https://github.com/mangowm/mango) é tão leve quanto o dwl e pode ser compilado inteiramente em poucos segundos. Apesar disso, o Mango não abre mão da funcionalidade.
 
+### Curious about what it looks like? Here's a glimpse.
+
+|      **Desktop & Waybar**      |
+| :--------------------------------: |
+| ![Desktop](Screenshots/desktop-1.png) |
+| ![Desktop](Screenshots/desktop-2.png) |
+
 ### Pré-requisitos
 - Arch Linux limpo (recomendado) ou uma distribuição baseada no Arch (por exemplo, EndeavourOS, Manjaro)
 ```bash
