@@ -106,6 +106,8 @@ bash ~/dotfiles/copy_dotfiles.sh
 ├── mako
 │   └── config
 ├── mango
+│   ├── scripts
+│   │   └── mango-keys.sh
 │   ├── bind.conf
 │   ├── config.conf
 │   ├── emoji-list.txt
@@ -115,6 +117,8 @@ bash ~/dotfiles/copy_dotfiles.sh
 ├── music-tui
 │   └── config.toml
 ├── niri
+│   ├── scripts
+│   │   └── niri-keys.sh
 │   ├── animations.kdl
 │   ├── binds.kdl
 │   ├── config.kdl
@@ -122,7 +126,9 @@ bash ~/dotfiles/copy_dotfiles.sh
 │   └── layout.kdl
 ├── Screenshots
 │   ├── desktop-1.png
-│   └── desktop-2.png
+│   ├── desktop-2.png
+│   ├── waybar-bottom.png
+│   └── waybar-top.png
 ├── scripts
 │   ├── colors
 │   │   ├── cava-colors.sh
@@ -155,8 +161,6 @@ bash ~/dotfiles/copy_dotfiles.sh
 │   ├── enable_services.sh
 │   ├── exit-menu.sh
 │   ├── extract_frames.sh
-│   ├── flatpak-install.sh
-│   ├── gravar-region.sh
 │   ├── hyprkeys.sh
 │   ├── hyprpicker.sh
 │   ├── hyprshot.sh
