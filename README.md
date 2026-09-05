@@ -95,7 +95,8 @@ bash ~/dotfiles/copy_dotfiles.sh
 │   │   ├── input.lua
 │   │   └── windowrules.lua
 │   ├── scripts
-│   │   └── hypr-colors.sh
+│   │   ├── hypr-colors.sh
+│   │   └── hyprkeys.sh
 │   ├── emoji-list.txt
 │   ├── hypridle.conf
 │   ├── hyprland.lua
@@ -144,7 +145,6 @@ bash ~/dotfiles/copy_dotfiles.sh
 │   │   ├── niri-colors.sh
 │   │   ├── telegram-colors.sh
 │   │   ├── update-hyprlock.sh
-│   │   ├── walstart.sh
 │   │   ├── waybar-colors.sh
 │   │   └── zathura-colors.sh
 │   ├── album_art.sh
@@ -154,15 +154,12 @@ bash ~/dotfiles/copy_dotfiles.sh
 │   ├── calendar.sh
 │   ├── clipboard.sh
 │   ├── clipboard_toggle.sh
-│   ├── cliphist-fuzzel-img.sh
 │   ├── contador_pacotes.sh
 │   ├── converter_imagens.sh
 │   ├── dashboard.sh
 │   ├── dashboard_toggle.sh
-│   ├── enable_services.sh
 │   ├── exit-menu.sh
 │   ├── extract_frames.sh
-│   ├── hyprkeys.sh
 │   ├── hyprpicker.sh
 │   ├── hyprshot.sh
 │   ├── media-notify.sh
