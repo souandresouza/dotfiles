@@ -61,7 +61,7 @@
       },
       },
     "custom/mpris": {
-      "exec": "python3 -u ~/.config/scripts/scrolling-mpris.py",
+      "exec": "python3 -u ~/.config/waybar/scripts/scrolling-mpris.py",
       "format": "{}",
       "return-type": "json",
       "on-click": "playerctl play-pause",
@@ -205,7 +205,7 @@
     "custom/weather": {
       "format": "{}",
       "interval": 1800,
-      "exec": "~/.config/scripts/weather.sh"
+      "exec": "~/.config/waybar/scripts/weather.sh"
       },
     "mango/layout": {
       "format": "{}",

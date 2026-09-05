@@ -161,23 +161,15 @@ bash ~/dotfiles/copy_dotfiles.sh
 │   ├── exit-menu.sh
 │   ├── extract_frames.sh
 │   ├── hyprpicker.sh
-│   ├── hyprshot.sh
-│   ├── media-notify.sh
-│   ├── mediaplayer.py
 │   ├── music-progress.sh
-│   ├── mute-mic.sh
-│   ├── mute.sh
 │   ├── powermenu.sh
 │   ├── qr.sh
 │   ├── random-wallpaper.sh
 │   ├── refreshWaybar.sh
 │   ├── screen_recorder.sh
 │   ├── screenshot.sh
-│   ├── scrolling-mpris.py
 │   ├── sequencia.sh
-│   ├── status.sh
 │   ├── take-screenshot.sh
-│   ├── weather.sh
 │   ├── wlsunset.sh
 │   └── year-progress.sh
 ├── swaylock
@@ -188,6 +180,9 @@ bash ~/dotfiles/copy_dotfiles.sh
 ├── wallpapers
 │   └── thumbnail-RQyNlaV-Na4-maxresdefault.png
 ├── waybar
+│   ├── scripts
+│   │   ├── scrolling-mpris.py
+│   │   └── weather.sh
 │   ├── colors-waybar.css
 │   ├── config.jsonc
 │   └── style.css
