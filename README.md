@@ -59,9 +59,8 @@ bash ~/dotfiles/copy_dotfiles.sh
 ## Estrutura
 <!-- TREE_START -->
 ```
-Configs
+/home/andre/dotfiles
 ├── cava
-│   ├── config
 │   ├── shaders
 │   │   ├── bar_spectrum.frag
 │   │   ├── eye_of_phi.frag
@@ -69,11 +68,11 @@ Configs
 │   │   ├── pass_through.vert
 │   │   ├── spectrogram.frag
 │   │   └── winamp_line_style_spectrum.frag
-│   └── themes
-│       ├── colors
-│       ├── solarized_dark
-│       └── tricolor
-├── copy_dotfiles.sh
+│   ├── themes
+│   │   ├── colors
+│   │   ├── solarized_dark
+│   │   └── tricolor
+│   └── config
 ├── dunst
 │   └── dunstrc
 ├── fastfetch
@@ -98,15 +97,9 @@ Configs
 │   ├── hyprlock.conf
 │   ├── monitors.lua
 │   └── workspaces.lua
-├── install_aur.sh
-├── install_dotfiles.sh
-├── install_flatpak.sh
-├── install_pacman.sh
 ├── kitty
 │   ├── colors-kitty.conf
 │   └── kitty.conf
-├── lista_aur.txt
-├── lista_pacman.txt
 ├── mako
 │   └── config
 ├── mango
@@ -124,16 +117,10 @@ Configs
 │   ├── config.kdl
 │   ├── emoji-list.txt
 │   └── layout.kdl
+├── Screenshots
+│   ├── desktop-1.png
+│   └── desktop-2.png
 ├── scripts
-│   ├── album_art.sh
-│   ├── auto_detect_terminal.sh
-│   ├── battery-status.sh
-│   ├── battery_tracker.sh
-│   ├── brilho.sh
-│   ├── calendar.sh
-│   ├── clipboard.sh
-│   ├── clipboard_toggle.sh
-│   ├── cliphist-fuzzel-img.sh
 │   ├── colors
 │   │   ├── cava-colors.sh
 │   │   ├── colors.wt-constants
@@ -149,6 +136,15 @@ Configs
 │   │   ├── walstart.sh
 │   │   ├── waybar-colors.sh
 │   │   └── zathura-colors.sh
+│   ├── album_art.sh
+│   ├── auto_detect_terminal.sh
+│   ├── battery-status.sh
+│   ├── battery_tracker.sh
+│   ├── brilho.sh
+│   ├── calendar.sh
+│   ├── clipboard.sh
+│   ├── clipboard_toggle.sh
+│   ├── cliphist-fuzzel-img.sh
 │   ├── contador_pacotes.sh
 │   ├── converter_imagens.sh
 │   ├── dashboard.sh
@@ -197,8 +193,19 @@ Configs
 │   ├── colors-waybar.css
 │   ├── config.jsonc
 │   └── style.css
-└── zathura
-    └── zathurarc
+├── zathura
+│   └── zathurarc
+├── .bashrc
+├── copy_dotfiles.sh
+├── install_aur.sh
+├── install_dotfiles.sh
+├── install_flatpak.sh
+├── install_pacman.sh
+├── LICENSE
+├── lista_aur.txt
+├── lista_pacman.txt
+├── README.md
+└── structure_update.py
 ```
 <!-- TREE_END -->
 
