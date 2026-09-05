@@ -18,10 +18,14 @@
 
 ### Curioso para saber como é? Aqui está uma prévia.
 
-|      **Desktop & Waybar**      |
+|      **Desktop**      |
 | :--------------------------------: |
 | ![Desktop](Screenshots/desktop-1.png) |
-| ![Waybar](Screenshots/waybar-top.png) 
+|      **Waybar top**      |
+| :--------------------------------: |
+| ![Waybar](Screenshots/waybar-top.png) |
+|      **Waybar bottom**      |
+| :--------------------------------: |
 | ![Waybar](Screenshots/waybar-bottom.png) |
 
 ### Pré-requisitos
