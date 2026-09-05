@@ -216,3 +216,13 @@ This repository reflects EXACTLY what I currently use:
 
 > [!IMPORTANT]
 > Regardless of whether you choose Hyprland, MangoWM, or Niri, the `random-wallpaper.sh` will generate `current_wallpaper.png` in `~/.cache`. After that, use `SUPER + G` to execute `sequencia.sh`, which will adjust the colors.
+
+## 🔔 Notification Services
+
+All supported compositors (MangoWM, Hyprland, Niri) use **mako** as the sole notification daemon.
+
+- **In use:** `mako` (active configuration in `mako/config`)
+- **Inactive configurations (for reference only):** `dunst/`, `swaync/`
+
+> ⚠️ **Important:** Only one notification daemon can be active at a time.
+> The `dunst/` and `swaync/` directories are version-controlled for historical purposes only but **are not used** in my current configuration.
