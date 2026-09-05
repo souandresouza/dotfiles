@@ -164,15 +164,11 @@ bash ~/dotfiles/copy_dotfiles.sh
 │   ├── hyprkeys.sh
 │   ├── hyprpicker.sh
 │   ├── hyprshot.sh
-│   ├── keys.sh
-│   ├── launch_first_available.sh
 │   ├── media-notify.sh
 │   ├── mediaplayer.py
 │   ├── music-progress.sh
 │   ├── mute-mic.sh
 │   ├── mute.sh
-│   ├── niri-keys.sh
-│   ├── niri-mirror.sh
 │   ├── powermenu.sh
 │   ├── qr.sh
 │   ├── random-wallpaper.sh
