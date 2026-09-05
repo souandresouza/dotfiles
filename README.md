@@ -96,7 +96,8 @@ bash ~/dotfiles/copy_dotfiles.sh
 │   │   └── windowrules.lua
 │   ├── scripts
 │   │   ├── hypr-colors.sh
-│   │   └── hyprkeys.sh
+│   │   ├── hyprkeys.sh
+│   │   └── run-scripts.sh
 │   ├── emoji-list.txt
 │   ├── hypridle.conf
 │   ├── hyprland.lua
@@ -138,7 +139,6 @@ bash ~/dotfiles/copy_dotfiles.sh
 │   │   ├── colors.wt-constants
 │   │   ├── dunst-colors.sh
 │   │   ├── fuzzel-colors.sh
-│   │   ├── hypr-colors.sh
 │   │   ├── kitty-colors.sh
 │   │   ├── mako-colors.sh
 │   │   ├── mango-colors.sh
