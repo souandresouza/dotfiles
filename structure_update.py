@@ -5,9 +5,10 @@ from pathlib import Path
 script_dir = Path(__file__).parent.absolute()
 readme_path = script_dir / "README.md"
 
-# Gerar árvore do diretório atual (dotfiles)
+# Gera a árvore a partir do diretório atual (relativo)
 tree = subprocess.check_output(
-    ["tree", "-a", "--dirsfirst", "--noreport", "-I", ".git", str(script_dir)],
+    ["tree", "-a", "--dirsfirst", "--noreport", "-I", ".git", "."],
+    cwd=script_dir,  # IMPORTANTE: executa o tree dentro do diretório do script
     text=True
 )
 

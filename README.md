@@ -59,7 +59,7 @@ bash ~/dotfiles/copy_dotfiles.sh
 ## Estrutura
 <!-- TREE_START -->
 ```
-/home/andre/dotfiles
+.
 ├── cava
 │   ├── shaders
 │   │   ├── bar_spectrum.frag
