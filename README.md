@@ -8,17 +8,16 @@
 </div>
 
 ## Niri
-> [Niri](https://github.com/YaLTeR/niri) is a scrollable-tiling Wayland compositor written in Rust. It offers a unique approach to window management compared to traditional tiling compositors.
+> O [Niri](https://github.com/YaLTeR/niri) é um compositor Wayland de organização em mosaico (tiling) com rolagem, escrito em Rust. Ele oferece uma abordagem única para o gerenciamento de janelas em comparação com os compositores de mosaico tradicionais.
 
 ## Hyprland
-> [Hyprland](https://github.com/hyprwm/Hyprland) is an independent, highly customizable, dynamic tiling Wayland compositor without sacrificing its looks.
+> O [Hyprland](https://github.com/hyprwm/Hyprland) é um compositor Wayland independente, altamente personalizável e de organização dinâmica em mosaico, sem sacrificar a estética.
 
 ## MangoWM
-> [MangoWM](https://github.com/mangowm/mango) is as lightweight as dwl and can be built completely within a few seconds. Despite this, Mango does not compromise on functionality.
+> O [MangoWM](https://github.com/mangowm/mango) é tão leve quanto o dwl e pode ser compilado inteiramente em poucos segundos. Apesar disso, o Mango não abre mão da funcionalidade.
 
-### Prerequisites
-- Clean Arch Linux (recommended) or an Arch-based distro (e.g. EndeavourOS, Manjaro)
-
+### Pré-requisitos
+- Arch Linux limpo (recomendado) ou uma distribuição baseada no Arch (por exemplo, EndeavourOS, Manjaro)
 ```bash
 sudo pacman -Syu --needed --noconfirm git
 ```
@@ -29,7 +28,7 @@ cd ~ && git clone https://github.com/souandresouza/dotfiles.git
 bash ~/dotfiles/install_pacman.sh
 ```
 
-### Install AUR helper
+### Instale AUR
 ```bash
 git clone https://aur.archlinux.org/yay.git
 cd yay && makepkg -si
@@ -39,18 +38,18 @@ cd yay && makepkg -si
 bash ~/dotfiles/install_aur.sh
 ```
 
-## Use symlinks to configure.
+## Use links simbólicos para configurar.
 
 ```bash
 bash install_dotfiles.sh
 ```
 
-### If you do not want to use symlinks, you can copy the configurations using the command below.
+### Se você não quiser usar links simbólicos, pode copiar as configurações usando o comando abaixo.
 ```bash
 bash ~/dotfiles/copy_dotfiles.sh
 ```
 
-## Structure
+## Estrutura
 <!-- TREE_START -->
 ```
 Configs
@@ -197,32 +196,32 @@ Configs
 <!-- TREE_END -->
 
 
-## 📦 What is installed (and what isn't)
+## 📦 O que está instalado (e o que não está)
 
-This repository reflects EXACTLY what I currently use:
+Este repositório reflete EXATAMENTE o que utilizo atualmente:
 
 ### Compositor
-- **MangoWM** (main)
+- **MangoWM** (principal)
 
-### Hybrid Components
-- **hyprlock** (replaces swaylock)
-- **hypridle** (power management, replaces swayidle)
+### Componentes Híbridos
+- **hyprlock** (substitui o swaylock)
+- **hypridle** (gerenciamento de energia, substitui o swayidle)
 
-### Tools
-- **mako** (notifications, replaces dunst/swaync)
-- **fuzzel** (launcher, replaces rofi)
-- **waybar** (bar)
+### Ferramentas
+- **mako** (notificações, substitui o dunst/swaync)
+- **fuzzel** (lançador, substitui o rofi)
+- **waybar** (barra)
 - **kitty** (terminal)
 
 > [!IMPORTANT]
-> Regardless of whether you choose Hyprland, MangoWM, or Niri, the `random-wallpaper.sh` will generate `current_wallpaper.png` in `~/.cache`. After that, use `SUPER + G` to execute `sequencia.sh`, which will adjust the colors.
+> Independentemente de você escolher Hyprland, MangoWM ou Niri, o script `random-wallpaper.sh` gerará o arquivo `current_wallpaper.png` em `~/.cache`. Em seguida, use `SUPER + G` para executar o `sequencia.sh`, que ajustará as cores.
 
-## 🔔 Notification Services
+## 🔔 Serviços de Notificação
 
-All supported compositors (MangoWM, Hyprland, Niri) use **mako** as the sole notification daemon.
+Todos os compositores suportados (MangoWM, Hyprland, Niri) utilizam o **mako** como o único daemon de notificação.
 
-- **In use:** `mako` (active configuration in `mako/config`)
-- **Inactive configurations (for reference only):** `dunst/`, `swaync/`
+- **Em uso:** `mako` (configuração ativa em `mako/config`)
+- **Configurações inativas (apenas para referência):** `dunst/`, `swaync/`
 
-> ⚠️ **Important:** Only one notification daemon can be active at a time.
-> The `dunst/` and `swaync/` directories are version-controlled for historical purposes only but **are not used** in my current configuration.
+> ⚠️ **Importante:** Apenas um daemon de notificação pode estar ativo por vez.
+> Os diretórios `dunst/` e `swaync/` estão sob controle de versão apenas para fins históricos, mas **não são utilizados** na minha configuração atual.
