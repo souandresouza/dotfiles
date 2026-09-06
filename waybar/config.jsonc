@@ -187,6 +187,7 @@
       "wireplumber",
       "bluetooth",
       "mango/layout",
+      "custom/recorder"
     ],
     "modules-right": [
       "cpu",
@@ -206,6 +207,12 @@
       "format": "{}",
       "interval": 1800,
       "exec": "~/.config/waybar/scripts/weather.sh"
+      },
+    "custom/recorder": {
+      "format": "",
+      "on-click": "$HOME/.config/scripts/screen_recorder.sh",
+      "tooltip": true,
+      "tooltip-format": "Stop recording"
       },
     "mango/layout": {
       "format": "{}",
