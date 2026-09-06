@@ -128,6 +128,13 @@ bash ~/dotfiles/copy_dotfiles.sh
 │   ├── config.kdl
 │   ├── emoji-list.txt
 │   └── layout.kdl
+├── qBittorrent
+│   ├── rss
+│   │   └── feeds.json
+│   ├── categories.json
+│   ├── qBittorrent.conf
+│   ├── qBittorrent-data.conf
+│   └── watched_folders.json
 ├── Screenshots
 │   ├── desktop-1.png
 │   ├── desktop-2.png
@@ -189,6 +196,7 @@ bash ~/dotfiles/copy_dotfiles.sh
 ├── zathura
 │   └── zathurarc
 ├── .bashrc
+├── black.qbtheme
 ├── copy_dotfiles.sh
 ├── install_aur.sh
 ├── install_dotfiles.sh
