@@ -178,7 +178,7 @@ bash ~/dotfiles/copy_dotfiles.sh
 │   ├── config.json
 │   └── style.css
 ├── wallpapers
-│   └── thumbnail-RQyNlaV-Na4-maxresdefault.png
+│   └── leaves.png
 ├── waybar
 │   ├── scripts
 │   │   ├── scrolling-mpris.py
