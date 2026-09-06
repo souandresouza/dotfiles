@@ -26,6 +26,7 @@ btop
 cabextract
 cantarell-fonts
 cava
+chafa
 cliphist
 cpupower
 cronie
@@ -144,7 +145,6 @@ sudo
 swaybg
 swayidle
 swaylock
-swaync
 telegram-desktop
 thunar
 thunar-archive-plugin
@@ -156,6 +156,7 @@ tlp
 tree
 ttf-bitstream-vera
 ttf-dejavu
+ttf-jetbrains-mono-nerd
 ttf-liberation
 ttf-meslo-nerd
 ttf-opensans
