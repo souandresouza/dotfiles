@@ -11,6 +11,7 @@
     "gtk-layer-shell": true,
     "reload_style_on_change": true,
     "modules-left": [
+      "custom/logo",
       "ext/workspaces",
       "custom/mpris"
       //"mpris"
@@ -22,6 +23,7 @@
     ],
     "modules-right": [
       "power-profiles-daemon",
+      "bluetooth",
       "network",
       "battery"
     ],
@@ -50,6 +52,12 @@
       "icon-size": 14,
       "spacing": 10,
     },
+    "custom/logo": {
+      "format": "󰮯 ",
+      "tooltip-format": "Have a nice day!",
+      "tooltip": true,
+      "on-click": "fuzzel"
+      },
     "power-profiles-daemon": {
       "format": "{icon} ",
       "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
@@ -165,6 +173,14 @@
       "on-scroll-down": "playerctl previous",
       // "ignored-players": ["cmus", "spotify"]
     },
+    "bluetooth": {
+      "format": " {status} {num_connections}",
+      "format-off": "󰂲 OFF",
+      "format-disabled": "󰂲 {status}",
+      "format-connected": "󰂱 {num_connections}",
+      "tooltip-format": "Devices connected: {num_connections}",
+      "on-click": "omarchy-launch-bluetooth"
+    },
     // Custom
   },
   {
@@ -185,7 +201,6 @@
     "modules-center": [
       "backlight",
       "wireplumber",
-      "bluetooth",
       "mango/layout",
       "custom/recorder"
     ],
@@ -195,13 +210,8 @@
       "temperature",
     ],
     "wlr/taskbar": {
-      "format": "{name}",
-      //"format": "{icon} {title:.16}",
-      "icon-size": 14,
-      "icon-theme": "BeautyLine",
-      "tooltip-format": "{title}",
-      "on-click": "activate",
-      "on-click-middle": "close",
+        "format": "{icon} {count}",
+        "icon-size": 14
     },
     "custom/weather": {
       "format": "{}",
@@ -307,14 +317,6 @@
       "<span size='8pt' color='#8e3813'>■■■■■■■■■</span>",
       "<span size='8pt' color='#722d0f'>■■■■■■■■■■</span>"
       ]
-    },
-    "bluetooth": {
-      "format": " {status} {num_connections}",
-      "format-off": "󰂲 OFF",
-      "format-disabled": "󰂲 {status}",
-      "format-connected": "󰂱 {num_connections}",
-      "tooltip-format": "Devices connected: {num_connections}",
-      "on-click": "omarchy-launch-bluetooth"
     },
   },
 ]
