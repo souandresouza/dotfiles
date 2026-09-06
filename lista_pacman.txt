@@ -49,6 +49,7 @@ fsarchiver
 fuzzel
 fzf
 galculator
+gammastep
 geoclue
 gimp
 glances
@@ -144,7 +145,6 @@ steam
 sudo
 swaybg
 swayidle
-swaylock
 telegram-desktop
 thunar
 thunar-archive-plugin
@@ -202,3 +202,4 @@ zathura-pdf-mupdf
 zed
 zoxide
 zram-generator
+zsh
