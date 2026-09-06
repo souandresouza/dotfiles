@@ -51,7 +51,7 @@
       "spacing": 10,
     },
     "power-profiles-daemon": {
-      "format": "{icon}",
+      "format": "{icon} ",
       "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
       "tooltip": true,
       "format-icons": {
@@ -195,7 +195,7 @@
       "temperature",
     ],
     "wlr/taskbar": {
-      "format": "{icon}",
+      "format": "{name}",
       //"format": "{icon} {title:.16}",
       "icon-size": 14,
       "icon-theme": "BeautyLine",
@@ -209,7 +209,7 @@
       "exec": "~/.config/waybar/scripts/weather.sh"
       },
     "custom/recorder": {
-      "format": "",
+      "format": " ",
       "on-click": "$HOME/.config/scripts/screen_recorder.sh",
       "tooltip": true,
       "tooltip-format": "Stop recording"
