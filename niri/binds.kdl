@@ -182,7 +182,7 @@ binds {
 
     // Ferramentas de produtividade
     Mod+N { spawn "sh" "-c" "$HOME/.config/scripts/qr.sh"; }                   // Gerar QR code
-    Mod+A { spawn "sh" "-c" "$HOME/.config/scripts/niri-keys.sh"; }                 // Visualizar atalhos
+    Mod+A { spawn "sh" "-c" "$HOME/.config/niri/scripts/niri-keys.sh"; }                 // Visualizar atalhos
 
     // Processamento de mídia
     Mod+J { spawn "sh" "-c" "$HOME/.config/scripts/extract_frames.sh"; }       // Extrair frames de vídeo

@@ -1,6 +1,6 @@
 local colors = {
-    active_border = "rgba(#d3d9e4ee)",
-    inactive_border = "rgba(#0a101eaa)"
+    active_border = "rgba(#adaca4ee)",
+    inactive_border = "rgba(#070806aa)"
 }
 
 return colors
