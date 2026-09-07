@@ -4,7 +4,7 @@
 $HOME/.config/scripts/colors/cava-colors.sh
 $HOME/.config/scripts/colors/fuzzel-colors.sh
 $HOME/.config/scripts/colors/kitty-colors.sh
-$HOME/.config/scripts/colors/mako-colors.sh
+$HOME/.config/scripts/colors/swaync-colors.sh
 $HOME/.config/hypr/scripts/hypr-colors.sh
 $HOME/.config/scripts/colors/update-hyprlock.sh
 $HOME/.config/scripts/colors/telegram-colors.sh

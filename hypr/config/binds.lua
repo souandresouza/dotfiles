@@ -19,7 +19,8 @@ hl.bind("SUPER + X", hl.dsp.exec_cmd("kitty -e scrcpy"),{ description = "scrcpy"
 hl.bind("SUPER + Y", hl.dsp.exec_cmd("kitty --class elio -e elio"),{ description = "elio" })
 hl.bind("SUPER + P", hl.dsp.exec_cmd("kitty -e nmtui"),{ description = "nmtui" })
 hl.bind("SUPER + SHIFT + A", hl.dsp.exec_cmd("kitty -e bluetui"),{ description = "bluetui" })
-hl.bind("SUPER + O", hl.dsp.exec_cmd("wineserver -k"),{ description = "close wine" })
+hl.bind("SUPER + O", hl.dsp.exec_cmd("wineserver -k"), { description = "close wine" })
+hl.bind("SUPER + SHIFT + D", hl.dsp.exec_cmd("swaync-client -t -sw"))
 
 hl.bind("SUPER + C", hl.dsp.exec_cmd(scripts .. "/hyprpicker.sh -hex"),{ description = "hyprpicker" })
 hl.bind("SUPER + G", hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/run-scripts.sh"))
