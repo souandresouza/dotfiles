@@ -1,6 +1,8 @@
 elio
 mangowm-git
+mpvpaper
 python-pywal
 wal-telegram-git
+waypaper
 yay
 yay-debug

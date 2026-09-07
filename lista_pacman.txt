@@ -170,7 +170,6 @@ unrar
 unzip
 usb_modeswitch
 v4l2loopback-dkms
-vim
 vlc
 vlc-plugins-all
 vte3
