@@ -84,12 +84,12 @@ libgepub
 libopenraw
 libpulse
 libreoffice-fresh
+librewolf
 libva-intel-driver
 linux-firmware
 linux-zen
 lsb-release
 lsscsi
-mako
 materia-gtk-theme
 mesa-utils
 mkinitcpio
@@ -145,6 +145,7 @@ steam
 sudo
 swaybg
 swayidle
+swaync
 telegram-desktop
 thunar
 thunar-archive-plugin

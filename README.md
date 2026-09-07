@@ -182,6 +182,7 @@ bash ~/dotfiles/copy_dotfiles.sh
 ├── waybar
 │   ├── scripts
 │   │   ├── scrolling-mpris.py
+│   │   ├── taskbar.sh
 │   │   └── weather.sh
 │   ├── colors-waybar.css
 │   ├── config.jsonc
