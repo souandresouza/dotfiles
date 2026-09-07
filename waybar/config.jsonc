@@ -92,66 +92,23 @@
       "sort-by-id": true,
       },
     "network": {
-      //"interface": "wlp2s0",
-      "format": "{ifname} [󰾆 {bandwidthTotalBytes}]",
-      "format-wifi": "{icon} {essid} [󰾆 {bandwidthTotalBytes}]",
-      "format-ethernet": "󱘖  {ifname} [󰾆 {bandwidthTotalBytes}]",
-      "format-disconnected": "󰌙 Disconnected ⚠",
-      "format-alt": "  {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}",
-      "tooltip-format": "{ifname} via {gwaddr} ",
-      "tooltip-format-wifi": "{frequency} MHz ({signalStrength}%)",
-      "tooltip-format-ethernet": "{ipaddr}/{cidr}  {bandwidthUpBytes}  {bandwidthDownBytes}",
-      "tooltip-format-disconnected": "Disconnected ⚠",
-      "max-length": 50,
-      "format-icons": [
-        "󰤯 ",
-        "󰤟 ",
-        "󰤢 ",
-        "󰤢 ",
-        "󰤨 "
-      ],
-    },
-    "battery": {
-      "format": "{icon} {capacity}%",
-      "format-discharging": "{icon} {capacity}%",
-      "format-charging": "{icon} {capacity}%",
-      "format-plugged": "",
-      "format-icons": {
-      "charging": [
-      "󰢜 <span size='8pt' color='#df6124'>━</span>",
-      "󰢜 <span size='8pt' color='#df6124'>■</span>",
-      "󰂆 <span size='8pt' color='#dd7006'>■■</span>",
-      "󰂇 <span size='8pt' color='#d88000'>■■■</span>",
-      "󰂈 <span size='8pt' color='#d09000'>■■■■</span>",
-      "󰢝 <span size='8pt' color='#c5a000'>■■■■■</span>",
-      "󰂉 <span size='8pt' color='#b5af00'>■■■■■■</span>",
-      "󰢞 <span size='8pt' color='#a2be00'>■■■■■■■</span>",
-      "󰂊 <span size='8pt' color='#8acc00'>■■■■■■■■</span>",
-      "󰂋 <span size='8pt' color='#68da00'>■■■■■■■■■</span>",
-      "󰂅 <span size='8pt' color='#25e712'>■■■■■■■■■■</span>"
-      ],
-      "default": [
-      "󰁺 <span size='8pt' color='#df6124'>━</span>",
-      "󰁺 <span size='8pt' color='#df6124'>■</span>",
-      "󰁻 <span size='8pt' color='#dd7006'>■■</span>",
-      "󰁼 <span size='8pt' color='#d88000'>■■■</span>",
-      "󰁽 <span size='8pt' color='#d09000'>■■■■</span>",
-      "󰁾 <span size='8pt' color='#c5a000'>■■■■■</span>",
-      "󰁿 <span size='8pt' color='#b5af00'>■■■■■■</span>",
-      "󰂀 <span size='8pt' color='#a2be00'>■■■■■■■</span>",
-      "󰂁 <span size='8pt' color='#8acc00'>■■■■■■■■</span>",
-      "󰂂 <span size='8pt' color='#68da00'>■■■■■■■■■</span>",
-      "󰁹 <span size='8pt' color='#25e712'>■■■■■■■■■■</span>"
-      ]
+      "interface": "wlan0",
+      "format": "{ifname}" ,
+      "format-wifi": "{essid} ({signalStrength}%) " ,
+      "format-ethernet": "{ipaddr}/{cidr} ",
+      "format-disconnected": "Disconnected ⚠",
+      "max-length": 50
       },
-      "format-full": "󰂅",
-      "tooltip-format-discharging": "{timeTo}",
-      "tooltip-format-charging": "{timeTo}",
-      "interval": 5,
+    "battery": {
       "states": {
-      "warning": 20,
-      "critical": 10
-      }
+      "warning": 30,
+      "critical": 15
+      },
+      "format": "{capacity}% {icon}",
+      "format-charging": "{capacity}% ⚡",
+      "format-plugged": "{capacity}% 🔌",
+      "format-alt": "{time} {icon}",
+      "format-icons": ["", "", "", "", ""]
     },
     "mpris": {
       "format": "{player_icon} {dynamic}",
@@ -242,21 +199,9 @@
       "format-VK": "Vertical Deck",
       },
     "cpu": {
-      "interval": 2,
-      "format": "<span size='10pt'></span> {icon} {usage}%",
-      "format-icons": [
-      "<span size='8pt'>━</span>",
-      "<span size='8pt'>■</span>",
-      "<span size='8pt' color='#ff79d2'>■■</span>",
-      "<span size='8pt' color='#ff6fbe'>■■■</span>",
-      "<span size='8pt' color='#ff66a9'>■■■■</span>",
-      "<span size='8pt' color='#ff5f94'>■■■■■</span>",
-      "<span size='8pt' color='#ff5b7e'>■■■■■■</span>",
-      "<span size='8pt' color='#fe5968'>■■■■■■■</span>",
-      "<span size='8pt' color='#f65a52'>■■■■■■■■</span>",
-      "<span size='8pt' color='#ec5d3c'>■■■■■■■■■</span>",
-      "<span size='8pt' color='#df6124'>■■■■■■■■■■</span>"
-      ]
+      "interval": 10,
+      "format": "{usage}% ",
+      "max-length": 10
       },
     "wireplumber": {
       "format": "{icon} {volume}%",
@@ -292,7 +237,7 @@
       // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
       "critical-threshold": 80,
       // "format-critical": "{temperatureC}°C {icon}",
-      "format": "{icon} {temperatureC}°C",
+      "format": "{icon} {temperatureC}°C" ,
       "format-alt": "{temperatureF}°F {icon}",
       "format-icons": [
         "",
@@ -302,21 +247,10 @@
       "tooltip": false,
     },
     "memory": {
-      "interval": 2,
-      "format": "<span size='9pt'></span> {icon} {used:0.1f}G",
-      "format-icons": [
-      "<span size='8pt'>━</span>",
-      "<span size='8pt'>■</span>",
-      "<span size='8pt' color='#f7b69a'>■■</span>",
-      "<span size='8pt' color='#ef9875'>■■■</span>",
-      "<span size='8pt' color='#e77b50'>■■■■</span>",
-      "<span size='8pt' color='#df6124'>■■■■■</span>",
-      "<span size='8pt' color='#d35720'>■■■■■■</span>",
-      "<span size='8pt' color='#c64e1c'>■■■■■■■</span>",
-      "<span size='8pt' color='#aa4318'>■■■■■■■■</span>",
-      "<span size='8pt' color='#8e3813'>■■■■■■■■■</span>",
-      "<span size='8pt' color='#722d0f'>■■■■■■■■■■</span>"
-      ]
+      "interval": 30,
+      "format": "  {percentage}%" ,
+      "format-alt": "  {used:0.1f}GB / {total:0.1f}GB",
+      "tooltip": true
     },
   },
 ]
